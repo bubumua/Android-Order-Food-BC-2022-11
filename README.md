@@ -45,6 +45,15 @@ https://github.com/Rahmouni-Seif-BI/Android-APP-Seif-Delivery-Food
 
 ### 一些规范
 
+在`build.gradle`的`dependencies`中添加
+
+```
+implementation files('{path}\\platforms\\android-{version}\\android.jar')
+```
+
++ `{path}`改为你的路径
++ `{version}`改为项目用的安卓SDK版本号
+
 在设置-编辑器-实时模板-Java-添加动态模板-模板文本中添加以下字段
 
 ```
