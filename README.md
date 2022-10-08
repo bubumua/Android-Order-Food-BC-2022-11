@@ -61,7 +61,7 @@ implementation files('{path}\\platforms\\android-{version}\\android.jar')
  * $simple_description$
  *
  $param1$$param1_description$ 
- * @return $return$
+ * @Return $return$
  * @description $description$
  * @Author 你的用户名
  * @date $date$ $time$
@@ -79,7 +79,7 @@ groovyScript("   def result='';   def params=\"${_1}\".replaceAll('[\\\\[|\\\\]|
 生成`DOC`参数
 
 ```shell
--encoding UTF-8 -charset UTF-8 -tag description:a:"描述" -tag return:a:"返回值" -tag Author:a:"作者"  -tag date:a:"最后修改日期" -tag commit:a:"最后提交信息"
+-encoding UTF-8 -charset UTF-8 -tag description:a:"描述" -tag Return:a:"返回值" -tag Author:a:"作者"  -tag date:a:"最后修改日期" -tag commit:a:"最后提交信息"
 ```
 
 ### 具体任务
