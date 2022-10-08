@@ -43,6 +43,36 @@ https://gitee.com/FranzLiszt1847/OrderOnline
 
 https://github.com/Rahmouni-Seif-BI/Android-APP-Seif-Delivery-Food
 
+### 一些规范
+
+在设置-编辑器-实时模板-Java-添加动态模板-模板文本中添加以下字段
+
+```
+ *
+ * $simple_description$
+ *
+ $param1$$param1_description$ 
+ * @return $return$
+ * @description $description$
+ * @Author 你的用户名
+ * @date $date$ $time$
+ * @commit $commit_message$
+ */
+```
+
+编辑模板变量
+![aaa](https://imgbed-1304793179.cos.ap-nanjing.myqcloud.com/typora/20221008184457.jpg)
+
+```
+groovyScript("   def result='';   def params=\"${_1}\".replaceAll('[\\\\[|\\\\]|\\\\s]', '').split(',').toList();   for(i = 0; i < params.size(); i++) { 	if(i==0)result+= '* ';     if(i!=0)result+= ' * ';     result+='@param '+params[i] +' '+ ((i < (params.size() - 1)) ? '\\n' : '');   };   return result", methodParameters())
+```
+
+生成`DOC`参数
+
+```shell
+-encoding UTF-8 -charset UTF-8 -tag description:a:"描述" -tag return:a:"返回值" -tag Author:a:"作者"  -tag date:a:"最后修改日期" -tag commit:a:"最后提交信息"
+```
+
 ### 具体任务
 
 #### 数据存储
@@ -67,6 +97,16 @@ https://github.com/Rahmouni-Seif-BI/Android-APP-Seif-Delivery-Food
 6. *`customDetail`客制化口味详情，做的简单点就是直接微辣~重辣
 7. *`comment`商品评价
 8. `GID`主键
+
+订单：
+
+1. `name`
+2. `price`
+3. `number`
+4. `owner`用户
+5. `OID`订单ID
+6. `remark`备注
+7. `PID`主键
 
 #### 登录页面
 
