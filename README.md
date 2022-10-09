@@ -62,7 +62,6 @@ implementation files('{path}\\platforms\\android-{version}\\android.jar')
  *
  $param1$$param1_description$ 
  * @Return $return$
- * @description $description$
  * @Author 你的用户名
  * @date $date$ $time$
  * @commit $commit_message$
@@ -79,8 +78,23 @@ groovyScript("   def result='';   def params=\"${_1}\".replaceAll('[\\\\[|\\\\]|
 生成`DOC`参数
 
 ```shell
--encoding UTF-8 -charset UTF-8 -tag description:a:"描述" -tag Return:a:"返回值" -tag Author:a:"作者"  -tag date:a:"最后修改日期" -tag commit:a:"最后提交信息"
+-encoding UTF-8 -charset UTF-8  -tag Return:a:"返回值" -tag Author:a:"作者"  -tag date:a:"最后修改日期" -tag commit:a:"最后提交信息"
 ```
+
+类模板
+
+![image-20221009193421866](https://imgbed-1304793179.cos.ap-nanjing.myqcloud.com/typora/20221009193421.png)
+
+```
+/**
+ * @Classname ${NAME}
+ * @Description TODO
+ * @Date ${DATE} ${TIME}
+ * @Created by Anduin9527
+ */
+```
+
+
 
 ### 具体任务
 
@@ -198,3 +212,23 @@ groovyScript("   def result='';   def params=\"${_1}\".replaceAll('[\\\\[|\\\\]|
 - [ ] 详情页和数据库交互逻辑
 - [ ] 商品详情页和数据库交互逻辑
 - [ ] 订单页面和数据库交互逻辑
+
+## 项目结构说明
+
+### Activity
+
+所有的`Activity`
+
+1. `LoginActivity`登录页面
+
+### Database
+
+所有的数据库
+
+1. `Person`用户数据库
+
+### Utils
+
+1. `KeyboardUtils`软键盘收起
+2. `RegexEditText` 轮子哥的自定义输入框上级接口
+3. `PasswordEditText`轮子哥的密码输入框
