@@ -13,13 +13,25 @@ public interface PersonDao {
     List<PersonEntity> getAll();
 
     @Insert
-    void insert(PersonEntity... personEntities);
+    void insert(PersonEntity personEntity);
 
     @Delete
     void delete(PersonEntity personEntity);
 
-    @Query("SELECT * FROM person_table WHERE username = :username and password = :password")
+    //使用用户名和密码进行登陆检查
+    @Query("SELECT * FROM person_table WHERE username = :username and password = :password ")
     PersonEntity checkLogin(String username, String password);
 
+    //使用手机号和密码进行登录检查
+    @Query("SELECT * FROM person_table WHERE phoneNumber = :phoneNumber and password = :password ")
+    PersonEntity checkLoginByPhoneNumber(int phoneNumber, String password);
+
+    //查询是否存在该用户名
+    @Query("SELECT * FROM person_table WHERE username = :username")
+    PersonEntity checkUsername(String username);
+
+    //查询是否存在该手机号
+    @Query("SELECT * FROM person_table WHERE phoneNumber = :phoneNumber")
+    PersonEntity checkPhoneNumber(int phoneNumber);
 
 }

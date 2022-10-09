@@ -83,15 +83,18 @@ groovyScript("   def result='';   def params=\"${_1}\".replaceAll('[\\\\[|\\\\]|
 
 类模板
 
-![image-20221009193421866](https://imgbed-1304793179.cos.ap-nanjing.myqcloud.com/typora/20221009193421.png)
-
 ```
+package ${PACKAGE_NAME};
+
 /**
- * @Classname ${NAME}
- * @Description TODO
- * @Date ${DATE} ${TIME}
- * @Created by Anduin9527
+ * @Type ${NAME}
+ * @Desc 
+ * @author Anduin9527
+ * @date ${DATE} ${TIME}
+ * @version 
  */
+public class ${NAME} {
+}
 ```
 
 

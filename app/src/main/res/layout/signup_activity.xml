@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context=".Activity.LoginActivity">
+    tools:context=".Activity.SignUpActivity">
 
     <ImageView
         android:id="@+id/imageView_bg"
@@ -14,9 +14,10 @@
         android:contentDescription="TODO"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.795"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.384"
         app:srcCompat="@drawable/login_background"
         tools:ignore="ImageContrastCheck" />
 
@@ -25,7 +26,7 @@
         android:layout_width="146dp"
         android:layout_height="76dp"
         android:layout_alignParentEnd="true"
-        android:text="@string/login_text"
+        android:text="@string/signup_text"
         android:textAlignment="center"
         android:textColor="#0E26AC"
         android:textSize="50sp"
@@ -33,10 +34,10 @@
         app:autoSizeTextType="none"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/imageView_bg"
-        app:layout_constraintHorizontal_bias="0.296"
+        app:layout_constraintHorizontal_bias="0.301"
         app:layout_constraintStart_toStartOf="@+id/imageView_bg"
         app:layout_constraintTop_toTopOf="@+id/imageView_bg"
-        app:layout_constraintVertical_bias="0.271" />
+        app:layout_constraintVertical_bias="0.13" />
 
     <com.example.Android_bigWork.Utils.ClearEditText
         android:id="@+id/textView_username"
@@ -44,21 +45,22 @@
         android:layout_height="48dp"
         android:layout_marginStart="32dp"
         android:layout_marginEnd="32dp"
+        android:autofillHints=""
         android:backgroundTint="#3769F3"
+
+
         android:ems="10"
 
-
-        android:hint="@string/login_username_hint"
-
+        android:hint="@string/signup_username_hint"
         android:inputType="textPersonName"
         android:minHeight="48dp"
-        android:textColorHint="#757575"
+        android:textColorHint="#1976D2"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.399"
+        app:layout_constraintVertical_bias="0.269"
         tools:ignore="SpeakableTextPresentCheck" />
 
     <com.example.Android_bigWork.Utils.PasswordEditText
@@ -79,6 +81,28 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView_username"
         app:layout_constraintVertical_bias="0.083"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <com.example.Android_bigWork.Utils.ClearEditText
+        android:id="@+id/textView_phoneNumber"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:backgroundTint="#3769F3"
+        android:ems="10"
+        android:hint="@string/signup_phoneNumber_hint"
+
+        android:minHeight="48dp"
+
+        android:textColorHint="#757575"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView_username"
+        app:layout_constraintVertical_bias="0.272"
+        app:regexType="mobile"
         tools:ignore="SpeakableTextPresentCheck" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -111,7 +135,40 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.16"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.62">
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/nanshi" />
+
+        <com.example.Android_bigWork.Utils.SwitchButton
+            android:id="@+id/SwitchButton_gender"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/nvshi" />
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

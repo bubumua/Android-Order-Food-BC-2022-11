@@ -16,6 +16,13 @@ public class PersonEntity {
     public static final int GENDER_MALE = 0;
     public static final int GENDER_FEMALE = 1;
 
+    public PersonEntity(String username, String password, int phoneNumber, int gender) {
+        this.username = username;
+        this.password = password;
+        this.phoneNumber = phoneNumber;
+        this.gender = gender;
+    }
+
     @Override
     public String toString() {
         return "PersonEntity{" +

@@ -4,4 +4,7 @@
     <string name="login_btn_text">开始美食之旅</string>
     <string name="login_username_hint">请输入用户名或手机号</string>
     <string name="login_password_hint">请输入密码</string>
+    <string name="signup_username_hint">请输入用户名</string>
+    <string name="signup_phoneNumber_hint" translatable="false">请输入您的手机号（中国）</string>
+    <string name="signup_text" translatable="false">注册</string>
 </resources>

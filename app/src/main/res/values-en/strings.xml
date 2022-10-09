@@ -5,4 +5,5 @@
     <string name="login_btn_text">GO！</string>
     <string name="login_username_hint">Please enter your username or mobile phone number</string>
     <string name="login_password_hint">Please enter your password</string>
+    <string name="signup_username_hint">Please enter your username</string>
 </resources>
