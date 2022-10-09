@@ -1,5 +1,7 @@
 package com.example.Android_bigWork;
 
+import static com.example.Android_bigWork.Utils.KeyboardUtils.hideKeyboard;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
@@ -21,7 +23,7 @@ public class LoginActivity extends AppCompatActivity {
             getSupportActionBar().hide();
         }
 
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.login_activity);
         username = findViewById(R.id.textView_username);
         password = findViewById(R.id.textView_password);
         //获取数据库
@@ -43,6 +45,17 @@ public class LoginActivity extends AppCompatActivity {
             } else {
                 Toast.makeText(this, "登录失败", Toast.LENGTH_SHORT).show();
             }
+        });
+        //点击到img则收起键盘
+        findViewById(R.id.imageView_bg).setOnClickListener(v -> {
+            //检测是否有焦点
+            if (username.isFocused() || password.isFocused()) {
+                //清除焦点
+                username.clearFocus();
+                password.clearFocus();
+            }
+            //收起键盘
+            hideKeyboard(this);
         });
 
     }
