@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">OrderFoodOL</string>
+    <string name="login_text">Login</string>
+    <string name="login_btn_text">GO！</string>
+    <string name="login_username_hint">Please enter your username or mobile phone number</string>
+    <string name="login_password_hint">Please enter your password</string>
+</resources>
