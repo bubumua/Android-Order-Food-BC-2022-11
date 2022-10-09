@@ -200,7 +200,7 @@ public class ${NAME} {
 ### 第一周任务
 
 - [ ] 页面设计（不包括逻辑设计）
-  - [ ] 登录页面（注册页面）
+  - [x] 登录页面（注册页面）
   - [ ] 主页
   - [ ] 详情页
   - [ ] 商品详情页
@@ -211,7 +211,7 @@ public class ${NAME} {
   - [ ] 账户增删改查
   - [ ] 商品增删改查
 - [ ] 主页和数据库交互逻辑
-- [ ] 登录页面和数据库交互逻辑
+- [x] 登录页面和数据库交互逻辑
 - [ ] 详情页和数据库交互逻辑
 - [ ] 商品详情页和数据库交互逻辑
 - [ ] 订单页面和数据库交互逻辑
@@ -223,6 +223,7 @@ public class ${NAME} {
 所有的`Activity`
 
 1. `LoginActivity`登录页面
+1. `SignUpActivity`注册页面
 
 ### Database
 
@@ -235,3 +236,6 @@ public class ${NAME} {
 1. `KeyboardUtils`软键盘收起
 2. `RegexEditText` 轮子哥的自定义输入框上级接口
 3. `PasswordEditText`轮子哥的密码输入框
+4. `ClearEditText`轮子哥的清空按钮输入框
+5. `SubmitButton`轮子哥的带动画提交按钮
+6. `SwitchButton`轮子哥的仿IOS开关
