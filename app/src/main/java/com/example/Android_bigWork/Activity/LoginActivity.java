@@ -1,4 +1,4 @@
-package com.example.Android_bigWork;
+package com.example.Android_bigWork.Activity;
 
 import static com.example.Android_bigWork.Utils.KeyboardUtils.hideKeyboard;
 
@@ -8,6 +8,10 @@ import android.content.Context;
 import android.os.Bundle;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.example.Android_bigWork.Database.PersonDao;
+import com.example.Android_bigWork.Database.PersonDatabase;
+import com.example.Android_bigWork.R;
 
 public class LoginActivity extends AppCompatActivity {
     EditText username, password;

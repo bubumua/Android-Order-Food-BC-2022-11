@@ -1,4 +1,4 @@
-package com.example.Android_bigWork;
+package com.example.Android_bigWork.Database;
 
 import android.content.Context;
 
@@ -11,7 +11,16 @@ public abstract class PersonDatabase extends RoomDatabase {
     private static final String DB_NAME = "person.db";
     private static PersonDatabase INSTANCE;
 
-    static synchronized PersonDatabase getDatabase(Context context) {
+    /**
+     * 获取数据库实例
+     *
+     * @param context 上下文环境
+     * @return PersonDatabase
+     * @Author Anduin9527
+     * @date 2022/10/9 19:27
+     * @commit
+     */
+    public static synchronized PersonDatabase getDatabase(Context context) {
         if (INSTANCE == null) {
             INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
                             PersonDatabase.class,

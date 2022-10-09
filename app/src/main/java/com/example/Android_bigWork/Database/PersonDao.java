@@ -1,4 +1,4 @@
-package com.example.Android_bigWork;
+package com.example.Android_bigWork.Database;
 
 import androidx.room.Dao;
 import androidx.room.Delete;

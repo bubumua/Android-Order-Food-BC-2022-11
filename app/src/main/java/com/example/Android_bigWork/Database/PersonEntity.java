@@ -1,4 +1,4 @@
-package com.example.Android_bigWork;
+package com.example.Android_bigWork.Database;
 
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
