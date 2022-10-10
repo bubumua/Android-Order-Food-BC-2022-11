@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent">
+
+    <LinearLayout
+        android:id="@+id/lists"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="200dp"
+        android:background="@android:color/white">
+        <ListView
+            android:id="@+id/category_list"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.2"
+            android:scrollbars="none" />
+
+        <se.emilsjolander.stickylistheaders.StickyListHeadersListView
+            android:id="@+id/showdishes"
+            android:layout_width="0dip"
+            android:layout_height="match_parent"
+            android:layout_weight="3.8"
+            android:clipToPadding="false"
+            android:drawSelectorOnTop="true"
+            android:listSelector="@android:color/transparent"
+            android:scrollbarSize="3dip"
+            android:scrollbars="none"/>
+    </LinearLayout>
+</LinearLayout>
+
