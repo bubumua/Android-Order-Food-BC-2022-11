@@ -14,10 +14,10 @@
         android:contentDescription="TODO"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.935"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.384"
+        app:layout_constraintVertical_bias="0.361"
         app:srcCompat="@drawable/login_background"
         tools:ignore="ImageContrastCheck" />
 
@@ -105,39 +105,6 @@
         app:regexType="mobile"
         tools:ignore="SpeakableTextPresentCheck" />
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/btn_login"
-        android:layout_width="130dp"
-        android:layout_height="41dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="40dp"
-        android:layout_marginEnd="32dp"
-
-        android:background="@drawable/btn_color"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.626">
-
-        <TextView
-            android:id="@+id/text_Login"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-
-            android:text="@string/login_btn_text"
-            android:textColor="#ffffff"
-
-            android:textSize="15sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -169,6 +136,23 @@
             android:layout_weight="1"
             app:srcCompat="@drawable/nvshi" />
     </LinearLayout>
+
+    <com.example.Android_bigWork.Utils.SubmitButton
+        android:id="@+id/btn_signup"
+        style="@style/ButtonStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/dp_40"
+        android:background="#6B33F9"
+        android:text="@string/signup_text"
+        android:textColor="#E0E0E0"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.987"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView_phoneNumber"
+        app:layout_constraintVertical_bias="0.146"
+        tools:ignore="DuplicateSpeakableTextCheck" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

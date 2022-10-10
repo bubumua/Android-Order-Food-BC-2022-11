@@ -10,13 +10,13 @@ public class PersonEntity {
 
     public String username;
     public String password;
-    public int phoneNumber;
+    public long phoneNumber;
     public int gender;
 
     public static final int GENDER_MALE = 0;
     public static final int GENDER_FEMALE = 1;
 
-    public PersonEntity(String username, String password, int phoneNumber, int gender) {
+    public PersonEntity(String username, String password, long phoneNumber, int gender) {
         this.username = username;
         this.password = password;
         this.phoneNumber = phoneNumber;

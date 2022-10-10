@@ -24,7 +24,7 @@ public interface PersonDao {
 
     //使用手机号和密码进行登录检查
     @Query("SELECT * FROM person_table WHERE phoneNumber = :phoneNumber and password = :password ")
-    PersonEntity checkLoginByPhoneNumber(int phoneNumber, String password);
+    PersonEntity checkLoginByPhoneNumber(long phoneNumber, String password);
 
     //查询是否存在该用户名
     @Query("SELECT * FROM person_table WHERE username = :username")
@@ -32,6 +32,6 @@ public interface PersonDao {
 
     //查询是否存在该手机号
     @Query("SELECT * FROM person_table WHERE phoneNumber = :phoneNumber")
-    PersonEntity checkPhoneNumber(int phoneNumber);
+    PersonEntity checkPhoneNumber(long phoneNumber);
 
 }

@@ -20,6 +20,19 @@
         app:srcCompat="@drawable/login_background"
         tools:ignore="ImageContrastCheck" />
 
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/btn_signup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:layout_marginEnd="32dp"
+        android:text="@string/login_signup"
+        android:textColor="@color/common_accent_color"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/btn_login"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView_password" />
+
     <TextView
         android:id="@+id/textView_signUp"
         android:layout_width="146dp"
@@ -96,7 +109,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView_password"
         app:layout_constraintVertical_bias="0.179" />
-    />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 
