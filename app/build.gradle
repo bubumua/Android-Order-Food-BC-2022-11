@@ -39,7 +39,7 @@ dependencies {
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.5.1'
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1'
-    implementation 'com.ashokvarma.android:bottom-navigation-bar:2.1.0'
+    implementation 'com.ashokvarma.android:bottom-navigation-bar:2.2.0'
     implementation 'se.emilsjolander:stickylistheaders:2.7.0'
     implementation 'com.android.support:multidex:1.0.3'
     implementation 'androidx.room:room-runtime:2.4.3'
