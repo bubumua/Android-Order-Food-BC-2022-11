@@ -11,6 +11,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.TestRoom"
+        android:name="android.support.multidex.MultiDexApplication"
         tools:targetApi="31">
         <activity
             android:name=".Activity.LoginActivity"
@@ -26,6 +27,7 @@
                 android:value="" />
         </activity>
         <activity android:name=".Activity.SignUpActivity"></activity>
+        <activity android:name=".Activity.MainActivity" />
     </application>
 
 </manifest>

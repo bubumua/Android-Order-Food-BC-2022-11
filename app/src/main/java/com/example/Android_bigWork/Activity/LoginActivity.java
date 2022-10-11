@@ -78,7 +78,11 @@ public class LoginActivity extends AppCompatActivity {
                     || isNumber && personDao.checkLoginByPhoneNumber(Long.parseLong(username), password) != null) {
                 mLoginButton.showSucceed();
                 Toast.makeText(this, "登录成功", Toast.LENGTH_SHORT).show();
-                //跳转到主页面TODO！！！
+                // TODO:跳转到主页面！！！
+                //跳转到主界面
+                Intent navigateToHome = new Intent(LoginActivity.this, MainActivity.class);
+                startActivity(navigateToHome);
+
 
             } else {
                 mLoginButton.showError(3000);

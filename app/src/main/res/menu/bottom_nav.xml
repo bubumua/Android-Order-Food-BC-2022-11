@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/detailFragment"
+        android:icon="@android:drawable/ic_dialog_dialer"
+        android:title="Detail" />
+    <item
+        android:id="@+id/orderFragment"
+        android:icon="@android:drawable/ic_dialog_dialer"
+        android:title="Order" />
+    <item
+        android:id="@+id/settingFragment"
+        android:icon="@android:drawable/ic_dialog_dialer"
+        android:title="Setting" />
+</menu>

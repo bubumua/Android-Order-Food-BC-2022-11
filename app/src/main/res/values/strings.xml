@@ -8,4 +8,6 @@
     <string name="signup_phoneNumber_hint" translatable="false">请输入您的手机号（中国）</string>
     <string name="signup_text" translatable="false">注册</string>
     <string name="login_signup" translatable="false">没有账号？</string>
+    <string name="buttomAdd">加入购物车</string>
+    <string name="buttonSub" >从购物车去除</string>
 </resources>

@@ -5,6 +5,8 @@ import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
 
+import com.example.Android_bigWork.Entity.PersonEntity;
+
 import java.util.List;
 
 @Dao //Dao的声明

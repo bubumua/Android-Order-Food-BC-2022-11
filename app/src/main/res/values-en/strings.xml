@@ -6,4 +6,6 @@
     <string name="login_username_hint">Please enter your username or mobile phone number</string>
     <string name="login_password_hint">Please enter your password</string>
     <string name="signup_username_hint">Please enter your username</string>
+    <string name="buttomAdd">add one to cart</string>
+    <string name="buttonSub" >sub one from cart</string>
 </resources>

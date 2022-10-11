@@ -4,7 +4,6 @@ import static com.example.Android_bigWork.Utils.KeyboardUtils.hideKeyboard;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -13,7 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.Android_bigWork.Database.PersonDao;
 import com.example.Android_bigWork.Database.PersonDatabase;
-import com.example.Android_bigWork.Database.PersonEntity;
+import com.example.Android_bigWork.Entity.PersonEntity;
 import com.example.Android_bigWork.R;
 import com.example.Android_bigWork.Utils.SubmitButton;
 import com.example.Android_bigWork.Utils.SwitchButton;
