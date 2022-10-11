@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#80333333">
+    <!--半透明遮罩-->
+    <View
+        android:id="@+id/v_dimiss"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="#00000000"/>
+    <!--商品菜单-->
+    <View
+        android:background="#97FFFF"
+        android:id="@+id/v_anim"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        />
+    <!--底部栏-->
+    <RelativeLayout
+        android:id="@+id/rl"
+        android:background="#fff"
+        android:layout_width="match_parent"
+        android:layout_height="70dp">
+        <View
+            android:background="#7FFF00"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_alignParentBottom="true"/>
+        <ImageView
+            android:layout_marginLeft="3dp"
+            android:src="@drawable/ic_baseline_shopping_cart_24"
+            android:layout_width="40dp"
+            android:layout_height="40dp" />
+    </RelativeLayout>
+</LinearLayout>

@@ -96,4 +96,6 @@
     <color name="common_confirm_text_color">#007AFF</color>
     <!-- 对话框取消按钮的文本颜色 -->
     <color name="common_cancel_text_color">#F44336</color>
+    <color name="grey_background_fill">#D3D3D3</color>
+    <color name="Ensborough">#DCDCDC</color>
 </resources>
