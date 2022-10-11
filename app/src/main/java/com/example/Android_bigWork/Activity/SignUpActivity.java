@@ -61,6 +61,7 @@ public class SignUpActivity extends AppCompatActivity
             else
                 isFemale[0] = 0;
         });
+
         //注册按钮监听器
         findViewById(R.id.btn_signup).setOnClickListener(v -> {
             mSignUpButton.showProgress();
@@ -68,27 +69,9 @@ public class SignUpActivity extends AppCompatActivity
             String password = this.mPassword.getText().toString();
             String phoneNumber = this.mPhoneNumber.getText().toString();
             //判断是否为空
-            if (username.isEmpty()) {
-                Toast.makeText(this, "用户名不能为空", Toast.LENGTH_SHORT).show();
-                mSignUpButton.showError(3000);
-            } else if (password.isEmpty()) {
-                Toast.makeText(this, "密码不能为空", Toast.LENGTH_SHORT).show();
-                mSignUpButton.showError(3000);
-            } else if (phoneNumber.isEmpty()) {
-                Toast.makeText(this, "手机号不能为空", Toast.LENGTH_SHORT).show();
-                mSignUpButton.showError(3000);
-            } else {
+            if (checkEmpty(username, password, phoneNumber)) {
                 //查询数据库
-                if (personDao.checkUsername(username) != null) {
-                    Toast.makeText(this, "用户名已存在", Toast.LENGTH_SHORT).show();
-                    mSignUpButton.showError(3000);
-                } else if (personDao.checkPhoneNumber(Long.parseLong(phoneNumber)) != null) {
-                    Toast.makeText(this, "手机号已存在", Toast.LENGTH_SHORT).show();
-                    mSignUpButton.showError(3000);
-                } else if (phoneNumber.length() != 11) {
-                    Toast.makeText(this, "手机号格式错误", Toast.LENGTH_SHORT).show();
-                    mSignUpButton.showError(3000);
-                } else {
+                if (checkDataBase(username, password, phoneNumber, personDao)) {
                     //添加用户
                     PersonEntity personEntity = new PersonEntity(username, password, Long.parseLong(phoneNumber), isFemale[0]);
                     personDao.insert(personEntity);
@@ -104,8 +87,6 @@ public class SignUpActivity extends AppCompatActivity
                         //关闭注册页面
                     }, 100);
                 }
-
-
             }
         });
 
@@ -120,5 +101,41 @@ public class SignUpActivity extends AppCompatActivity
             //收起键盘
             hideKeyboard(this);
         });
+    }
+
+    private boolean checkDataBase(String username, String password, String phoneNumber, PersonDao personDao) {
+        //查询数据库
+        if (personDao.checkUsername(username) != null) {
+            Toast.makeText(this, "用户名已存在", Toast.LENGTH_SHORT).show();
+            mSignUpButton.showError(3000);
+        } else if (personDao.checkPhoneNumber(Long.parseLong(phoneNumber)) != null) {
+            Toast.makeText(this, "手机号已存在", Toast.LENGTH_SHORT).show();
+            mSignUpButton.showError(3000);
+        } else if (phoneNumber.length() != 11) {
+            Toast.makeText(this, "手机号格式错误", Toast.LENGTH_SHORT).show();
+            mSignUpButton.showError(3000);
+        } else if (password.length() < 6) {
+            Toast.makeText(this, "密码长度不足6位", Toast.LENGTH_SHORT).show();
+            mSignUpButton.showError(3000);
+        } else {
+            return true;
+        }
+        return false;
+    }
+
+    private boolean checkEmpty(String username, String password, String phoneNumber) {
+        if (username.isEmpty()) {
+            Toast.makeText(this, "用户名不能为空", Toast.LENGTH_SHORT).show();
+            mSignUpButton.showError(3000);
+        } else if (password.isEmpty()) {
+            Toast.makeText(this, "密码不能为空", Toast.LENGTH_SHORT).show();
+            mSignUpButton.showError(3000);
+        } else if (phoneNumber.isEmpty()) {
+            Toast.makeText(this, "手机号不能为空", Toast.LENGTH_SHORT).show();
+            mSignUpButton.showError(3000);
+        } else {
+            return true;
+        }
+        return false;
     }
 }
