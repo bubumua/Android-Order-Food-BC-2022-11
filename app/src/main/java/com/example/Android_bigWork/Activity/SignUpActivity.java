@@ -14,6 +14,7 @@ import com.example.Android_bigWork.Database.PersonDao;
 import com.example.Android_bigWork.Database.PersonDatabase;
 import com.example.Android_bigWork.Entity.PersonEntity;
 import com.example.Android_bigWork.R;
+import com.example.Android_bigWork.Utils.HandlerAction;
 import com.example.Android_bigWork.Utils.SubmitButton;
 import com.example.Android_bigWork.Utils.SwitchButton;
 
@@ -23,7 +24,8 @@ import com.example.Android_bigWork.Utils.SwitchButton;
  * @Desc 注册界面
  * @date 2022/10/9 20:09
  */
-public class SignUpActivity extends AppCompatActivity {
+public class SignUpActivity extends AppCompatActivity
+        implements HandlerAction {
     EditText mUsername, mPassword, mPhoneNumber;
     SubmitButton mSignUpButton;
     SwitchButton mGender;
@@ -42,6 +44,8 @@ public class SignUpActivity extends AppCompatActivity {
         mPhoneNumber = findViewById(R.id.textView_phoneNumber);
         mGender = findViewById(R.id.SwitchButton_gender);
         mSignUpButton = findViewById(R.id.btn_signup);
+
+        Intent navigateToLogin = new Intent(this, LoginActivity.class);
 
         //设置电话号码输入框只能输入数字
         mPhoneNumber.setInputType(android.text.InputType.TYPE_CLASS_NUMBER);
@@ -89,15 +93,19 @@ public class SignUpActivity extends AppCompatActivity {
                     PersonEntity personEntity = new PersonEntity(username, password, Long.parseLong(phoneNumber), isFemale[0]);
                     personDao.insert(personEntity);
                     Toast.makeText(this, "注册成功", Toast.LENGTH_SHORT).show();
-                    mSignUpButton.showSucceed();
                     //跳转到登录界面
-                    Intent intent = new Intent(this, LoginActivity.class);
-                    //携带数据并填入
-                    intent.putExtra("username", username);
-                    intent.putExtra("password", password);
-                    startActivity(intent);
-
+                    postDelayed(() -> {
+                        mSignUpButton.showSucceed();
+                        postDelayed(() -> {
+                            navigateToLogin.putExtra("username", username);
+                            navigateToLogin.putExtra("password", password);
+                            startActivity(navigateToLogin);
+                        }, 1000);
+                        //关闭注册页面
+                    }, 100);
                 }
+
+
             }
         });
 

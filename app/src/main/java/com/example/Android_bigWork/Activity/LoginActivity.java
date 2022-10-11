@@ -16,8 +16,10 @@ import com.example.Android_bigWork.Database.PersonDao;
 import com.example.Android_bigWork.Database.PersonDatabase;
 import com.example.Android_bigWork.R;
 import com.example.Android_bigWork.Utils.SubmitButton;
+import com.example.Android_bigWork.Utils.HandlerAction;
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity
+        implements HandlerAction {
     EditText mUsername, mPassword;
     SubmitButton mLoginButton;
     AppCompatTextView mSignUpButton;
@@ -37,9 +39,14 @@ public class LoginActivity extends AppCompatActivity {
         mLoginButton = findViewById(R.id.btn_login);
         mSignUpButton = findViewById(R.id.btn_signup);
 
-        Intent intent = getIntent();
-        String iUsername = intent.getStringExtra("username");
-        String iPassword = intent.getStringExtra("password");
+        Intent initIntent = getIntent();
+        Intent navigateToSignUp = new Intent(this, SignUpActivity.class);
+        //跳转到Main时，清空Activity堆栈
+        Intent navigateToHome = new Intent(this, MainActivity.class)
+                .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+
+        String iUsername = initIntent.getStringExtra("username");
+        String iPassword = initIntent.getStringExtra("password");
         if (iUsername != null && iPassword != null) {
             mUsername.setText(iUsername);
             mPassword.setText(iPassword);
@@ -77,25 +84,23 @@ public class LoginActivity extends AppCompatActivity {
                     || personDao.checkLogin(username, password) != null
                     || isNumber && personDao.checkLoginByPhoneNumber(Long.parseLong(username), password) != null) {
                 mLoginButton.showSucceed();
-                Toast.makeText(this, "登录成功", Toast.LENGTH_SHORT).show();
-                // TODO:跳转到主页面！！！
-                //跳转到主界面
-                Intent navigateToHome = new Intent(LoginActivity.this, MainActivity.class);
-                startActivity(navigateToHome);
 
+                Toast.makeText(this, "登录成功", Toast.LENGTH_SHORT).show();
+                //跳转到主界面
+                postDelayed(() -> {
+                    startActivity(navigateToHome);
+                }, 1000);
 
             } else {
                 mLoginButton.showError(3000);
                 Toast.makeText(this, "用户名或密码错误", Toast.LENGTH_SHORT).show();
-
             }
         });
 
         //注册按钮监听器
         mSignUpButton.setOnClickListener(v -> {
             //跳转到注册界面
-            Intent intent2 = new Intent(LoginActivity.this, SignUpActivity.class);
-            startActivity(intent2);
+            startActivity(navigateToSignUp);
         });
 
         //点击到img则收起键盘
