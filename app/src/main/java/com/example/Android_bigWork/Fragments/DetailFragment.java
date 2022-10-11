@@ -1,10 +1,14 @@
 package com.example.Android_bigWork.Fragments;
 
+import android.app.Dialog;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -14,6 +18,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.example.Android_bigWork.Activity.MainActivity;
 import com.example.Android_bigWork.Adapters.FoodCategoryAdapter;
 import com.example.Android_bigWork.Adapters.FoodStickyAdapter;
 import com.example.Android_bigWork.Entity.Dish;
@@ -87,18 +92,38 @@ public class DetailFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 int selectedCID=((FoodCategoryAdapter.CategoryItem)foodCategoryAdapter.getItem(position)).getCID();
-                stickyListView.setSelection(foodStickyAdapter.getPositionByCID(selectedCID));
+                int selectedPosition=foodStickyAdapter.getPositionByCID(selectedCID);
+                stickyListView.smoothScrollToPosition(selectedPosition);
+                stickyListView.setSelection(selectedPosition);
+//                stickyListView.smoothScrollToPositionFromTop(selectedPosition,0);
+//                stickyListView.smoothScrollByOffset(foodStickyAdapter.getPositionByCID(selectedCID));
                 Log.d(TAG, "onItemClick: click and set selection");
             }
         });
 
         // TODO: Use the ViewModel
 
+//        Dialog dialog = new Dialog(getContext(),R.style.Theme_AppCompat_Dialog);
+        Dialog dialog = new Dialog(getContext(), androidx.databinding.library.baseAdapters.R.style.Theme_AppCompat_Dialog);
+        dialog.setContentView(LayoutInflater.from(getContext()).inflate(R.layout.dialog, null));
+        Window dialogWindow = dialog.getWindow();
+        dialogWindow.getDecorView().setPadding(0, 0, 0, 0);// 边距设为0
+        dialogWindow.setBackgroundDrawableResource(android.R.color.transparent);//背景透明，不然会有个白色的东东
+        dialogWindow.setWindowAnimations(R.style.dialogWindowAnim); //设置窗口弹出动画
+        WindowManager.LayoutParams lp = dialogWindow.getAttributes();
+        lp.width = WindowManager.LayoutParams.MATCH_PARENT; // 宽度
+        lp.height = 300; // 高度
+        dialogWindow.setAttributes(lp);
+        dialogWindow.setGravity(Gravity.BOTTOM);
+        // 弹出dialog
+        dialog.show();
+
     }
 
     private void initDishListForTest() {
         // for test
         dishList = new ArrayList<>();
+        dishList.add(new Dish(111, getResources().getString(R.string.dish_01), "none", 2.5, "OEW", 0, false));
         dishList.add(new Dish(111, "TEST DISH", "none", 2.5, "OEW", 0, false));
         dishList.add(new Dish(111, "TEST DISH", "none", 2.5, "OEW", 0, false));
         dishList.add(new Dish(111, "TEST DISH", "none", 2.5, "OEW", 0, false));
@@ -106,20 +131,19 @@ public class DetailFragment extends Fragment {
         dishList.add(new Dish(111, "TEST DISH", "none", 2.5, "OEW", 0, false));
         dishList.add(new Dish(111, "TEST DISH", "none", 2.5, "OEW", 0, false));
         dishList.add(new Dish(111, "TEST DISH", "none", 2.5, "OEW", 0, false));
-        dishList.add(new Dish(111, "TEST DISH", "none", 2.5, "OEW", 0, false));
-        dishList.add(new Dish(111, "TEST DISH", "none", 2.5, "OEW", 0, false));
-        dishList.add(new Dish(111, "TEST DISH", "none", 2.5, "OEW", 0, false));
-        dishList.add(new Dish(211, "TEST DISH", "none", 2.5, "NEW", 1, false));
-        dishList.add(new Dish(211, "TEST DISH", "none", 2.5, "NEW", 1, false));
-        dishList.add(new Dish(211, "TEST DISH", "none", 2.5, "NEW", 1, false));
-        dishList.add(new Dish(211, "TEST DISH", "none", 2.5, "NEW", 1, false));
-        dishList.add(new Dish(211, "TEST DISH", "none", 2.5, "NEW", 1, false));
-        dishList.add(new Dish(211, "TEST DISH", "none", 2.5, "NEW", 1, false));
-        dishList.add(new Dish(211, "TEST DISH", "none", 2.5, "OEW", 1, false));
-        dishList.add(new Dish(211, "TEST DISH", "none", 2.5, "NEW", 1, false));
-        dishList.add(new Dish(211, "TEST DISH", "none", 2.5, "NEW", 1, false));
-        dishList.add(new Dish(211, "TEST DISH", "none", 2.5, "NEW", 1, false));
-        dishList.add(new Dish(211, "TEST DISH", "none", 2.5, "NEW", 1, false));
+        dishList.add(new Dish(111, "TEST DISH", "none", 2.5, "POPULAR", 1, false));
+        dishList.add(new Dish(111, "TEST DISH", "none", 2.5, "POPULAR", 1, false));
+        dishList.add(new Dish(211, "TEST DISH", "none", 2.5, "POPULAR", 1, false));
+        dishList.add(new Dish(211, "TEST DISH", "none", 2.5, "POPULAR", 1, false));
+        dishList.add(new Dish(211, "TEST DISH", "none", 2.5, "POPULAR", 1, false));
+        dishList.add(new Dish(211, "TEST DISH", "none", 2.5, "POPULAR", 1, false));
+        dishList.add(new Dish(211, "TEST DISH", "none", 2.5, "POPULAR", 1, false));
+        dishList.add(new Dish(211, "TEST DISH", "none", 2.5, "CEW", 2, false));
+        dishList.add(new Dish(211, "TEST DISH", "none", 2.5, "OEW", 2, false));
+        dishList.add(new Dish(211, "TEST DISH", "none", 2.5, "NEW", 2, false));
+        dishList.add(new Dish(211, "TEST DISH", "none", 2.5, "NEW", 2, false));
+        dishList.add(new Dish(211, "TEST DISH", "none", 2.5, "NEW", 2, false));
+        dishList.add(new Dish(211, "TEST DISH", "none", 2.5, "NEW", 2, false));
 
     }
 

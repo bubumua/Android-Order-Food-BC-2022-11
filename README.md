@@ -35,15 +35,17 @@
    4. 功能异常或出现死机（每个 -5分）
    5. UI设计优美、用户体验好（+5分）
 
-## 制作
+## 参考与规范
 
-主要参考这两个项目
+### 参考
 
 https://gitee.com/FranzLiszt1847/OrderOnline
 
 https://github.com/Rahmouni-Seif-BI/Android-APP-Seif-Delivery-Food
 
-### 一些规范
+### 代码规范
+
+#### JavaDoc
 
 在`build.gradle`的`dependencies`中添加
 
@@ -99,11 +101,13 @@ public class ${NAME} {
 
 
 
-### 具体任务
+## 具体实现效果
 
 #### 数据存储
 
-使用`JetPack`的`Room`本地化存储，实现账号与商品的增删改查接口即可
+##### 用户账户
+
+使用`JetPack`的`Room`本地化存储
 
 账户：
 
@@ -113,18 +117,29 @@ public class ${NAME} {
 4. `phoneNumber`
 5. `UID`主键
 
-商品：
+##### 商品
+
+（[Database Entity](#Dish)）
 
 1. `name`
 2. `category`分类
 3. `price`
 4. `detail`商品描述
 5. `isCustomed`是否支持客制化，即定制口味
-6. *`customDetail`客制化口味详情，做的简单点就是直接微辣~重辣
-7. *`comment`商品评价
+6. `customDetail`客制化口味详情，做的简单点就是直接微辣~重辣
+7. `comment`商品评价
 8. `GID`主键
 
-订单：
+**GID**:int
+**name:**String 
+**description**:String 
+**price**:double 
+**category**:String 
+**CID**:int 
+**ImageSrc**:String 
+**customizable**:boolean
+
+##### 订单
 
 1. `name`
 2. `price`
@@ -197,7 +212,7 @@ public class ${NAME} {
 2. 国际化（切换语言）
 3. 检查更新
 
-### 任务清单
+## 任务清单
 
 - [ ] 页面设计
   - [x] 登录页面（注册页面）
@@ -240,6 +255,13 @@ public class ${NAME} {
 所有的数据库
 
 1. `Person`用户数据库
+
+2. <span id="Dish">`Dish`展示菜品数据库</span>
+
+     
+
+
+​    
 
 ### Utils
 
