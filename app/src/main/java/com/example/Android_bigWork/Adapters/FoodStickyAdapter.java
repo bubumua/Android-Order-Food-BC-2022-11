@@ -41,10 +41,9 @@ public class FoodStickyAdapter extends BaseAdapter implements StickyListHeadersA
 
     @Override
     public long getHeaderId(int position) {
-        return this.dishList.get(position).getGID();
-//        return Long.parseLong("S");
-
+        return this.dishList.get(position).getCID();
     }
+
 
     @Override
     public int getCount() {
@@ -82,6 +81,16 @@ public class FoodStickyAdapter extends BaseAdapter implements StickyListHeadersA
 
         }
         return convertView;
+    }
+
+    public int getPositionByCID(int CID){
+        for (int i = 0; i < dishList.size(); i++) {
+            Dish dish=dishList.get(i);
+            if(CID==dish.getCID()){
+                return i;
+            }
+        }
+        return 0;
     }
 
     static class ViewHolder {

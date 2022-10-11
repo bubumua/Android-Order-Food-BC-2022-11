@@ -6,19 +6,29 @@ public class Dish {
     private String description;
     private double price;
     private String category;
+    private int CID;
     private boolean customizable;
 
     public Dish(String name,double price) {
-        new Dish(0,name,"no description",price,"popular",false);
+        new Dish(0,name,"no description",price,"popular",0,false);
     }
 
-    public Dish(int gid, String name, String description, double price, String category, boolean customizable) {
+    public Dish(int gid, String name, String description, double price, String category, int CID, boolean customizable) {
         this.GID=gid;
         setName(name);
         setDescription(description);
         setPrice(price);
         setCategory(category);
+        setCID(CID);
         setCustomizable(customizable);
+    }
+
+    public int getCID() {
+        return CID;
+    }
+
+    public void setCID(int CID) {
+        this.CID = CID;
     }
 
     public int getGID() {

@@ -5,7 +5,9 @@
 
     <TextView
         android:id="@+id/dish_category"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Category" />
+        android:background="@color/Ensborough"
+        android:text="Category"
+        android:textSize="20sp" />
 </FrameLayout>

@@ -8,16 +8,17 @@
 
     <LinearLayout
         android:id="@+id/lists"
-        android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="200dp"
-        android:background="@android:color/white">
+        android:background="@color/Ensborough"
+        android:orientation="horizontal">
+
         <ListView
             android:id="@+id/category_list"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1.2"
+            android:layout_weight="1.6"
             android:scrollbars="none" />
 
         <se.emilsjolander.stickylistheaders.StickyListHeadersListView
@@ -29,7 +30,7 @@
             android:drawSelectorOnTop="true"
             android:listSelector="@android:color/transparent"
             android:scrollbarSize="3dip"
-            android:scrollbars="none"/>
+            android:scrollbars="none" />
     </LinearLayout>
 </LinearLayout>
 
