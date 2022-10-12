@@ -19,9 +19,9 @@
             android:layout_height="wrap_content">
 
             <ImageView
-                android:id="@+id/imageView3"
-                android:layout_width="56dp"
-                android:layout_height="56dp"
+                android:id="@+id/dish_img"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/guideline3"
                 app:layout_constraintStart_toStartOf="parent"

@@ -205,16 +205,6 @@ public class DetailFragment extends Fragment {
 
         //获取数据库中的菜品
         dishList = (ArrayList<Dish>) dishDao.getAllDish();
-        // 对获取到的菜品列表按类别排序
-        dishList.sort((d1, d2) -> {
-            if (d1.getCID() < d2.getCID()) {
-                return -1;
-            }
-            if (d1.getCID() > d2.getCID()) {
-                return 1;
-            }
-            return 0;
-        });
 
         //输出内容
         for (Dish dish : dishList) {

@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.Android_bigWork.Entity.Dish;
@@ -69,17 +70,17 @@ public class FoodStickyAdapter extends BaseAdapter implements StickyListHeadersA
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
-        // 在视图上设置文本
+        // 在视图上设置文本、图片
         Dish dish = dishList.get(position);
         holder.name.setText(dish.getName());
         holder.price.setText(String.valueOf(dish.getPrice()));
+        holder.img.setImageResource(R.drawable.ic_baseline_remove_red_eye_24);
         holder.add.setOnClickListener(v -> {
             // TODO: 2022/10/10 将菜加入购物车
         });
         holder.sub.setOnClickListener(v -> {
             // TODO: 2022/10/10 将菜从购物车中取出
         });
-
 
         return convertView;
     }
@@ -99,12 +100,14 @@ public class FoodStickyAdapter extends BaseAdapter implements StickyListHeadersA
         TextView price;
         ImageButton add;
         ImageButton sub;
+        ImageView img;
 
         public ViewHolder(View view) {
             this.name = view.findViewById(R.id.dish_name);
             this.price = view.findViewById(R.id.dish_price);
             this.add = view.findViewById(R.id.dish_add);
             this.sub = view.findViewById(R.id.dish_sub);
+            this.img=view.findViewById(R.id.dish_img);
         }
         public ViewHolder() {}
     }
