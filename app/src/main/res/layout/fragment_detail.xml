@@ -14,7 +14,7 @@
             android:id="@+id/lists"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:background="@color/Ensborough"
+            android:background="@color/grey_background_fill"
             android:orientation="horizontal"
             app:layout_constraintBottom_toTopOf="@+id/shopping_car"
             app:layout_constraintEnd_toEndOf="parent"
@@ -37,13 +37,15 @@
                 android:drawSelectorOnTop="true"
                 android:listSelector="@android:color/transparent"
                 android:scrollbarSize="3dip"
-                android:scrollbars="none" />
+                android:scrollbars="none"
+                android:divider="#00000000"/>
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/shopping_car"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="#CCFFFFFF"
             android:orientation="horizontal"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -53,8 +55,8 @@
                 android:id="@+id/shopping_account"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:orientation="horizontal"
-                android:layout_weight="5">
+                android:layout_weight="5"
+                android:orientation="horizontal">
 
                 <ImageView
                     android:id="@+id/imageView4"
