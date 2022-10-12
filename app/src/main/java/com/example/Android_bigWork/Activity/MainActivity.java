@@ -35,12 +35,11 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         //获取到fragment的管理对象
         fragmentManager = getSupportFragmentManager();
+        // init FragmentArrayList
+        initFragmentArrayList();
 
         // init BottomNavigationBar
         initBottomNavigationBar();
-
-        // init FragmentArrayList
-        initFragmentArrayList();
 
         // init FragmentTransaction and select the first fragment to show
         initFragmentTransaction();
@@ -70,6 +69,7 @@ public class MainActivity extends AppCompatActivity {
         fragmentArrayList.add(new DetailFragment());
         fragmentArrayList.add(new OrderFragment());
         fragmentArrayList.add(new SettingFragment());
+
     }
 
     private void initBottomNavigationBar() {
@@ -80,6 +80,7 @@ public class MainActivity extends AppCompatActivity {
                 .addItem(new BottomNavigationItem(R.drawable.ic_baseline_home_24, "Setting"))
                 .setFirstSelectedPosition(0)
                 .initialise();
+
         // BottomNavigationBar的点击监听器
         bottomNavigationBar.setTabSelectedListener(new BottomNavigationBar.OnTabSelectedListener() {
             @Override
@@ -104,7 +105,17 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        bottomNavigationBar.setVisibility(View.GONE);
+        // 监听BottomNavigationBar的宽高
+        bottomNavigationBar.addOnLayoutChangeListener(new View.OnLayoutChangeListener() {
+            @Override
+            public void onLayoutChange(View v, int left, int top, int right, int bottom, int oldLeft, int oldTop, int oldRight, int oldBottom) {
+                int width=bottomNavigationBar.getMeasuredWidth();
+                int height=bottomNavigationBar.getMeasuredHeight();
+                Log.d(TAG, "onLayoutChange: BottomNavigationBar (width,height)=("+width+","+height+")");
+//                ((DetailFragment)fragmentArrayList.get(0)).setBottomNavigationBarHeight(height);
+            }
+        });
+//        bottomNavigationBar.setVisibility(View.GONE);
     }
 
 }
