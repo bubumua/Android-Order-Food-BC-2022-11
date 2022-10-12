@@ -13,9 +13,9 @@ public class Dish {
     private String category;    // 分类类名
     private int CID;    // 分类编号
     private boolean customizable;   // 是否支持定制需求
-    private boolean spicy;  // 辣味是否可选
-    private boolean sweet;  // 甜味是否可选
-    private int count;  // 选购份数
+//    private boolean spicy;  // 辣味是否可选
+//    private boolean sweet;  // 甜味是否可选
+//    private int count;  // 选购份数
 
     public Dish() {
 
@@ -31,41 +31,41 @@ public class Dish {
         this.customizable = customizable;
     }
 
-    public Dish(int gid, String name, String description, double price, String category, int CID, boolean spicy,boolean sweet,int count) {
-        this.GID = gid;
-        this.name = name;
-        this.description = description;
-        this.price = price;
-        this.category = category;
-        this.CID = CID;
-        this.spicy = spicy;
-        this.sweet=sweet;
-        this.count=count;
-    }
-
-    public boolean isSpicy() {
-        return spicy;
-    }
-
-    public void setSpicy(boolean spicy) {
-        this.spicy = spicy;
-    }
-
-    public boolean isSweet() {
-        return sweet;
-    }
-
-    public void setSweet(boolean sweet) {
-        this.sweet = sweet;
-    }
-
-    public int getCount() {
-        return count;
-    }
-
-    public void setCount(int count) {
-        this.count = count;
-    }
+//    public Dish(int gid, String name, String description, double price, String category, int CID, boolean spicy,boolean sweet,int count) {
+//        this.GID = gid;
+//        this.name = name;
+//        this.description = description;
+//        this.price = price;
+//        this.category = category;
+//        this.CID = CID;
+//        this.spicy = spicy;
+//        this.sweet=sweet;
+//        this.count=count;
+//    }
+//
+//    public boolean isSpicy() {
+//        return spicy;
+//    }
+//
+//    public void setSpicy(boolean spicy) {
+//        this.spicy = spicy;
+//    }
+//
+//    public boolean isSweet() {
+//        return sweet;
+//    }
+//
+//    public void setSweet(boolean sweet) {
+//        this.sweet = sweet;
+//    }
+//
+//    public int getCount() {
+//        return count;
+//    }
+//
+//    public void setCount(int count) {
+//        this.count = count;
+//    }
 
     public int getCID() {
         return CID;

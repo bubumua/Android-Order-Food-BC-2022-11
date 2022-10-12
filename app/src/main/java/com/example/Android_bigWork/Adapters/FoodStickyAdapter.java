@@ -1,6 +1,7 @@
 package com.example.Android_bigWork.Adapters;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,10 +21,12 @@ public class FoodStickyAdapter extends BaseAdapter implements StickyListHeadersA
 
     private LayoutInflater inflater;
     private List<Dish> dishList;
+    private Resources resources ;
 
     public FoodStickyAdapter(Context context, List<Dish> dishList) {
         inflater = LayoutInflater.from(context);
         this.dishList = dishList;
+        this.resources=context.getResources();
     }
 
     @Override
@@ -74,7 +77,8 @@ public class FoodStickyAdapter extends BaseAdapter implements StickyListHeadersA
         Dish dish = dishList.get(position);
         holder.name.setText(dish.getName());
         holder.price.setText(String.valueOf(dish.getPrice()));
-        holder.img.setImageResource(R.drawable.ic_baseline_remove_red_eye_24);
+//        holder.img.setImageResource(R.drawable.dish_1);
+        holder.img.setImageResource(resources.getIdentifier("dish_1","drawable","com.example.Android_bigWork"));
         holder.add.setOnClickListener(v -> {
             // TODO: 2022/10/10 将菜加入购物车
         });
