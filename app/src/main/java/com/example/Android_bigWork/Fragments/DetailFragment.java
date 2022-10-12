@@ -2,6 +2,8 @@ package com.example.Android_bigWork.Fragments;
 
 import static com.example.Android_bigWork.Utils.TestPopupWindow.makeDropDownMeasureSpec;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.util.Log;
@@ -14,14 +16,12 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.PopupWindow;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.core.widget.PopupWindowCompat;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.Android_bigWork.Adapters.FoodCategoryAdapter;
@@ -44,11 +44,12 @@ public class DetailFragment extends Fragment {
     private StickyListHeadersListView stickyListView;
     private ListView listView;
     LinearLayout shoppingCar;
-    Button showPopup;
+    Button payment;
 
     //for test
     private ArrayList<Dish> dishList;
     private ArrayList<FoodCategoryAdapter.CategoryItem> categoryItems;
+
     //数据库
     private DishDatabase dishDatabase;
 
@@ -116,7 +117,30 @@ public class DetailFragment extends Fragment {
             }
         });
 
-        showPopup.setOnClickListener(new View.OnClickListener() {
+        // 支付按钮点击事件
+        payment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                showNewPopupWindow();
+                // 点击后生成确认对话框
+                AlertDialog.Builder builder = new AlertDialog.Builder(requireActivity());
+                builder.setTitle(getRString(R.string.confirm_to_pay));
+                builder.setMessage(getRString(R.string.confirm_message));
+                builder.setNegativeButton(getRString(R.string.cancel), new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Log.d(TAG, "dialogNo: payment cancel");
+                    }
+                });
+                builder.setPositiveButton(getRString(R.string.confirm), (dialogInterface, i) -> {
+                    Log.d(TAG, "dialogYes: payment succeed");
+                    // TODO: 2022/10/12 生成订单
+                });
+                builder.create().show();
+            }
+        });
+
+        shoppingCar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 showNewPopupWindow();
@@ -134,11 +158,20 @@ public class DetailFragment extends Fragment {
 
     }
 
-    private void bindViews(View view){
+    /**
+     * 绑定视图
+     *
+     * @param view
+     * @return void
+     * @Author Bubu
+     * @date 2022/10/12 20:51
+     * @commit none
+     */
+    private void bindViews(View view) {
         stickyListView = view.findViewById(R.id.showdishes);
         listView = view.findViewById(R.id.category_list);
-        showPopup = view.findViewById(R.id.shopping_commit);
-        shoppingCar=view.findViewById(R.id.shopping_car);
+        payment = view.findViewById(R.id.shopping_commit);
+        shoppingCar = view.findViewById(R.id.shopping_car);
     }
 
     /**
@@ -170,16 +203,23 @@ public class DetailFragment extends Fragment {
         dishDatabase = DishDatabase.getDatabase(getContext());
         DishDao dishDao = dishDatabase.getDishDao();
 
-
         //获取数据库中的菜品
         dishList = (ArrayList<Dish>) dishDao.getAllDish();
+        // 对获取到的菜品列表按类别排序
+        dishList.sort((d1, d2) -> {
+            if (d1.getCID() < d2.getCID()) {
+                return -1;
+            }
+            if (d1.getCID() > d2.getCID()) {
+                return 1;
+            }
+            return 0;
+        });
 
         //输出内容
         for (Dish dish : dishList) {
             Log.d(TAG, "initDishListForTest: " + dish.toString());
         }
-
-
     }
 
     private void initCategoryItems() {
@@ -203,7 +243,7 @@ public class DetailFragment extends Fragment {
         });
     }
 
-    private void showNewPopupWindow(){
+    private void showNewPopupWindow() {
         TestPopupWindow window = new TestPopupWindow(getContext());
         View contentView = window.getContentView();
         //需要先测量，PopupWindow还未弹出时，宽高为0
@@ -211,9 +251,9 @@ public class DetailFragment extends Fragment {
                 makeDropDownMeasureSpec(window.getHeight()));
         // 计算偏移量
         int offsetX = -contentView.getMeasuredWidth();
-        int offsetY = -(contentView.getMeasuredHeight()+showPopup.getHeight());
+        int offsetY = -(contentView.getMeasuredHeight() + payment.getHeight());
         // 显示购物车弹窗
-        PopupWindowCompat.showAsDropDown(window, showPopup, offsetX, offsetY, Gravity.END);
+        PopupWindowCompat.showAsDropDown(window, payment, offsetX, offsetY, Gravity.END);
         // 设置按钮的点击事件
         Button button = contentView.findViewById(R.id.clear_shopping);
         button.setOnClickListener(v -> {
@@ -222,16 +262,13 @@ public class DetailFragment extends Fragment {
         });
     }
 
-//    public void setBottomNavigationBarHeight(int height){
-//        this.bottomNavigationBarHeight=height;
-//    }
 
     /**
      * show shopping car popupWindow
      *
      * @return void
      * @Author Bubu
-     * @date  2022/10/12 17:45
+     * @date 2022/10/12 17:45
      * @commit
      */
 //    private void showPopupWindow() {

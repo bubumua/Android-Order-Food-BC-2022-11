@@ -310,5 +310,10 @@
     <string name="commit">付款</string>
     <string name="shopping_car_title">购物车</string>
     <string name="clear_shopping_car">清空</string>
+    <string name="confirm_to_pay">确认付款</string>
+    <string name="confirm_message">您确定要付款并生成订单吗？啊？大声点？</string>
+    <string name="confirm">确认</string>
+    <string name="cancel">取消</string>
+
 
 </resources>
