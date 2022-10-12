@@ -307,6 +307,16 @@
     <string name="price_93" translatable="false">10</string>
     <string name="price_94" translatable="false">7</string>
     <string name="price_95" translatable="false">11</string>
+    <string-array name="setting_country">
+        <item>China</item>
+        <item>England</item>
+        <item>Japan</item>
+    </string-array>
+    <string-array name="setting_language">
+        <item>Chinese</item>
+        <item>English</item>
+        <item>Japanese</item>
+    </string-array>
     <string name="commit">付款</string>
     <string name="shopping_car_title">购物车</string>
     <string name="clear_shopping_car">清空</string>
