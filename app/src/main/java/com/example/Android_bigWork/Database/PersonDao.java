@@ -20,20 +20,64 @@ public interface PersonDao {
     @Delete
     void delete(PersonEntity personEntity);
 
-    //使用用户名和密码进行登陆检查
+    /**
+     * 登录检测（使用用户名和密码的组合）
+     *
+     * @param username 用户名 password 密码
+     * @return Query
+     * @Author Anduin9527
+     * @date 2022/10/12 9:14
+     * @commit
+     */
     @Query("SELECT * FROM person_table WHERE username = :username and password = :password ")
     PersonEntity checkLogin(String username, String password);
 
-    //使用手机号和密码进行登录检查
+    /**
+     * 登录检测（使用电话号码和密码的组合）
+     *
+     * @param phoneNumber 电话号码 password 密码
+     * @return
+     * @Author Anduin9527
+     * @date 2022/10/12 9:15
+     * @commit
+     */
     @Query("SELECT * FROM person_table WHERE phoneNumber = :phoneNumber and password = :password ")
     PersonEntity checkLoginByPhoneNumber(long phoneNumber, String password);
 
-    //查询是否存在该用户名
+    /**
+     * 检测用户名是否存在
+     *
+     * @param username 用户名
+     * @return Query
+     * @Author Anduin9527
+     * @date 2022/10/12 9:14
+     * @commit
+     */
     @Query("SELECT * FROM person_table WHERE username = :username")
     PersonEntity checkUsername(String username);
 
-    //查询是否存在该手机号
+    /**
+     * 检测电话号码是否存在
+     *
+     * @param phoneNumber 电话号码
+     * @return Query
+     * @Author Anduin9527
+     * @date 2022/10/12 9:14
+     * @commit
+     */
     @Query("SELECT * FROM person_table WHERE phoneNumber = :phoneNumber")
     PersonEntity checkPhoneNumber(long phoneNumber);
+
+    /**
+     * 修改密码
+     *
+     * @param username 用户名 newPassword 新密码
+     * @return Update
+     * @Author Anduin9527
+     * @date 2022/10/12 9:14
+     * @commit
+     */
+    @Query("UPDATE person_table SET password = :newPassword WHERE username = :username")
+    void changePassword(String username, String newPassword);
 
 }

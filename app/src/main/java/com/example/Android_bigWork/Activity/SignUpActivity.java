@@ -83,9 +83,9 @@ public class SignUpActivity extends AppCompatActivity
                             navigateToLogin.putExtra("username", username);
                             navigateToLogin.putExtra("password", password);
                             startActivity(navigateToLogin);
+                            finish();
                         }, 1000);
-                        //关闭注册页面
-                    }, 100);
+                    }, 0);
                 }
             }
         });
