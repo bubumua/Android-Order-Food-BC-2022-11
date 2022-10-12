@@ -80,4 +80,19 @@ public interface PersonDao {
     @Query("UPDATE person_table SET password = :newPassword WHERE username = :username")
     void changePassword(String username, String newPassword);
 
+    //查询用户
+
+    /**
+     * 查询用户
+     *
+     * @param username
+     * @return
+     * @Author Anduin9527
+     * @date 2022/10/12 13:34
+     * @commit
+     */
+    @Query("SELECT * FROM person_table WHERE username = :username")
+    PersonEntity queryPerson(String username);
+
+
 }
