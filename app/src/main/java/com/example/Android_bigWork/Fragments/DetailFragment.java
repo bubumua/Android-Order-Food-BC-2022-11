@@ -104,7 +104,7 @@ public class DetailFragment extends Fragment {
         // TODO: Use the ViewModel
 
 //        Dialog dialog = new Dialog(getContext(),R.style.Theme_AppCompat_Dialog);
-        Dialog dialog = new Dialog(getContext(), androidx.databinding.library.baseAdapters.R.style.Theme_AppCompat_Dialog);
+        Dialog dialog = new Dialog(getContext(), com.google.android.material.R.style.Theme_AppCompat_Dialog);
         dialog.setContentView(LayoutInflater.from(getContext()).inflate(R.layout.dialog, null));
         Window dialogWindow = dialog.getWindow();
         dialogWindow.getDecorView().setPadding(0, 0, 0, 0);// 边距设为0
@@ -112,7 +112,7 @@ public class DetailFragment extends Fragment {
         dialogWindow.setWindowAnimations(R.style.dialogWindowAnim); //设置窗口弹出动画
         WindowManager.LayoutParams lp = dialogWindow.getAttributes();
         lp.width = WindowManager.LayoutParams.MATCH_PARENT; // 宽度
-        lp.height = 300; // 高度
+        lp.height = 200; // 高度
         dialogWindow.setAttributes(lp);
         dialogWindow.setGravity(Gravity.BOTTOM);
         // 弹出dialog
