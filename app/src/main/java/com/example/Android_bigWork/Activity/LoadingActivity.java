@@ -144,7 +144,7 @@ public class LoadingActivity extends AppCompatActivity
         postDelayed(() -> {
             Intent intent = new Intent(this, LoginActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
-        }, 2700);
+        }, 2400);
 
     }
 

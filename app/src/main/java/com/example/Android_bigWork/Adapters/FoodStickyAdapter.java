@@ -21,12 +21,12 @@ public class FoodStickyAdapter extends BaseAdapter implements StickyListHeadersA
 
     private LayoutInflater inflater;
     private List<Dish> dishList;
-    private Resources resources ;
+    private Resources resources;
 
     public FoodStickyAdapter(Context context, List<Dish> dishList) {
         inflater = LayoutInflater.from(context);
         this.dishList = dishList;
-        this.resources=context.getResources();
+        this.resources = context.getResources();
     }
 
     @Override
@@ -77,8 +77,7 @@ public class FoodStickyAdapter extends BaseAdapter implements StickyListHeadersA
         Dish dish = dishList.get(position);
         holder.name.setText(dish.getName());
         holder.price.setText(String.valueOf(dish.getPrice()));
-//        holder.img.setImageResource(R.drawable.dish_1);
-        holder.img.setImageResource(resources.getIdentifier("dish_1","drawable","com.example.Android_bigWork"));
+        holder.img.setImageResource(resources.getIdentifier("dish_" + String.valueOf(dish.getGID()), "drawable", "com.example.Android_bigWork"));
         holder.add.setOnClickListener(v -> {
             // TODO: 2022/10/10 将菜加入购物车
         });
@@ -111,9 +110,11 @@ public class FoodStickyAdapter extends BaseAdapter implements StickyListHeadersA
             this.price = view.findViewById(R.id.dish_price);
             this.add = view.findViewById(R.id.dish_add);
             this.sub = view.findViewById(R.id.dish_sub);
-            this.img=view.findViewById(R.id.dish_img);
+            this.img = view.findViewById(R.id.dish_img);
         }
-        public ViewHolder() {}
+
+        public ViewHolder() {
+        }
     }
 
     static class HeaderViewHolder {

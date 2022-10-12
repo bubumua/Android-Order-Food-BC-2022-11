@@ -8,7 +8,7 @@ import androidx.room.RoomDatabase;
 
 import com.example.Android_bigWork.Entity.Dish;
 
-@Database(entities = {Dish.class}, version = 1, exportSchema = false)
+@Database(entities = {Dish.class}, version = 2, exportSchema = false)
 public abstract class DishDatabase extends RoomDatabase {
     private static final String DB_NAME = "dish.db";
     private static DishDatabase INSTANCE;
