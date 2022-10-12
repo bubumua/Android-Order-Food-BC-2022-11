@@ -95,7 +95,7 @@ public class DetailFragment extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 int selectedCID = ((FoodCategoryAdapter.CategoryItem) foodCategoryAdapter.getItem(position)).getCID();
                 int selectedPosition = foodStickyAdapter.getPositionByCID(selectedCID);
-                stickyListView.smoothScrollToPosition(selectedPosition);
+//                stickyListView.smoothScrollToPosition(selectedPosition);
                 stickyListView.setSelection(selectedPosition);
 //                stickyListView.smoothScrollToPositionFromTop(selectedPosition,0);
 //                stickyListView.smoothScrollByOffset(foodStickyAdapter.getPositionByCID(selectedCID));

@@ -28,11 +28,11 @@ public class FoodStickyAdapter extends BaseAdapter implements StickyListHeadersA
     @Override
     public View getHeaderView(int position, View convertView, ViewGroup parent) {
         HeaderViewHolder headerViewHolder;
-        if(convertView==null){
-            convertView = inflater.inflate(R.layout.category_header,null);
+        if (convertView == null) {
+            convertView = inflater.inflate(R.layout.category_header, null);
             headerViewHolder = new HeaderViewHolder(convertView);
             convertView.setTag(headerViewHolder);
-        }else{
+        } else {
             headerViewHolder = (HeaderViewHolder) convertView.getTag();
         }
         headerViewHolder.category.setText(dishList.get(position).getCategory());
@@ -43,7 +43,6 @@ public class FoodStickyAdapter extends BaseAdapter implements StickyListHeadersA
     public long getHeaderId(int position) {
         return this.dishList.get(position).getCID();
     }
-
 
     @Override
     public int getCount() {
@@ -67,26 +66,28 @@ public class FoodStickyAdapter extends BaseAdapter implements StickyListHeadersA
             convertView = inflater.inflate(R.layout.item_dish, parent, false);
             holder = new ViewHolder(convertView);
             convertView.setTag(holder);
-
-            // 在视图上设置文本
-            Dish dish = dishList.get(position);
-            holder.name.setText(dish.getName());
-            holder.price.setText(String.valueOf(dish.getPrice()));
-            holder.add.setOnClickListener(v -> {
-                // TODO: 2022/10/10 将菜加入购物车
-            });
-            holder.sub.setOnClickListener(v -> {
-                // TODO: 2022/10/10 将菜从购物车中取出
-            });
-
+        } else {
+            holder = (ViewHolder) convertView.getTag();
         }
+        // 在视图上设置文本
+        Dish dish = dishList.get(position);
+        holder.name.setText(dish.getName());
+        holder.price.setText(String.valueOf(dish.getPrice()));
+        holder.add.setOnClickListener(v -> {
+            // TODO: 2022/10/10 将菜加入购物车
+        });
+        holder.sub.setOnClickListener(v -> {
+            // TODO: 2022/10/10 将菜从购物车中取出
+        });
+
+
         return convertView;
     }
 
-    public int getPositionByCID(int CID){
+    public int getPositionByCID(int CID) {
         for (int i = 0; i < dishList.size(); i++) {
-            Dish dish=dishList.get(i);
-            if(CID==dish.getCID()){
+            Dish dish = dishList.get(i);
+            if (CID == dish.getCID()) {
                 return i;
             }
         }
@@ -100,11 +101,12 @@ public class FoodStickyAdapter extends BaseAdapter implements StickyListHeadersA
         ImageButton sub;
 
         public ViewHolder(View view) {
-            this.name = (TextView) view.findViewById(R.id.dish_name);
-            this.price = (TextView) view.findViewById(R.id.dish_price);
-            this.add = (ImageButton) view.findViewById(R.id.dish_add);
-            this.sub = (ImageButton) view.findViewById(R.id.dish_sub);
+            this.name = view.findViewById(R.id.dish_name);
+            this.price = view.findViewById(R.id.dish_price);
+            this.add = view.findViewById(R.id.dish_add);
+            this.sub = view.findViewById(R.id.dish_sub);
         }
+        public ViewHolder() {}
     }
 
     static class HeaderViewHolder {

@@ -6,31 +6,80 @@
     android:layout_height="match_parent"
     android:layout_width="match_parent">
 
-    <LinearLayout
-        android:id="@+id/lists"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="200dp"
-        android:background="@color/Ensborough"
-        android:orientation="horizontal">
+        android:layout_height="match_parent">
 
-        <ListView
-            android:id="@+id/category_list"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1.6"
-            android:scrollbars="none" />
+        <LinearLayout
+            android:id="@+id/shopping_car"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
 
-        <se.emilsjolander.stickylistheaders.StickyListHeadersListView
-            android:id="@+id/showdishes"
-            android:layout_width="0dip"
-            android:layout_height="match_parent"
-            android:layout_weight="3.8"
-            android:clipToPadding="false"
-            android:drawSelectorOnTop="true"
-            android:listSelector="@android:color/transparent"
-            android:scrollbarSize="3dip"
-            android:scrollbars="none" />
-    </LinearLayout>
+            <LinearLayout
+                android:id="@+id/shopping_account"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:layout_weight="5">
+
+                <ImageView
+                    android:id="@+id/imageView4"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    app:srcCompat="@drawable/ic_baseline_shopping_cart_24" />
+
+                <TextView
+                    android:id="@+id/account_in_car"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="4"
+                    android:text="￥" />
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/shopping_commit"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/commit" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/lists"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="@color/Ensborough"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toTopOf="@+id/shopping_car"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ListView
+                android:id="@+id/category_list"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1.6"
+                android:scrollbars="none" />
+
+            <se.emilsjolander.stickylistheaders.StickyListHeadersListView
+                android:id="@+id/showdishes"
+                android:layout_width="0dip"
+                android:layout_height="match_parent"
+                android:layout_weight="3.8"
+                android:clipToPadding="false"
+                android:drawSelectorOnTop="true"
+                android:listSelector="@android:color/transparent"
+                android:scrollbarSize="3dip"
+                android:scrollbars="none" />
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 </LinearLayout>
 
