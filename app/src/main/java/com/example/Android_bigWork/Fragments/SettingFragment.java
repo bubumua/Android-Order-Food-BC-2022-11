@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -30,6 +32,26 @@ public class SettingFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+
+        Button button1=(Button) getActivity().findViewById(R.id.button_user);
+        Button button2=(Button) getActivity().findViewById(R.id.button_update);
+
+
+
+        //监听button1单击事件
+        button1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getActivity(),"修改成功！",Toast.LENGTH_LONG).show();
+            }
+        });
+
+        button2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getActivity(),"更新成功！",Toast.LENGTH_LONG).show();
+            }
+        });
         mViewModel = new ViewModelProvider(this).get(SettingViewModel.class);
         // TODO: Use the ViewModel
     }
