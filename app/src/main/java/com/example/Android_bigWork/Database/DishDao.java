@@ -1,5 +1,6 @@
 package com.example.Android_bigWork.Database;
 
+import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
@@ -12,8 +13,29 @@ import java.util.List;
 
 @Dao //Dao的声明
 public interface DishDao {
+    /**
+     * 获取所有菜品
+     *
+     * @param
+     * @return Query
+     * @Author Anduin9527
+     * @date 2022/10/12 9:14
+     * @commit
+     */
     @Query("SELECT * FROM dish_table")
-    List<Dish> getAll();
+    List<Dish> getAllDish();
+
+    /**
+     * 清除所有菜品
+     *
+     * @param
+     * @return Query
+     * @Author Anduin9527
+     * @date 2022/10/12 9:14
+     * @commit
+     */
+    @Query("DELETE FROM dish_table")
+    void deleteAllDish();
 
     @Insert
     void insert(Dish Dish);
@@ -43,5 +65,5 @@ public interface DishDao {
      * @commit
      */
     @Query("SELECT * FROM dish_table WHERE category = :category")
-    ArrayList<Dish> getDishByCategory(String category);
+    List<Dish> getDishByCategory(String category);
 }
