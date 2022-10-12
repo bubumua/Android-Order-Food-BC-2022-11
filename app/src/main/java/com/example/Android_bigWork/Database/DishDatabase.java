@@ -27,6 +27,7 @@ public abstract class DishDatabase extends RoomDatabase {
             INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
                             DishDatabase.class,
                             DB_NAME)
+                    .fallbackToDestructiveMigration()
                     .allowMainThreadQueries()
                     .build();
         }
