@@ -68,7 +68,9 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="4"
-                    android:text="￥" />
+                    android:gravity="center"
+                    android:text="￥"
+                    android:textAlignment="textStart" />
             </LinearLayout>
 
             <Button
@@ -76,7 +78,15 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="@string/commit" />
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                android:paddingLeft="0dp"
+                android:paddingTop="0dp"
+                android:paddingRight="0dp"
+                android:paddingBottom="0dp"
+                android:text="@string/commit"
+                android:textSize="20sp"
+                app:iconPadding="0dp" />
 
         </LinearLayout>
 
