@@ -12,11 +12,10 @@
         android:background="#00000000"/>
     <!--商品菜单-->
     <View
-        android:background="#97FFFF"
         android:id="@+id/v_anim"
         android:layout_width="match_parent"
-        android:layout_height="300dp"
-        />
+        android:layout_height="100dp"
+        android:background="#97FFFF" />
     <!--底部栏-->
     <RelativeLayout
         android:id="@+id/rl"
