@@ -42,7 +42,7 @@ public class LoadingActivity extends AppCompatActivity
         DishDao dishDao = dishDatabase.getDishDao();
         PersonDatabase personDatabase = PersonDatabase.getDatabase(this);
         PersonDao personDao = personDatabase.getPersonDao();
-        //清空数据库
+        //TODO: 测试用，后续删除：清空数据库
         dishDao.deleteAllDish();
         //插入数据
         dishDao.insert(new Dish(1, getRString(R.string.dish_1), getRString(R.string.desc_1), Double.parseDouble(getRString(R.string.price_1)), getRString(R.string.cate_1), 1, false));

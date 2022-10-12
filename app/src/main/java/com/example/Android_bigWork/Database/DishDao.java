@@ -22,7 +22,7 @@ public interface DishDao {
      * @date 2022/10/12 9:14
      * @commit
      */
-    @Query("SELECT * FROM dish_table")
+    @Query("SELECT * FROM dish_table ORDER BY CID")
     List<Dish> getAllDish();
 
     /**
