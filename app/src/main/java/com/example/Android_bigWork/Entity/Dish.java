@@ -23,14 +23,16 @@ public class Dish {
 
     }
 
-    public Dish(int gid, String name, String description, double price, String category, int CID, boolean customizable) {
+    public Dish(int gid, String name, String description, double price, String category, int CID, boolean spicy, boolean sweet) {
         this.GID = gid;
         this.name = name;
         this.description = description;
         this.price = price;
         this.category = category;
         this.CID = CID;
-        this.customizable = customizable;
+        this.spicy = spicy;
+        this.sweet = sweet;
+        this.count = 0;
     }
 
     public boolean isSpicy() {
