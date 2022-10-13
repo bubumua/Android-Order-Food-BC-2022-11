@@ -206,12 +206,14 @@
     <string name="desc_95" translatable="false">饼皮薄厚适中，柔软有嚼劲。喷香炒蛋，浓郁芝士，鲜嫩火腿扒，搭配经典番茄酱，口感层次丰富。拿下今天从早餐开始！</string>
     <!--分类信息-->
     <string name="cate_1" translatable="false">汉堡</string>
-    <string name="cate_2" translatable="false">500大卡套餐</string>
-    <string name="cate_3" translatable="false">甜品</string>
-    <string name="cate_4" translatable="false">早餐</string>
-    <string name="cate_5" translatable="false">开心乐园餐</string>
-    <string name="cate_6" translatable="false">小食</string>
-    <string name="cate_7" translatable="false">饮品</string>
+    <string name="cate_2" translatable="false">饮品</string>
+    <string name="cate_3" translatable="false">早餐</string>
+    <string name="cate_4" translatable="false">甜品</string>
+    <string name="cate_5" translatable="false">小食</string>
+    <string name="cate_6" translatable="false">开心乐园餐</string>
+    <string name="cate_7" translatable="false">500大卡套餐</string>
+
+
     <string name="price_1" translatable="false">17</string>
     <string name="price_2" translatable="false">5</string>
     <string name="price_3" translatable="false">8</string>
