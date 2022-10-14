@@ -11,30 +11,32 @@
         android:text="@string/sweetDegree" />
 
     <RadioGroup
+        android:id="@+id/sweet_RadioGroup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:checkedButton="@id/RadioButton1"
         android:orientation="horizontal">
 
         <RadioButton
-            android:id="@+id/radioButton"
+            android:id="@+id/RadioButton1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/sweet_1" />
 
         <RadioButton
-            android:id="@+id/radioButton2"
+            android:id="@+id/RadioButton2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/sweet_2" />
 
         <RadioButton
-            android:id="@+id/radioButton3"
+            android:id="@+id/RadioButton3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/sweet_3" />
 
         <RadioButton
-            android:id="@+id/radioButton4"
+            android:id="@+id/RadioButton4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"

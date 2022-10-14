@@ -18,7 +18,7 @@ public class RelativePopupWindow extends PopupWindow {
         setOutsideTouchable(true);
         setFocusable(true);
         setBackgroundDrawable(new ColorDrawable(Color.WHITE));
-        View contentView = LayoutInflater.from(context).inflate(R.layout.popupwindow, null, false);
+        View contentView = LayoutInflater.from(context).inflate(R.layout.popupwindow_shopping_car, null, false);
         setContentView(contentView);
     }
 
