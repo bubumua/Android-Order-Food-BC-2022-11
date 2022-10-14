@@ -1,19 +1,23 @@
 package com.example.Android_bigWork.Activity;
 
 import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import com.ashokvarma.bottomnavigation.BottomNavigationBar;
 import com.ashokvarma.bottomnavigation.BottomNavigationItem;
 //import com.example.Android_bigWork.R;
+import com.example.Android_bigWork.Entity.PersonEntity;
 import com.example.Android_bigWork.Fragments.DetailFragment;
 import com.example.Android_bigWork.Fragments.OrderFragment;
 import com.example.Android_bigWork.Fragments.SettingFragment;
@@ -28,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
     private ArrayList<Fragment> fragmentArrayList;
     private FragmentManager fragmentManager;
     private FragmentTransaction fragmentTransaction;
+    private String username;//用于检索用户信息
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -49,14 +54,18 @@ public class MainActivity extends AppCompatActivity {
         if (actionBar != null) {
             actionBar.hide();
         }
+        //获取从登录界面传来的用户名
+        Intent initIntent = getIntent();
+        String username = initIntent.getStringExtra("username");
+        Toast.makeText(this, "欢迎您，" + username, Toast.LENGTH_SHORT).show();
 
     }
 
     private void initFragmentTransaction() {
         //开启事务
-        fragmentTransaction=fragmentManager.beginTransaction();
+        fragmentTransaction = fragmentManager.beginTransaction();
         for (int i = 0; i < fragmentArrayList.size(); i++) {
-            fragmentTransaction.add(R.id.fragmentContainer,fragmentArrayList.get(i));
+            fragmentTransaction.add(R.id.fragmentContainer, fragmentArrayList.get(i));
             fragmentTransaction.hide(fragmentArrayList.get(i));
         }
         fragmentTransaction.show(fragmentArrayList.get(0));
@@ -109,13 +118,25 @@ public class MainActivity extends AppCompatActivity {
         bottomNavigationBar.addOnLayoutChangeListener(new View.OnLayoutChangeListener() {
             @Override
             public void onLayoutChange(View v, int left, int top, int right, int bottom, int oldLeft, int oldTop, int oldRight, int oldBottom) {
-                int width=bottomNavigationBar.getMeasuredWidth();
-                int height=bottomNavigationBar.getMeasuredHeight();
-                Log.d(TAG, "onLayoutChange: BottomNavigationBar (width,height)=("+width+","+height+")");
+                int width = bottomNavigationBar.getMeasuredWidth();
+                int height = bottomNavigationBar.getMeasuredHeight();
+                Log.d(TAG, "onLayoutChange: BottomNavigationBar (width,height)=(" + width + "," + height + ")");
 //                ((DetailFragment)fragmentArrayList.get(0)).setBottomNavigationBarHeight(height);
             }
         });
 //        bottomNavigationBar.setVisibility(View.GONE);
     }
 
+    /**
+     * Activity向各个fragment传递用户名数据，需要fragment重写onAttach方法
+     *
+     * @param
+     * @return username
+     * @Author Anduin9527
+     * @date 2022/10/14 9:59
+     * @commit
+     */
+    public String getUsername() {
+        return this.username;
+    }
 }

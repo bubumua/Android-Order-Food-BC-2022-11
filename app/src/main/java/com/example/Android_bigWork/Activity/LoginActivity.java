@@ -68,6 +68,7 @@ public class LoginActivity extends AppCompatActivity implements HandlerAction {
                 Toast.makeText(this, "登录成功", Toast.LENGTH_SHORT).show();
                 //跳转到主界面
                 postDelayed(() -> {
+                    navigateToHome.putExtra("username", username);
                     startActivity(navigateToHome);
                 }, 1000);
             } else {
