@@ -2,10 +2,12 @@ package com.example.Android_bigWork.Adapters;
 
 import android.content.Context;
 import android.content.res.Resources;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewStub;
 import android.widget.BaseAdapter;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -32,6 +34,7 @@ public class FoodStickyAdapter extends BaseAdapter implements StickyListHeadersA
     static class ViewHolder {
         TextView name;
         TextView price;
+        TextView count;
         ImageButton add;
         ImageButton sub;
         ImageView img;
@@ -44,6 +47,7 @@ public class FoodStickyAdapter extends BaseAdapter implements StickyListHeadersA
             this.sub = view.findViewById(R.id.dish_sub);
             this.img = view.findViewById(R.id.dish_img);
             this.dishCardView=view.findViewById(R.id.dish_cardView);
+            this.count=view.findViewById(R.id.dish_count);
         }
     }
 
@@ -110,10 +114,11 @@ public class FoodStickyAdapter extends BaseAdapter implements StickyListHeadersA
         Dish dish = dishList.get(position);
         holder.name.setText(dish.getName());
         holder.price.setText(String.valueOf(dish.getPrice()));
+        holder.count.setText(String.valueOf(dish.getCount()));
         holder.img.setImageResource(resources.getIdentifier("dish_" + dish.getGID(), "drawable", "com.example.Android_bigWork"));
         // 加号点击事件
         holder.add.setOnClickListener(v -> {
-            // TODO: 2022/10/10 打开菜品详情
+            showDishDetail(dish);
         });
         // 减号点击事件
         holder.sub.setOnClickListener(v -> {
@@ -121,15 +126,15 @@ public class FoodStickyAdapter extends BaseAdapter implements StickyListHeadersA
         });
         // 菜品卡片点击事件
         holder.dishCardView.setOnClickListener(v -> {
-            // TODO: 2022/10/13 打开菜品详情
-            showDishDetail();
+            showDishDetail(dish);
         });
 
         return convertView;
     }
 
-    private void showDishDetail() {
-        View contentView =LayoutInflater.from(context).inflate(R.layout.popupwindow_dish_detail, null);
+    private void showDishDetail(Dish dish) {
+        Log.d("TAG", "showDishDetail: ");
+        View contentView =LayoutInflater.from(context).inflate(R.layout.popupwindow_dish_detail, null,false);
         PopupWindow dishDetail= new PopupWindow(contentView,
                 ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT);
@@ -145,6 +150,37 @@ public class FoodStickyAdapter extends BaseAdapter implements StickyListHeadersA
 //        dishDetail.setAnimationStyle(R.style.ipopwindow_anim_style);
 //        RecyclerView detailCustom=contentView.findViewById(R.id.custom_list);
 
+        // 绑定视图
+        TextView desc=contentView.findViewById(R.id.dish_desctiption);
+        TextView name=contentView.findViewById(R.id.dish_name);
+        TextView price=contentView.findViewById(R.id.dish_price);
+        ImageView img=contentView.findViewById(R.id.dish_img);
+        ImageButton add=contentView.findViewById(R.id.dish_add);
+        ImageButton sub=contentView.findViewById(R.id.dish_sub);
+        ViewStub spicyOption=contentView.findViewById(R.id.spicy_option);
+        ViewStub sweetOption=contentView.findViewById(R.id.sweet_option);
+        // 设置组件内容、事件
+        desc.setText(dish.getDescription());
+        name.setText(dish.getName());
+        price.setText(String.valueOf(dish.getPrice()));
+        img.setImageResource(resources.getIdentifier("dish_" + dish.getGID(), "drawable", "com.example.Android_bigWork"));
+        if(dish.isSpicy()){
+            try{
+                View v= spicyOption.inflate();
+            }catch (Exception e){
+                spicyOption.setVisibility(View.VISIBLE);
+            }
+        }
+        if(dish.isSweet()){
+            try{
+                View v= sweetOption.inflate();
+            }catch (Exception e){
+                sweetOption.setVisibility(View.VISIBLE);
+            }
+        }
+        add.setOnClickListener(v -> {
+            Log.d("FoodStickyAdapter", "showDishDetail: add clicked");
+        });
         // 显示
         dishDetail.showAtLocation(contentView, Gravity.TOP, 0, 0);
 

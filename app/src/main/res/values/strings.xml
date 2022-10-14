@@ -327,6 +327,14 @@
     <string name="confirm">确认</string>
     <string name="cancel">取消</string>
     <string name="spicyDegree">辣度</string>
-
+    <string name="spicy_1">不辣</string>
+    <string name="spicy_2">微辣</string>
+    <string name="spicy_3">中辣</string>
+    <string name="spicy_4">特辣</string>
+    <string name="sweetDegree">甜度</string>
+    <string name="sweet_1">0分甜</string>
+    <string name="sweet_2">3分甜</string>
+    <string name="sweet_3">7分甜</string>
+    <string name="sweet_4">10分甜</string>
 
 </resources>

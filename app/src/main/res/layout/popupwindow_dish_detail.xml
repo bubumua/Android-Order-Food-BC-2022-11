@@ -85,15 +85,15 @@
                     android:contentDescription="@string/buttonSub"
                     android:minWidth="48dp"
                     android:minHeight="48dp"
-                    app:layout_constraintBottom_toBottomOf="@+id/textView5"
-                    app:layout_constraintEnd_toStartOf="@+id/textView5"
+                    app:layout_constraintBottom_toBottomOf="@+id/dish_count"
+                    app:layout_constraintEnd_toStartOf="@+id/dish_count"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toStartOf="@+id/guideline4"
-                    app:layout_constraintTop_toTopOf="@+id/textView5"
+                    app:layout_constraintTop_toTopOf="@+id/dish_count"
                     app:srcCompat="@drawable/ic_baseline_remove_circle_24" />
 
                 <TextView
-                    android:id="@+id/textView5"
+                    android:id="@+id/dish_count"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="0"
@@ -115,7 +115,7 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toEndOf="@+id/textView5"
+                    app:layout_constraintStart_toEndOf="@+id/dish_count"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintVertical_bias="1.0"
                     app:srcCompat="@drawable/ic_baseline_add_circle_24" />
@@ -123,16 +123,22 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <TextView
-                android:id="@+id/desctiption_textView"
+                android:id="@+id/dish_desctiption"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="this is  dish description " />
 
             <ViewStub
-                android:id="@+id/viewStub"
+                android:id="@+id/spicy_option"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout="@layout/item_custom_option" />
+                android:layout="@layout/spicy_option" />
+
+            <ViewStub
+                android:id="@+id/sweet_option"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout="@layout/sweet_option" />
 
 
         </LinearLayout>
