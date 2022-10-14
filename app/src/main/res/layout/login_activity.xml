@@ -14,10 +14,10 @@
         android:contentDescription="TODO"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.795"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/login_background"
+        app:layout_constraintVertical_bias="0.493"
+        app:srcCompat="@drawable/bg_dialog"
         tools:ignore="ImageContrastCheck" />
 
     <androidx.appcompat.widget.AppCompatTextView
@@ -25,31 +25,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="end"
-        android:layout_marginEnd="32dp"
+        android:layout_marginEnd="44dp"
         android:text="@string/login_signup"
         android:textColor="@color/common_accent_color"
         android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/btn_login"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView_password" />
-
-    <TextView
-        android:id="@+id/textView_signUp"
-        android:layout_width="146dp"
-        android:layout_height="76dp"
-        android:layout_alignParentEnd="true"
-        android:text="@string/login_text"
-        android:textAlignment="center"
-        android:textColor="#0E26AC"
-        android:textSize="50sp"
-        android:textStyle="bold"
-        app:autoSizeTextType="none"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/imageView_bg"
-        app:layout_constraintHorizontal_bias="0.296"
-        app:layout_constraintStart_toStartOf="@+id/imageView_bg"
-        app:layout_constraintTop_toTopOf="@+id/imageView_bg"
-        app:layout_constraintVertical_bias="0.271" />
+        app:layout_constraintTop_toBottomOf="@+id/textView_password"
+        app:layout_constraintVertical_bias="0.164" />
 
     <com.example.Android_bigWork.Utils.ClearEditText
         android:id="@+id/textView_username"
@@ -57,21 +40,17 @@
         android:layout_height="48dp"
         android:layout_marginStart="32dp"
         android:layout_marginEnd="32dp"
-        android:backgroundTint="#3769F3"
+
         android:ems="10"
-
-
         android:hint="@string/login_username_hint"
-
         android:inputType="textPersonName"
         android:minHeight="48dp"
-        android:textColorHint="#757575"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.399"
+        app:layout_constraintVertical_bias="0.404"
         tools:ignore="SpeakableTextPresentCheck" />
 
     <com.example.Android_bigWork.Utils.PasswordEditText
@@ -80,13 +59,10 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginEnd="32dp"
-        android:backgroundTint="#3769F3"
         android:ems="10"
         android:hint="@string/login_password_hint"
         android:inputType="textPassword"
         android:minHeight="48dp"
-
-        android:textColorHint="#757575"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -100,15 +76,26 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/dp_40"
-        android:background="#6B33F9"
+        android:background="@drawable/fillet_edit_text"
+        android:backgroundTint="#febb53"
         android:text="@string/login_text"
-        android:textColor="#E0E0E0"
+        android:textColor="#1B5E20"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.648"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView_password"
-        app:layout_constraintVertical_bias="0.179" />
+        app:layout_constraintVertical_bias="0.54" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/textView_username"
+        app:layout_constraintStart_toStartOf="@+id/textView_username"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.086"
+        app:srcCompat="@drawable/logo" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -18,7 +18,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.361"
-        app:srcCompat="@drawable/login_background"
+        app:srcCompat="@drawable/bg_dialog"
         tools:ignore="ImageContrastCheck" />
 
     <TextView
@@ -28,7 +28,7 @@
         android:layout_alignParentEnd="true"
         android:text="@string/signup_text"
         android:textAlignment="center"
-        android:textColor="#0E26AC"
+        android:textColor="#fc8c60"
         android:textSize="50sp"
         android:textStyle="bold"
         app:autoSizeTextType="none"
@@ -45,22 +45,37 @@
         android:layout_height="48dp"
         android:layout_marginStart="32dp"
         android:layout_marginEnd="32dp"
-        android:autofillHints=""
-        android:backgroundTint="#3769F3"
-
-
+        android:layout_marginBottom="16dp"
         android:ems="10"
-
         android:hint="@string/signup_username_hint"
         android:inputType="textPersonName"
-        android:minHeight="48dp"
-        android:textColorHint="#1976D2"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.269"
+
+        tools:ignore="SpeakableTextPresentCheck" />
+
+
+    <com.example.Android_bigWork.Utils.ClearEditText
+        android:id="@+id/textView_phoneNumber"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:ems="10"
+        android:hint="@string/signup_phoneNumber_hint"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView_username"
+        app:layout_constraintVertical_bias="0.272"
+        app:regexType="mobile"
         tools:ignore="SpeakableTextPresentCheck" />
 
     <com.example.Android_bigWork.Utils.PasswordEditText
@@ -69,40 +84,17 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginEnd="32dp"
-        android:backgroundTint="#3769F3"
+
         android:ems="10"
         android:hint="@string/login_password_hint"
         android:inputType="textPassword"
-        android:minHeight="48dp"
 
-        android:textColorHint="#757575"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView_username"
         app:layout_constraintVertical_bias="0.083"
-        tools:ignore="SpeakableTextPresentCheck" />
 
-    <com.example.Android_bigWork.Utils.ClearEditText
-        android:id="@+id/textView_phoneNumber"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginEnd="32dp"
-        android:backgroundTint="#3769F3"
-        android:ems="10"
-        android:hint="@string/signup_phoneNumber_hint"
-
-        android:minHeight="48dp"
-
-        android:textColorHint="#757575"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView_username"
-        app:layout_constraintVertical_bias="0.272"
-        app:regexType="mobile"
         tools:ignore="SpeakableTextPresentCheck" />
 
     <LinearLayout
@@ -140,19 +132,18 @@
     <com.example.Android_bigWork.Utils.SubmitButton
         android:id="@+id/btn_signup"
         style="@style/ButtonStyle"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/dp_40"
-        android:background="#6B33F9"
+        android:background="@drawable/fillet_edit_text"
+        android:backgroundTint="#febb53"
         android:text="@string/signup_text"
-        android:textColor="#E0E0E0"
+        android:textColor="#1B5E20"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.987"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView_phoneNumber"
-        app:layout_constraintVertical_bias="0.146"
-        tools:ignore="DuplicateSpeakableTextCheck" />
+        app:layout_constraintTop_toBottomOf="@+id/textView_password"
+        app:layout_constraintVertical_bias="0.54" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

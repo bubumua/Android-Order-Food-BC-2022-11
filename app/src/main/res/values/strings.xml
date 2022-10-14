@@ -11,7 +11,7 @@
     <string name="buttomAdd">加入购物车</string>
     <string name="buttonSub">从购物车去除</string>
     <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
-
+    <string name="pay_title" translatable="false">请输入支付密码</string>
     <!--    商品信息    -->
     <string name="dish_1" translatable="false">巨无霸</string>
     <string name="dish_2" translatable="false">原味珍珠奶茶</string>
@@ -206,13 +206,13 @@
     <string name="desc_95" translatable="false">饼皮薄厚适中，柔软有嚼劲。喷香炒蛋，浓郁芝士，鲜嫩火腿扒，搭配经典番茄酱，口感层次丰富。拿下今天从早餐开始！</string>
     <!--分类信息-->
     <string name="cate_1" translatable="false">汉堡</string>
-
     <string name="cate_2" translatable="false">饮品</string>
     <string name="cate_3" translatable="false">早餐</string>
     <string name="cate_4" translatable="false">甜品</string>
     <string name="cate_5" translatable="false">小食</string>
-    <string name="cate_6" translatable="false">开心乐园\n套餐</string>
-    <string name="cate_7" translatable="false">500大卡\n套餐</string>
+    <string name="cate_6" translatable="false">开心乐园餐</string>
+    <string name="cate_7" translatable="false">500大卡套餐</string>
+
 
     <string name="price_1" translatable="false">17</string>
     <string name="price_2" translatable="false">5</string>
@@ -326,6 +326,8 @@
     <string name="confirm_message">您确定要付款并生成订单吗？啊？大声点？</string>
     <string name="confirm">确认</string>
     <string name="cancel">取消</string>
+    <string name="pay_sub_title">支付给兰苑食堂</string>
+
     <string name="spicyDegree">辣度</string>
     <string name="spicy_1">不辣</string>
     <string name="spicy_2">微辣</string>

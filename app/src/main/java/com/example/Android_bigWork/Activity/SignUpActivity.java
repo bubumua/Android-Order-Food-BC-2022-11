@@ -14,7 +14,7 @@ import com.example.Android_bigWork.Database.PersonDao;
 import com.example.Android_bigWork.Database.PersonDatabase;
 import com.example.Android_bigWork.Entity.PersonEntity;
 import com.example.Android_bigWork.R;
-import com.example.Android_bigWork.Utils.HandlerAction;
+import com.example.Android_bigWork.action.HandlerAction;
 import com.example.Android_bigWork.Utils.SubmitButton;
 import com.example.Android_bigWork.Utils.SwitchButton;
 

@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 
 import com.airbnb.lottie.LottieAnimationView;
 import com.example.Android_bigWork.Database.DishDao;
@@ -13,11 +12,8 @@ import com.example.Android_bigWork.Database.DishDatabase;
 import com.example.Android_bigWork.Database.PersonDao;
 import com.example.Android_bigWork.Database.PersonDatabase;
 import com.example.Android_bigWork.Entity.Dish;
-import com.example.Android_bigWork.Entity.PersonEntity;
 import com.example.Android_bigWork.R;
-import com.example.Android_bigWork.Utils.HandlerAction;
-
-import java.util.concurrent.Delayed;
+import com.example.Android_bigWork.action.HandlerAction;
 
 public class LoadingActivity extends AppCompatActivity
         implements HandlerAction {

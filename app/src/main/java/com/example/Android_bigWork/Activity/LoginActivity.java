@@ -15,7 +15,7 @@ import com.example.Android_bigWork.Database.PersonDao;
 import com.example.Android_bigWork.Database.PersonDatabase;
 import com.example.Android_bigWork.R;
 import com.example.Android_bigWork.Utils.SubmitButton;
-import com.example.Android_bigWork.Utils.HandlerAction;
+import com.example.Android_bigWork.action.HandlerAction;
 
 public class LoginActivity extends AppCompatActivity implements HandlerAction {
     EditText mUsername, mPassword;
