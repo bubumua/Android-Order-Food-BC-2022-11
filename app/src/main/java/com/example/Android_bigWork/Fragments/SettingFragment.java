@@ -1,10 +1,13 @@
 package com.example.Android_bigWork.Fragments;
 
+import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -12,12 +15,16 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.example.Android_bigWork.Activity.MainActivity;
+import com.example.Android_bigWork.Database.PersonDao;
+import com.example.Android_bigWork.Database.PersonDatabase;
 import com.example.Android_bigWork.R;
 import com.example.Android_bigWork.ViewModels.SettingViewModel;
 
 public class SettingFragment extends Fragment {
 
     private SettingViewModel mViewModel;
+    private String username;//用于检索用户信息
 
     public static SettingFragment newInstance() {
         return new SettingFragment();
@@ -33,27 +40,47 @@ public class SettingFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        Button button1=(Button) getActivity().findViewById(R.id.button_user);
-        Button button2=(Button) getActivity().findViewById(R.id.button_update);
-
-
+        Button button1 = (Button) getActivity().findViewById(R.id.button_user);
+        Button button2 = (Button) getActivity().findViewById(R.id.button_update);
 
         //监听button1单击事件
         button1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getActivity(),"修改成功！",Toast.LENGTH_LONG).show();
+                //获取Person数据库
+                PersonDatabase personDatabase = PersonDatabase.getDatabase(getActivity());
+                PersonDao personDao = personDatabase.getPersonDao();
+
+                //修改密码
+                Toast.makeText(getActivity(), "修改成功！", Toast.LENGTH_LONG).show();
             }
         });
 
         button2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getActivity(),"更新成功！",Toast.LENGTH_LONG).show();
+                Toast.makeText(getActivity(), "更新成功！", Toast.LENGTH_LONG).show();
             }
         });
         mViewModel = new ViewModelProvider(this).get(SettingViewModel.class);
         // TODO: Use the ViewModel
+    }
+
+    /**
+     * 从MainActivity获取数据
+     *
+     * @param context
+     * @return
+     * @Author Anduin9527
+     * @date 2022/10/14 9:56
+     * @commit
+     */
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        Activity activity = (Activity) context;
+        username = ((MainActivity) activity).getUsername();
     }
 
 }
