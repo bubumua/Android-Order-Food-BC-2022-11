@@ -300,9 +300,9 @@ public class DishMenuFragment extends Fragment {
      * @commit
      */
     public void showShoppingCar() {
-        RelativePopupWindow window = new RelativePopupWindow(getContext());
+        RelativePopupWindow shoppingCar = new RelativePopupWindow(getContext());
         // 绑定视图
-        View contentView = window.getContentView();
+        View contentView = shoppingCar.getContentView();
         Button button = contentView.findViewById(R.id.clear_shopping);
         RecyclerView shoppingList=contentView.findViewById(R.id.shopping_list);
         // 设置 RecyclerView
@@ -310,14 +310,16 @@ public class DishMenuFragment extends Fragment {
         ShoppingCarAdapter shoppingCarAdapter=new ShoppingCarAdapter(getContext(),this,userDishList,dishList);
         shoppingList.setAdapter(shoppingCarAdapter);
         //需要先测量，PopupWindow还未弹出时，宽高为0
-        contentView.measure(makeDropDownMeasureSpec(window.getWidth()),
-                makeDropDownMeasureSpec(window.getHeight()));
+        contentView.measure(makeDropDownMeasureSpec(shoppingCar.getWidth()),
+                makeDropDownMeasureSpec(shoppingCar.getHeight()));
         // 计算偏移量
         int offsetX = -contentView.getMeasuredWidth();
-        int offsetY = -(contentView.getMeasuredHeight() + payment.getHeight());
+//        int offsetY = (contentView.getMeasuredHeight() + payment.getHeight());
+        int offsetY=0;
+        // 设置显隐动画
+        shoppingCar.setAnimationStyle(R.style.shoppingCar_anim_style);
         // 显示购物车弹窗
-        PopupWindowCompat.showAsDropDown(window, payment, offsetX, offsetY, Gravity.END);
-//        window.showAtLocation(contentView,Gravity.TOP,0,100);
+        PopupWindowCompat.showAsDropDown(shoppingCar, payment, offsetX, offsetY, Gravity.END);
         Log.d(TAG, "showShoppingCar: X,Y="+offsetX+","+offsetY);
         // "清空"按钮点击事件
         button.setOnClickListener(v -> {

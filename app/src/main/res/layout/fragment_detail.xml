@@ -11,45 +11,14 @@
         android:layout_height="match_parent">
 
         <LinearLayout
-            android:id="@+id/lists"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:background="@color/grey_background_fill"
-            android:orientation="horizontal"
-            app:layout_constraintBottom_toTopOf="@+id/shopping_car"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <ListView
-                android:id="@+id/category_list"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1.6"
-                android:scrollbars="none" />
-
-            <se.emilsjolander.stickylistheaders.StickyListHeadersListView
-                android:id="@+id/showdishes"
-                android:layout_width="0dip"
-                android:layout_height="match_parent"
-                android:layout_weight="3.8"
-                android:clipToPadding="false"
-                android:drawSelectorOnTop="true"
-                android:listSelector="@android:color/transparent"
-                android:scrollbarSize="3dip"
-                android:scrollbars="none"
-                android:divider="#00000000"/>
-        </LinearLayout>
-
-        <LinearLayout
             android:id="@+id/shopping_car"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#CCFFFFFF"
             android:orientation="horizontal"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent">
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
             <LinearLayout
                 android:id="@+id/shopping_account"
@@ -91,6 +60,37 @@
                 android:textSize="20sp"
                 app:iconPadding="0dp" />
 
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/lists"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="@color/grey_background_fill"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/shopping_car">
+
+            <ListView
+                android:id="@+id/category_list"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1.6"
+                android:scrollbars="none" />
+
+            <se.emilsjolander.stickylistheaders.StickyListHeadersListView
+                android:id="@+id/showdishes"
+                android:layout_width="0dip"
+                android:layout_height="match_parent"
+                android:layout_weight="3.8"
+                android:clipToPadding="false"
+                android:divider="#00000000"
+                android:drawSelectorOnTop="true"
+                android:listSelector="@android:color/transparent"
+                android:scrollbarSize="3dip"
+                android:scrollbars="none" />
         </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

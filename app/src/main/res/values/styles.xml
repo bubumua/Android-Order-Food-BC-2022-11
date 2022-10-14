@@ -33,10 +33,10 @@
         <item name="android:windowExitAnimation">@anim/exit</item>
     </style>
 
-    <style name="ipopwindow_anim_style">
-        <item name="android:windowEnterAnimation">@anim/popshow_anim</item>
+    <style name="shoppingCar_anim_style">
+        <item name="android:windowEnterAnimation">@anim/shopping_car_enter</item>
         <!-- 指定显示的动画xml -->
-        <item name="android:windowExitAnimation">@anim/pophidden_anim</item>
+        <item name="android:windowExitAnimation">@anim/shopping_car_exit</item>
         <!-- 指定消失的动画xml -->
     </style>
 </resources>

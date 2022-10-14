@@ -297,7 +297,7 @@ public class FoodStickyAdapter extends BaseAdapter implements StickyListHeadersA
             }
         });
         // 显示
-        dishDetail.showAtLocation(contentView, Gravity.TOP, 0, 0);
+        dishDetail.showAtLocation(contentView, Gravity.CENTER, 0, 0);
 
     }
 
