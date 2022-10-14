@@ -3,8 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:descendantFocusability="blocksDescendants">
+    android:descendantFocusability="blocksDescendants"
+    android:orientation="horizontal">
 
 
     <ImageView
@@ -12,26 +12,29 @@
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        app:srcCompat="@drawable/ic_baseline_play_arrow_24"
-        android:focusable="false"/>
+        android:focusable="false"
+        app:srcCompat="@drawable/ic_baseline_play_arrow_24" />
 
     <TextView
         android:id="@+id/categoryText"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="7"
+        android:focusable="false"
+        android:gravity="center|center_horizontal"
+        android:lines="2"
+        android:maxLines="2"
         android:text="category"
-        android:textAlignment="textStart"
-        android:textSize="20sp"
-        android:focusable="false"/>
+        android:textAlignment="center"
+        android:textSize="20sp" />
 
     <TextView
         android:id="@+id/categoryCountText"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="2"
+        android:focusable="false"
         android:gravity="center"
         android:text="0"
-        android:textAlignment="center"
-        android:focusable="false"/>
+        android:textAlignment="center" />
 </LinearLayout>

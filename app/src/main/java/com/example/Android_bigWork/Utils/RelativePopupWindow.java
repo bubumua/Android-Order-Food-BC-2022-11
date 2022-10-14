@@ -10,16 +10,15 @@ import android.widget.PopupWindow;
 
 import com.example.Android_bigWork.R;
 
-public class TestPopupWindow extends PopupWindow {
-    public TestPopupWindow(Context context) {
+public class RelativePopupWindow extends PopupWindow {
+    public RelativePopupWindow(Context context) {
         super(context);
         setWidth(ViewGroup.LayoutParams.MATCH_PARENT);
         setHeight(ViewGroup.LayoutParams.WRAP_CONTENT);
         setOutsideTouchable(true);
         setFocusable(true);
         setBackgroundDrawable(new ColorDrawable(Color.WHITE));
-        View contentView = LayoutInflater.from(context).inflate(R.layout.popupwindow,
-                null, false);
+        View contentView = LayoutInflater.from(context).inflate(R.layout.popupwindow, null, false);
         setContentView(contentView);
     }
 

@@ -54,8 +54,9 @@ public class FoodCategoryAdapter extends BaseAdapter {
         }else{
             viewHolder = (ViewHolder) convertView.getTag();
         }
-//        convertView.setBackgroundResource(selectedPosition == position ? R.layout.item_category_selected : R.layout.item_category);
+        // 设置视图
         viewHolder.categoryNameTextView.setText(categoryItems.get(position).getCategoryName());
+//        viewHolder.categoryNameTextView.setText("");
         viewHolder.categoryCountTextView.setText(String.valueOf(categoryItems.get(position).getCategoryCount()));
         viewHolder.categoryCountTextView.setVisibility(categoryItems.get(position).getCategoryCount() == 0 ? View.GONE : View.VISIBLE);
         viewHolder.categoryPointer.setVisibility(position==selectedPosition ? View.VISIBLE : View.INVISIBLE);

@@ -1,6 +1,6 @@
 package com.example.Android_bigWork.Fragments;
 
-import static com.example.Android_bigWork.Utils.TestPopupWindow.makeDropDownMeasureSpec;
+import static com.example.Android_bigWork.Utils.RelativePopupWindow.makeDropDownMeasureSpec;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -30,16 +30,16 @@ import com.example.Android_bigWork.Database.DishDao;
 import com.example.Android_bigWork.Database.DishDatabase;
 import com.example.Android_bigWork.Entity.Dish;
 import com.example.Android_bigWork.R;
-import com.example.Android_bigWork.Utils.TestPopupWindow;
+import com.example.Android_bigWork.Utils.RelativePopupWindow;
 import com.example.Android_bigWork.ViewModels.DetailViewModel;
 
 import java.util.ArrayList;
 
 import se.emilsjolander.stickylistheaders.StickyListHeadersListView;
 
-public class DetailFragment extends Fragment {
+public class DishMenuFragment extends Fragment {
 
-    private final String TAG = "DetailFragment";
+    private final String TAG = "DishMenuFragment";
     private DetailViewModel mViewModel;
     private StickyListHeadersListView stickyListView;
     private ListView listView;
@@ -53,8 +53,8 @@ public class DetailFragment extends Fragment {
     //数据库
     private DishDatabase dishDatabase;
 
-    public static DetailFragment newInstance() {
-        return new DetailFragment();
+    public static DishMenuFragment newInstance() {
+        return new DishMenuFragment();
     }
 
     @Override
@@ -140,10 +140,11 @@ public class DetailFragment extends Fragment {
             }
         });
 
+        // 购物车栏点击事件
         shoppingCar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showNewPopupWindow();
+                showShoppingCar();
             }
         });
 
@@ -212,6 +213,14 @@ public class DetailFragment extends Fragment {
         }
     }
 
+    /**
+     * 初始化类别列表，从商品列表中提取分类
+     *
+     * @return void
+     * @Author Bubu
+     * @date 2022/10/13 0:51
+     * @commit
+     */
     private void initCategoryItems() {
         categoryItems = null;
         dishList.forEach(dish -> {
@@ -233,8 +242,16 @@ public class DetailFragment extends Fragment {
         });
     }
 
-    private void showNewPopupWindow() {
-        TestPopupWindow window = new TestPopupWindow(getContext());
+    /**
+     * 显示购物车
+     *
+     * @return void
+     * @Author Bubu
+     * @date 2022/10/12 17:45
+     * @commit
+     */
+    private void showShoppingCar() {
+        RelativePopupWindow window = new RelativePopupWindow(getContext());
         View contentView = window.getContentView();
         //需要先测量，PopupWindow还未弹出时，宽高为0
         contentView.measure(makeDropDownMeasureSpec(window.getWidth()),

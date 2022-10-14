@@ -44,7 +44,7 @@ dependencies {
     implementation 'se.emilsjolander:stickylistheaders:2.7.0'
     implementation 'com.android.support:multidex:1.0.3'
     implementation 'androidx.room:room-runtime:2.4.3'
-    
+
     annotationProcessor('androidx.room:room-compiler:2.4.3')
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'

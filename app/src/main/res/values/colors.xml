@@ -98,4 +98,5 @@
     <color name="common_cancel_text_color">#F44336</color>
     <color name="grey_background_fill">#F6F6F6</color>
     <color name="Ensborough">#DCDCDC</color>
+    <color name="category_header_background">#FAE47A</color>
 </resources>

@@ -7,7 +7,7 @@
         android:id="@+id/dish_category"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/Ensborough"
+        android:background="@color/category_header_background"
         android:text="Category"
         android:textSize="20sp" />
 </FrameLayout>
