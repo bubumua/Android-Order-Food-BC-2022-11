@@ -12,7 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.Android_bigWork.Database.PersonDao;
 import com.example.Android_bigWork.Database.PersonDatabase;
-import com.example.Android_bigWork.Entity.PersonEntity;
+import com.example.Android_bigWork.Entity.Person;
 import com.example.Android_bigWork.R;
 import com.example.Android_bigWork.action.HandlerAction;
 import com.example.Android_bigWork.Utils.SubmitButton;
@@ -73,8 +73,8 @@ public class SignUpActivity extends AppCompatActivity
                 //查询数据库
                 if (checkDataBase(username, password, phoneNumber, personDao)) {
                     //添加用户
-                    PersonEntity personEntity = new PersonEntity(username, password, Long.parseLong(phoneNumber), isFemale[0]);
-                    personDao.insert(personEntity);
+                    Person person = new Person(username, password, Long.parseLong(phoneNumber), isFemale[0]);
+                    personDao.insert(person);
                     Toast.makeText(this, "注册成功", Toast.LENGTH_SHORT).show();
                     //跳转到登录界面
                     postDelayed(() -> {

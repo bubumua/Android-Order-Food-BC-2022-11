@@ -4,7 +4,7 @@ import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 @Entity(tableName = "person_table")//实体类的声明
-public class PersonEntity {
+public class Person {
     @PrimaryKey(autoGenerate = true)
     public int UID;
 
@@ -16,7 +16,7 @@ public class PersonEntity {
     public static final int GENDER_MALE = 0;
     public static final int GENDER_FEMALE = 1;
 
-    public PersonEntity(String username, String password, long phoneNumber, int gender) {
+    public Person(String username, String password, long phoneNumber, int gender) {
         this.username = username;
         this.password = password;
         this.phoneNumber = phoneNumber;

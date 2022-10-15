@@ -1,7 +1,6 @@
 package com.example.Android_bigWork.Activity;
 
 import androidx.annotation.Nullable;
-import androidx.annotation.StringRes;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
@@ -19,8 +18,6 @@ import com.ashokvarma.bottomnavigation.BottomNavigationItem;
 //import com.example.Android_bigWork.R;
 
 import com.example.Android_bigWork.Fragments.DishMenuFragment;
-
-import com.example.Android_bigWork.Entity.PersonEntity;
 
 import com.example.Android_bigWork.Fragments.OrderFragment;
 import com.example.Android_bigWork.Fragments.SettingFragment;
