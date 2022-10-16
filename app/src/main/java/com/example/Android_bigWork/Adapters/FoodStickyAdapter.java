@@ -197,14 +197,17 @@ public class FoodStickyAdapter extends BaseAdapter implements StickyListHeadersA
         // 辣度和甜度
         final int[] spicy = {0};
         final int[] sweet = {0};
-        final String[] spicyStr = {""};
-        final String[] sweetStr = {""};
+        final String[] spicyStr = {getRString(R.string.defaultValue)};
+        final String[] sweetStr = {getRString(R.string.defaultValue)};
         // 判断是否显示口味选项
         // 若有辣度选项，展开辣度单选题
         if (dish.isSpicy()) {
             try {
                 View v = spicyOption.inflate();
                 RadioGroup spicyRadioGroup = v.findViewById(R.id.spicy_RadioGroup);
+                // 默认选择不辣
+                spicy[0] = 1;
+                spicyStr[0] = getRString(R.string.spicy_1);
                 // 设置单选框监听器
                 spicyRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
                     @Override
@@ -241,6 +244,9 @@ public class FoodStickyAdapter extends BaseAdapter implements StickyListHeadersA
             try {
                 View v = sweetOption.inflate();
                 RadioGroup sweetRadioGroup = v.findViewById(R.id.sweet_RadioGroup);
+                // 默认0分甜
+                sweet[0] = 1;
+                sweetStr[0] = getRString(R.string.sweet_1);
                 // 设置单选框监听器
                 sweetRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
                     @Override
@@ -277,17 +283,24 @@ public class FoodStickyAdapter extends BaseAdapter implements StickyListHeadersA
             // 将自定义口味拼接为一个字符串
             ArrayList<String> customList=new ArrayList<>();
             if(spicy[0]>0 ){
-                if(!Objects.equals(spicyStr[0], "")){
+                if(!Objects.equals(spicyStr[0], getRString(R.string.defaultValue))){
                     customList.add(spicyStr[0]);
+                    Log.d(TAG, "add value: "+spicyStr[0]);
+
                 }else {
                     customList.add(getRString(R.string.defaultValue));
+                    Log.d(TAG, "add default: ");
                 }
             }
             if(sweet[0]>0 ){
-                if(!Objects.equals(sweetStr[0], "")){
+                if(!Objects.equals(sweetStr[0], getRString(R.string.defaultValue))){
                     customList.add(sweetStr[0]);
+                    Log.d(TAG, "add value: "+sweetStr[0]);
+
                 }else {
                     customList.add(getRString(R.string.defaultValue));
+                    Log.d(TAG, "add default: ");
+
                 }
             }
             String customText= StringUtil.join(customList,",");

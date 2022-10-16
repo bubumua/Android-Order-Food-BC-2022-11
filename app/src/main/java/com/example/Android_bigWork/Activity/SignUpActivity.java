@@ -4,19 +4,24 @@ import static com.example.Android_bigWork.Utils.KeyboardUtils.hideKeyboard;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.Android_bigWork.Database.PersonDao;
 import com.example.Android_bigWork.Database.PersonDatabase;
-import com.example.Android_bigWork.Entity.PersonEntity;
+import com.example.Android_bigWork.Entity.Person;
 import com.example.Android_bigWork.R;
+import com.example.Android_bigWork.Utils.BaseDialog;
+import com.example.Android_bigWork.Utils.PayPasswordDialog;
 import com.example.Android_bigWork.action.HandlerAction;
 import com.example.Android_bigWork.Utils.SubmitButton;
 import com.example.Android_bigWork.Utils.SwitchButton;
+import com.hjq.xtoast.XToast;
 
 /**
  * @author Anduin9527
@@ -29,6 +34,7 @@ public class SignUpActivity extends AppCompatActivity
     EditText mUsername, mPassword, mPhoneNumber;
     SubmitButton mSignUpButton;
     SwitchButton mGender;
+    private String TAG = "SignUpActivity";
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -73,19 +79,41 @@ public class SignUpActivity extends AppCompatActivity
                 //查询数据库
                 if (checkDataBase(username, password, phoneNumber, personDao)) {
                     //添加用户
-                    PersonEntity personEntity = new PersonEntity(username, password, Long.parseLong(phoneNumber), isFemale[0]);
-                    personDao.insert(personEntity);
-                    Toast.makeText(this, "注册成功", Toast.LENGTH_SHORT).show();
-                    //跳转到登录界面
-                    postDelayed(() -> {
-                        mSignUpButton.showSucceed();
-                        postDelayed(() -> {
-                            navigateToLogin.putExtra("username", username);
-                            navigateToLogin.putExtra("password", password);
-                            startActivity(navigateToLogin);
-                            finish();
-                        }, 1000);
-                    }, 0);
+                    new PayPasswordDialog.Builder(this)
+                            .setTitle(getRString(R.string.pay_set_title))
+                            .setSubTitle(R.string.pay_set_sub_title)
+                            .setAutoDismiss(true)
+                            .setListener(new PayPasswordDialog.OnListener() {
+                                @Override
+                                public void onCompleted(BaseDialog dialog, String payPassword) {
+                                    //添加用户
+                                    Person person = new Person(username, password, Long.parseLong(phoneNumber), isFemale[0], Integer.parseInt(payPassword));
+                                    personDao.insert(person);
+                                    mSignUpButton.showSucceed();
+                                    Log.d(TAG, "onSignUp: " + person.toString());
+                                    Toast.makeText(SignUpActivity.this, getRString(R.string.register_success), Toast.LENGTH_SHORT).show();
+                                    //使用HandlerAction接口的PostDelayed方法实现延时跳转
+                                    postDelayed(() -> {
+                                        //构建Bundle对象传递person
+                                        Bundle bundle = new Bundle();
+                                        bundle.putSerializable("user", person);
+
+                                        navigateToLogin.putExtras(bundle);
+                                        startActivity(navigateToLogin);
+                                        finish();
+                                    }, 2000);
+                                }
+
+                                @Override
+                                public void onCancel(BaseDialog dialog) {
+                                    postDelayed(() -> {
+                                        mSignUpButton.reset();
+                                    }, 1000);
+                                    Toast.makeText(SignUpActivity.this, getRString(R.string.register_fail), Toast.LENGTH_SHORT).show();
+                                    dialog.dismiss();
+                                }
+                            })
+                            .show();
                 }
             }
         });
@@ -106,17 +134,17 @@ public class SignUpActivity extends AppCompatActivity
     private boolean checkDataBase(String username, String password, String phoneNumber, PersonDao personDao) {
         //查询数据库
         if (personDao.checkUsername(username) != null) {
-            Toast.makeText(this, "用户名已存在", Toast.LENGTH_SHORT).show();
-            mSignUpButton.showError(3000);
+            newErrorXToast(R.string.register_username_exist);
+            mSignUpButton.showError(2000);
         } else if (personDao.checkPhoneNumber(Long.parseLong(phoneNumber)) != null) {
-            Toast.makeText(this, "手机号已存在", Toast.LENGTH_SHORT).show();
-            mSignUpButton.showError(3000);
+            newErrorXToast(R.string.register_phone_exist);
+            mSignUpButton.showError(2000);
         } else if (phoneNumber.length() != 11) {
-            Toast.makeText(this, "手机号格式错误", Toast.LENGTH_SHORT).show();
-            mSignUpButton.showError(3000);
+            newErrorXToast(R.string.register_phone_error);
+            mSignUpButton.showError(2000);
         } else if (password.length() < 6) {
-            Toast.makeText(this, "密码长度不足6位", Toast.LENGTH_SHORT).show();
-            mSignUpButton.showError(3000);
+            newErrorXToast(R.string.register_password_less);
+            mSignUpButton.showError(2000);
         } else {
             return true;
         }
@@ -125,17 +153,37 @@ public class SignUpActivity extends AppCompatActivity
 
     private boolean checkEmpty(String username, String password, String phoneNumber) {
         if (username.isEmpty()) {
-            Toast.makeText(this, "用户名不能为空", Toast.LENGTH_SHORT).show();
-            mSignUpButton.showError(3000);
+            newErrorXToast(R.string.register_username_empty);
+            mSignUpButton.showError(2000);
         } else if (password.isEmpty()) {
-            Toast.makeText(this, "密码不能为空", Toast.LENGTH_SHORT).show();
-            mSignUpButton.showError(3000);
+            newErrorXToast(R.string.register_password_empty);
+            mSignUpButton.showError(2000);
         } else if (phoneNumber.isEmpty()) {
-            Toast.makeText(this, "手机号不能为空", Toast.LENGTH_SHORT).show();
-            mSignUpButton.showError(3000);
+            newErrorXToast(R.string.register_phone_empty);
+            mSignUpButton.showError(2000);
         } else {
             return true;
         }
         return false;
     }
+
+    private String getRString(@StringRes int id) {
+        return getResources().getString(id);
+    }
+
+    private void newErrorXToast(@StringRes int id) {
+        new XToast<>(this)
+                .setContentView(R.layout.window_hint)
+                .setDuration(1000)
+                .setImageDrawable(android.R.id.icon, R.drawable.icon_error)
+                .setText(getRString(id))
+                //设置动画效果
+                .setAnimStyle(R.style.IOSAnimStyle)
+                // 设置外层是否能被触摸
+                .setOutsideTouchable(false)
+                // 设置窗口背景阴影强度
+                .setBackgroundDimAmount(0.5f)
+                .show();
+    }
+
 }

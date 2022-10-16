@@ -122,4 +122,5 @@
         <item name="android:windowEnterAnimation">@anim/window_right_in</item>
         <item name="android:windowExitAnimation">@anim/window_right_out</item>
     </style>
+
 </resources>

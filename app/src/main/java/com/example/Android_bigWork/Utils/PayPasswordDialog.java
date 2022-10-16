@@ -153,6 +153,20 @@ public final class PayPasswordDialog {
             mPasswordView.setPassWordLength(mRecordList.size());
         }
 
+        @Override
+        public void onClick(View view) {
+            if (view == mCloseView) {
+                if (mAutoDismiss) {
+                    dismiss();
+                }
+
+                if (mListener == null) {
+                    return;
+                }
+                mListener.onCancel(getDialog());
+            }
+        }
+
     }
 
     private static final class KeyboardAdapter extends AppAdapter<String> {

@@ -54,5 +54,7 @@ dependencies {
 
     // Shape 框架：https://github.com/getActivity/ShapeView
     implementation 'com.github.getActivity:ShapeView:8.5'
+    // 悬浮窗框架：https://github.com/getActivity/XToast
+    implementation 'com.github.getActivity:XToast:8.5'
 
 }

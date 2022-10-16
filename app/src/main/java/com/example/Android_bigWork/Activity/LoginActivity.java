@@ -13,9 +13,11 @@ import android.widget.Toast;
 
 import com.example.Android_bigWork.Database.PersonDao;
 import com.example.Android_bigWork.Database.PersonDatabase;
+import com.example.Android_bigWork.Entity.Person;
 import com.example.Android_bigWork.R;
 import com.example.Android_bigWork.Utils.SubmitButton;
 import com.example.Android_bigWork.action.HandlerAction;
+import com.hjq.xtoast.XToast;
 
 public class LoginActivity extends AppCompatActivity implements HandlerAction {
     EditText mUsername, mPassword;
@@ -41,12 +43,18 @@ public class LoginActivity extends AppCompatActivity implements HandlerAction {
         Intent navigateToSignUp = new Intent(this, SignUpActivity.class);
         //跳转到Main时，清空Activity堆栈
         Intent navigateToHome = new Intent(this, MainActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-        //判断传入数据
-        String iUsername = initIntent.getStringExtra("username");
-        String iPassword = initIntent.getStringExtra("password");
-        if (iUsername != null && iPassword != null) {
-            mUsername.setText(iUsername);
-            mPassword.setText(iPassword);
+        //判断是否有传入的Bundle数据
+        if (initIntent.getExtras() != null) {
+            //获取Bundle数据
+            Bundle bundle = initIntent.getExtras();
+            //获取Bundle中的数据
+            Person user = (Person) bundle.getSerializable("user");
+            //判断是否有传入的用户数据
+            if (user != null) {
+                //将用户数据显示在界面上
+                mUsername.setText(user.username);
+                mPassword.setText(user.password);
+            }
         }
 
         //获取数据库
@@ -68,12 +76,29 @@ public class LoginActivity extends AppCompatActivity implements HandlerAction {
                 Toast.makeText(this, "登录成功", Toast.LENGTH_SHORT).show();
                 //跳转到主界面
                 postDelayed(() -> {
-                    navigateToHome.putExtra("username", username);
+                    //查询该用户
+                    Person user = personDao.queryPerson(username);
+                    //将用户数据传入Bundle
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable("user", user);
+                    //将Bundle数据传入Intent
+                    navigateToHome.putExtras(bundle);
                     startActivity(navigateToHome);
                 }, 1000);
             } else {
                 mLoginButton.showError(3000);
-                Toast.makeText(this, "用户名或密码错误", Toast.LENGTH_SHORT).show();
+                new XToast<>(this)
+                        .setContentView(R.layout.window_hint)
+                        .setDuration(1000)
+                        .setImageDrawable(android.R.id.icon, R.drawable.icon_error)
+                        .setText(R.string.login_fail)
+                        //设置动画效果
+                        .setAnimStyle(R.style.IOSAnimStyle)
+                        // 设置外层是否能被触摸
+                        .setOutsideTouchable(false)
+                        // 设置窗口背景阴影强度
+                        .setBackgroundDimAmount(0.5f)
+                        .show();
             }
         });
 
@@ -107,11 +132,33 @@ public class LoginActivity extends AppCompatActivity implements HandlerAction {
     private boolean checkEmpty(String username, String password) {
         //判断是否为空
         if (username.isEmpty()) {
-            Toast.makeText(this, "用户名或手机号不能为空", Toast.LENGTH_SHORT).show();
+            new XToast<>(this)
+                    .setContentView(R.layout.window_hint)
+                    .setDuration(1000)
+                    .setImageDrawable(android.R.id.icon, R.drawable.icon_error)
+                    .setText(R.string.login_username_empty)
+                    //设置动画效果
+                    .setAnimStyle(R.style.IOSAnimStyle)
+                    // 设置外层是否能被触摸
+                    .setOutsideTouchable(false)
+                    // 设置窗口背景阴影强度
+                    .setBackgroundDimAmount(0.5f)
+                    .show();
             mLoginButton.showError(3000);
             return true;
         } else if (password.isEmpty()) {
-            Toast.makeText(this, "密码不能为空", Toast.LENGTH_SHORT).show();
+            new XToast<>(this)
+                    .setContentView(R.layout.window_hint)
+                    .setDuration(1000)
+                    .setImageDrawable(android.R.id.icon, R.drawable.icon_error)
+                    .setText(R.string.login_password_empty)
+                    //设置动画效果
+                    .setAnimStyle(R.style.IOSAnimStyle)
+                    // 设置外层是否能被触摸
+                    .setOutsideTouchable(false)
+                    // 设置窗口背景阴影强度
+                    .setBackgroundDimAmount(0.5f)
+                    .show();
             mLoginButton.showError(3000);
             return true;
         }
