@@ -43,7 +43,7 @@ import com.example.Android_bigWork.Utils.BaseDialog;
 import com.example.Android_bigWork.Utils.PayPasswordDialog;
 import com.example.Android_bigWork.Utils.RelativePopupWindow;
 import com.example.Android_bigWork.Utils.StringUtil;
-import com.example.Android_bigWork.ViewModels.DetailViewModel;
+import com.example.Android_bigWork.ViewModels.DishMenu;
 
 import java.util.ArrayList;
 
@@ -52,7 +52,7 @@ import se.emilsjolander.stickylistheaders.StickyListHeadersListView;
 public class DishMenuFragment extends Fragment {
 
     private final String TAG = "my";
-    private DetailViewModel mViewModel;
+    private DishMenu mViewModel;
     private StickyListHeadersListView stickyListView;
     private ListView listView;
     LinearLayout shoppingCar;
@@ -91,7 +91,7 @@ public class DishMenuFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         // init ViewModel
-        mViewModel = new ViewModelProvider(this).get(DetailViewModel.class);
+        mViewModel = new ViewModelProvider(this).get(DishMenu.class);
         userDishList = new ArrayList<>();
         // TODO: Use the ViewModel
 

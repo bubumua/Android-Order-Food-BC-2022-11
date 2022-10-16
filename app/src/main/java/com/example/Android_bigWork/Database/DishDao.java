@@ -5,6 +5,7 @@ import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
+import androidx.room.Update;
 
 import com.example.Android_bigWork.Entity.Dish;
 
@@ -37,8 +38,20 @@ public interface DishDao {
     @Query("DELETE FROM dish_table")
     void deleteAllDish();
 
+    /**
+     * 添加菜品
+     *
+     * @param dish
+     * @return void
+     * @Author Bubu
+     * @date 2022/10/15 21:51
+     * @commit
+     */
     @Insert
-    void insert(Dish Dish);
+    void insert(Dish dish);
+
+    @Update
+    void update(Dish dish);
 
     @Delete
     void delete(Dish Dish);
