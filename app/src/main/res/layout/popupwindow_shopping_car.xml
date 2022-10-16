@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -43,7 +42,7 @@
             android:paddingBottom="0dp"
             android:text="@string/clear_shopping_car"
             android:textColor="@color/black"
-            app:icon="@drawable/ic_baseline_delete_outline_24"
+            app:icon="@drawable/icon_delete"
             app:iconGravity="start"
             app:iconPadding="0dp"
             app:iconSize="10dp" />
@@ -54,9 +53,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constrainedHeight="true"
-        app:layout_constraintHeight_max="350dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_max="350dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/shopping_top_bar"
         app:layout_constraintVertical_bias="0.0" />

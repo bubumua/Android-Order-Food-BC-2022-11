@@ -49,6 +49,7 @@ import com.example.Android_bigWork.Utils.PayPasswordDialog;
 import com.example.Android_bigWork.Utils.RelativePopupWindow;
 import com.example.Android_bigWork.Utils.StringUtil;
 import com.example.Android_bigWork.ViewModels.DetailViewModel;
+import com.hjq.xtoast.XToast;
 
 import java.util.ArrayList;
 
@@ -169,6 +170,7 @@ public class DishMenuFragment extends Fragment {
                         Log.d(TAG, "dialogNo: payment cancel");
                     }
                 });
+                final boolean[] isPay = {false};
                 builder.setPositiveButton(getRString(R.string.confirm), (dialogInterface, i) -> {
                     //确认订单则弹出支付窗口
                     //获取当前购物车中的价格
@@ -189,22 +191,64 @@ public class DishMenuFragment extends Fragment {
                                 @Override
                                 public void onCompleted(BaseDialog dialog, String payPassword) {
                                     if (Integer.parseInt(payPassword) == user.payPassword) {
-                                        Toast.makeText(requireActivity(), getRString(R.string.pay_success), Toast.LENGTH_SHORT).show();
+//                                        Toast.makeText(requireActivity(), getRString(R.string.pay_success), Toast.LENGTH_SHORT).show();
+                                        //new XToast
+                                        //获取MainActivity对象
+                                        MainActivity mainActivity = (MainActivity) getActivity();
+                                        //输出
+                                        Log.d(TAG, "onCompleted: " + mainActivity);
+                                        new XToast<>(requireActivity())
+                                                .setContentView(R.layout.window_hint)
+                                                .setDuration(1000)
+                                                .setImageDrawable(android.R.id.icon, R.drawable.icon_success)
+                                                .setText(R.string.pay_success)
+                                                //设置动画效果
+                                                .setAnimStyle(R.style.IOSAnimStyle)
+                                                // 设置外层是否能被触摸
+                                                .setOutsideTouchable(false)
+                                                // 设置窗口背景阴影强度
+                                                .setBackgroundDimAmount(0.5f)
+                                                .show();
+                                        //TODO:设置支付成功后的操作
                                     } else {
-                                        Toast.makeText(requireActivity(), getRString(R.string.pay_fail), Toast.LENGTH_SHORT).show();
+//                                        Toast.makeText(requireActivity(), getRString(R.string.pay_fail), Toast.LENGTH_SHORT).show();
                                         Log.d(TAG, "onPay: " + payPassword + " " + personDao.queryPayPassword(user.username));
+                                        new XToast<>(requireActivity())
+                                                .setContentView(R.layout.window_hint)
+                                                .setDuration(1000)
+                                                .setImageDrawable(android.R.id.icon, R.drawable.icon_error)
+                                                .setText(R.string.pay_fail)
+                                                //设置动画效果
+                                                .setAnimStyle(R.style.IOSAnimStyle)
+                                                // 设置外层是否能被触摸
+                                                .setOutsideTouchable(false)
+                                                // 设置窗口背景阴影强度
+                                                .setBackgroundDimAmount(0.5f)
+                                                .show();
                                     }
                                 }
 
                                 @Override
                                 public void onCancel(BaseDialog dialog) {
-                                    Toast.makeText(requireActivity(), getRString(R.string.pay_cancel), Toast.LENGTH_SHORT).show();
+                                    new XToast<>(requireActivity())
+                                            .setContentView(R.layout.window_hint)
+                                            .setDuration(1000)
+                                            .setImageDrawable(android.R.id.icon, R.drawable.icon_warning)
+                                            .setText(R.string.pay_cancel)
+                                            //设置动画效果
+                                            .setAnimStyle(R.style.IOSAnimStyle)
+                                            // 设置外层是否能被触摸
+                                            .setOutsideTouchable(false)
+                                            // 设置窗口背景阴影强度
+                                            .setBackgroundDimAmount(0.5f)
+                                            .show();
                                 }
                             })
                             .show();
                 });
                 builder.create().show();
             }
+
         });
 
         // 初始化购物车已购金额
@@ -275,7 +319,7 @@ public class DishMenuFragment extends Fragment {
     }
 
     /**
-     * 获取string里商品属性
+     * 获取string中的属性值
      *
      * @param id
      * @return String

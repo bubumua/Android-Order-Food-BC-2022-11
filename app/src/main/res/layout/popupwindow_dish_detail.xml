@@ -90,7 +90,7 @@
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toStartOf="@+id/guideline4"
                     app:layout_constraintTop_toTopOf="@+id/dish_count"
-                    app:srcCompat="@drawable/ic_baseline_remove_circle_24" />
+                    app:srcCompat="@drawable/icon_reduce" />
 
                 <TextView
                     android:id="@+id/dish_count"
@@ -118,7 +118,7 @@
                     app:layout_constraintStart_toEndOf="@+id/dish_count"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintVertical_bias="1.0"
-                    app:srcCompat="@drawable/ic_baseline_add_circle_24" />
+                    app:srcCompat="@drawable/icon_add" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

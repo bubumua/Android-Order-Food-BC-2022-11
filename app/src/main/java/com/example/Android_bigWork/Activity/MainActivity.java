@@ -114,9 +114,9 @@ public class MainActivity extends AppCompatActivity {
     private void initBottomNavigationBar() {
         bottomNavigationBar = (BottomNavigationBar) findViewById(R.id.bottomNavigationBar);
         bottomNavigationBar
-                .addItem(new BottomNavigationItem(R.drawable.ic_baseline_home_24, "Detail"))
-                .addItem(new BottomNavigationItem(R.drawable.ic_baseline_home_24, "Order"))
-                .addItem(new BottomNavigationItem(R.drawable.ic_baseline_home_24, "Setting"))
+                .addItem(new BottomNavigationItem(R.drawable.icon_home, "Detail"))
+                .addItem(new BottomNavigationItem(R.drawable.icon_order, "Order"))
+                .addItem(new BottomNavigationItem(R.drawable.icon_setting, "Setting"))
                 .setFirstSelectedPosition(0)
                 .initialise();
 
