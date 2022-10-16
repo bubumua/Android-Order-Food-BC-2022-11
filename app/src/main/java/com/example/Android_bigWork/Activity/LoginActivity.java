@@ -17,6 +17,7 @@ import com.example.Android_bigWork.Entity.Person;
 import com.example.Android_bigWork.R;
 import com.example.Android_bigWork.Utils.SubmitButton;
 import com.example.Android_bigWork.action.HandlerAction;
+import com.hjq.xtoast.XToast;
 
 public class LoginActivity extends AppCompatActivity implements HandlerAction {
     EditText mUsername, mPassword;
@@ -86,7 +87,18 @@ public class LoginActivity extends AppCompatActivity implements HandlerAction {
                 }, 1000);
             } else {
                 mLoginButton.showError(3000);
-                Toast.makeText(this, "用户名或密码错误", Toast.LENGTH_SHORT).show();
+                new XToast<>(this)
+                        .setContentView(R.layout.window_hint)
+                        .setDuration(1000)
+                        .setImageDrawable(android.R.id.icon, R.drawable.icon_error)
+                        .setText(R.string.login_fail)
+                        //设置动画效果
+                        .setAnimStyle(R.style.IOSAnimStyle)
+                        // 设置外层是否能被触摸
+                        .setOutsideTouchable(false)
+                        // 设置窗口背景阴影强度
+                        .setBackgroundDimAmount(0.5f)
+                        .show();
             }
         });
 
@@ -120,11 +132,33 @@ public class LoginActivity extends AppCompatActivity implements HandlerAction {
     private boolean checkEmpty(String username, String password) {
         //判断是否为空
         if (username.isEmpty()) {
-            Toast.makeText(this, "用户名或手机号不能为空", Toast.LENGTH_SHORT).show();
+            new XToast<>(this)
+                    .setContentView(R.layout.window_hint)
+                    .setDuration(1000)
+                    .setImageDrawable(android.R.id.icon, R.drawable.icon_error)
+                    .setText(R.string.login_username_empty)
+                    //设置动画效果
+                    .setAnimStyle(R.style.IOSAnimStyle)
+                    // 设置外层是否能被触摸
+                    .setOutsideTouchable(false)
+                    // 设置窗口背景阴影强度
+                    .setBackgroundDimAmount(0.5f)
+                    .show();
             mLoginButton.showError(3000);
             return true;
         } else if (password.isEmpty()) {
-            Toast.makeText(this, "密码不能为空", Toast.LENGTH_SHORT).show();
+            new XToast<>(this)
+                    .setContentView(R.layout.window_hint)
+                    .setDuration(1000)
+                    .setImageDrawable(android.R.id.icon, R.drawable.icon_error)
+                    .setText(R.string.login_password_empty)
+                    //设置动画效果
+                    .setAnimStyle(R.style.IOSAnimStyle)
+                    // 设置外层是否能被触摸
+                    .setOutsideTouchable(false)
+                    // 设置窗口背景阴影强度
+                    .setBackgroundDimAmount(0.5f)
+                    .show();
             mLoginButton.showError(3000);
             return true;
         }
