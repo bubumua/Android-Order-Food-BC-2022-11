@@ -4,6 +4,7 @@ import static com.example.Android_bigWork.Utils.KeyboardUtils.hideKeyboard;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -14,6 +15,8 @@ import com.example.Android_bigWork.Database.PersonDao;
 import com.example.Android_bigWork.Database.PersonDatabase;
 import com.example.Android_bigWork.Entity.Person;
 import com.example.Android_bigWork.R;
+import com.example.Android_bigWork.Utils.BaseDialog;
+import com.example.Android_bigWork.Utils.PayPasswordDialog;
 import com.example.Android_bigWork.action.HandlerAction;
 import com.example.Android_bigWork.Utils.SubmitButton;
 import com.example.Android_bigWork.Utils.SwitchButton;
@@ -29,6 +32,7 @@ public class SignUpActivity extends AppCompatActivity
     EditText mUsername, mPassword, mPhoneNumber;
     SubmitButton mSignUpButton;
     SwitchButton mGender;
+    private String TAG = "SignUpActivity";
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -73,19 +77,41 @@ public class SignUpActivity extends AppCompatActivity
                 //查询数据库
                 if (checkDataBase(username, password, phoneNumber, personDao)) {
                     //添加用户
-                    Person person = new Person(username, password, Long.parseLong(phoneNumber), isFemale[0]);
-                    personDao.insert(person);
-                    Toast.makeText(this, "注册成功", Toast.LENGTH_SHORT).show();
-                    //跳转到登录界面
-                    postDelayed(() -> {
-                        mSignUpButton.showSucceed();
-                        postDelayed(() -> {
-                            navigateToLogin.putExtra("username", username);
-                            navigateToLogin.putExtra("password", password);
-                            startActivity(navigateToLogin);
-                            finish();
-                        }, 1000);
-                    }, 0);
+                    new PayPasswordDialog.Builder(this)
+                            .setTitle("设置支付密码")
+                            .setSubTitle("请勿透露支付密码给他人嚄")
+                            .setAutoDismiss(true)
+                            .setListener(new PayPasswordDialog.OnListener() {
+                                @Override
+                                public void onCompleted(BaseDialog dialog, String payPassword) {
+                                    Log.d(TAG, "该用户信息为: " + username + " " + password + " " + phoneNumber + " " + isFemale[0] + " " + payPassword + " " + Integer.parseInt(payPassword));
+                                    //添加用户
+                                    Person person = new Person(username, password, Long.parseLong(phoneNumber), isFemale[0], Integer.parseInt(payPassword));
+                                    personDao.insert(person);
+                                    mSignUpButton.showSucceed();
+                                    Toast.makeText(SignUpActivity.this, "注册成功", Toast.LENGTH_SHORT).show();
+                                    //使用HandlerAction接口的PostDelayed方法实现延时跳转
+                                    postDelayed(() -> {
+                                        //构建Bundle对象传递person
+                                        Bundle bundle = new Bundle();
+                                        bundle.putSerializable("user", person);
+
+                                        navigateToLogin.putExtras(bundle);
+                                        startActivity(navigateToLogin);
+                                        finish();
+                                    }, 2000);
+                                }
+
+                                @Override
+                                public void onCancel(BaseDialog dialog) {
+                                    postDelayed(() -> {
+                                        mSignUpButton.reset();
+                                    }, 1000);
+                                    Toast.makeText(SignUpActivity.this, "注册失败", Toast.LENGTH_SHORT).show();
+                                    dialog.dismiss();
+                                }
+                            })
+                            .show();
                 }
             }
         });

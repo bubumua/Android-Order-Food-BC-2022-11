@@ -17,6 +17,7 @@ import com.ashokvarma.bottomnavigation.BottomNavigationBar;
 import com.ashokvarma.bottomnavigation.BottomNavigationItem;
 //import com.example.Android_bigWork.R;
 
+import com.example.Android_bigWork.Entity.Person;
 import com.example.Android_bigWork.Fragments.DishMenuFragment;
 
 import com.example.Android_bigWork.Fragments.OrderFragment;
@@ -32,7 +33,8 @@ public class MainActivity extends AppCompatActivity {
     private ArrayList<Fragment> fragmentArrayList;
     private FragmentManager fragmentManager;
     private FragmentTransaction fragmentTransaction;
-    private String username;//用于检索用户信息
+
+    private Person user;//从登录界面传来的用户信息
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -54,10 +56,17 @@ public class MainActivity extends AppCompatActivity {
         if (actionBar != null) {
             actionBar.hide();
         }
-        //获取从登录界面传来的用户名
+        //获取从登录界面传来的数据
         Intent initIntent = getIntent();
-        String username = initIntent.getStringExtra("username");
-        Toast.makeText(this, "欢迎您，" + username, Toast.LENGTH_SHORT).show();
+        if (initIntent.getExtras() != null) {
+            //获取Bundle数据
+            Bundle bundle = initIntent.getExtras();
+            //获取Bundle中的数据
+            user = (Person) bundle.getSerializable("user");
+            //判断是否有传入的用户数据
+            Toast.makeText(this, "欢迎您，" + user.username, Toast.LENGTH_SHORT).show();
+        }
+
 
     }
 
@@ -73,11 +82,32 @@ public class MainActivity extends AppCompatActivity {
         fragmentTransaction.commit();
     }
 
+    /**
+     * 初始化fragment，并向其中传递user信息
+     *
+     * @param
+     * @return
+     * @Author Anduin9527
+     * @date 2022/10/16 11:39
+     * @commit
+     */
     private void initFragmentArrayList() {
+
         fragmentArrayList = new ArrayList<>();
-        fragmentArrayList.add(new DishMenuFragment());
-        fragmentArrayList.add(new OrderFragment());
-        fragmentArrayList.add(new SettingFragment());
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("user", user);
+
+        DishMenuFragment dishMenuFragment = new DishMenuFragment();
+        dishMenuFragment.setArguments(bundle);
+        fragmentArrayList.add(dishMenuFragment);
+
+        OrderFragment orderFragment = new OrderFragment();
+        orderFragment.setArguments(bundle);
+        fragmentArrayList.add(orderFragment);
+
+        SettingFragment settingFragment = new SettingFragment();
+        settingFragment.setArguments(bundle);
+        fragmentArrayList.add(settingFragment);
 
     }
 
@@ -119,9 +149,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onLayoutChange(View v, int left, int top, int right, int bottom, int oldLeft, int oldTop, int oldRight, int oldBottom) {
 
-                int width=bottomNavigationBar.getMeasuredWidth();
-                int height=bottomNavigationBar.getMeasuredHeight();
-                Log.d(TAG, "onLayoutChange: BottomNavigationBar (width,height)=("+width+","+height+")");
+                int width = bottomNavigationBar.getMeasuredWidth();
+                int height = bottomNavigationBar.getMeasuredHeight();
+                Log.d(TAG, "onLayoutChange: BottomNavigationBar (width,height)=(" + width + "," + height + ")");
 //                ((DishMenuFragment)fragmentArrayList.get(0)).setBottomNavigationBarHeight(height);
 
             }
@@ -129,16 +159,4 @@ public class MainActivity extends AppCompatActivity {
 //        bottomNavigationBar.setVisibility(View.GONE);
     }
 
-    /**
-     * Activity向各个fragment传递用户名数据，需要fragment重写onAttach方法
-     *
-     * @param
-     * @return username
-     * @Author Anduin9527
-     * @date 2022/10/14 9:59
-     * @commit
-     */
-    public String getUsername() {
-        return this.username;
-    }
 }

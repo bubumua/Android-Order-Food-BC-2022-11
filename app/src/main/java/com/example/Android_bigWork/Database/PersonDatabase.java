@@ -8,7 +8,7 @@ import androidx.room.RoomDatabase;
 
 import com.example.Android_bigWork.Entity.Person;
 
-@Database(entities = {Person.class}, version = 2, exportSchema = false)
+@Database(entities = {Person.class}, version = 3, exportSchema = false)
 public abstract class PersonDatabase extends RoomDatabase {
     private static final String DB_NAME = "person.db";
     private static PersonDatabase INSTANCE;
@@ -27,6 +27,7 @@ public abstract class PersonDatabase extends RoomDatabase {
             INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
                             PersonDatabase.class,
                             DB_NAME)
+                    .fallbackToDestructiveMigration()
                     .allowMainThreadQueries()
                     .build();
         }

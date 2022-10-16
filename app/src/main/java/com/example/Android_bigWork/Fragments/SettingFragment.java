@@ -2,6 +2,7 @@ package com.example.Android_bigWork.Fragments;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,16 +19,28 @@ import androidx.lifecycle.ViewModelProvider;
 import com.example.Android_bigWork.Activity.MainActivity;
 import com.example.Android_bigWork.Database.PersonDao;
 import com.example.Android_bigWork.Database.PersonDatabase;
+import com.example.Android_bigWork.Entity.Person;
 import com.example.Android_bigWork.R;
 import com.example.Android_bigWork.ViewModels.SettingViewModel;
 
 public class SettingFragment extends Fragment {
 
     private SettingViewModel mViewModel;
-    private String username;//用于检索用户信息
+    private Person user;
 
     public static SettingFragment newInstance() {
         return new SettingFragment();
+    }
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        //初始化数据库
+
+        //获取MainActivity的Bundle数据
+        Intent intent = ((Activity) context).getIntent();
+        Bundle bundle = intent.getExtras();
+        user = (Person) bundle.getSerializable("user");
     }
 
     @Override
@@ -66,21 +79,5 @@ public class SettingFragment extends Fragment {
         // TODO: Use the ViewModel
     }
 
-    /**
-     * 从MainActivity获取数据
-     *
-     * @param context
-     * @return
-     * @Author Anduin9527
-     * @date 2022/10/14 9:56
-     * @commit
-     */
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        Activity activity = (Activity) context;
-        username = ((MainActivity) activity).getUsername();
-    }
 
 }

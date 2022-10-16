@@ -94,5 +94,9 @@ public interface PersonDao {
     @Query("SELECT * FROM person_table WHERE username = :username")
     Person queryPerson(String username);
 
+    //查询用户的支付密码
+
+    @Query("SELECT payPassword FROM person_table WHERE username = :username")
+    int queryPayPassword(String username);
 
 }
