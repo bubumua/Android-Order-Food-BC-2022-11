@@ -1,5 +1,6 @@
 package com.example.Android_bigWork.Adapters;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.Resources;
 import android.util.Log;
@@ -26,6 +27,7 @@ import com.example.Android_bigWork.Utils.StringUtil;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import se.emilsjolander.stickylistheaders.StickyListHeadersAdapter;
 
@@ -195,13 +197,17 @@ public class FoodStickyAdapter extends BaseAdapter implements StickyListHeadersA
         // 辣度和甜度
         final int[] spicy = {0};
         final int[] sweet = {0};
-        final String[] spicyStr = {""};
-        final String[] sweetStr = {""};
+        final String[] spicyStr = {getRString(R.string.defaultValue)};
+        final String[] sweetStr = {getRString(R.string.defaultValue)};
         // 判断是否显示口味选项
+        // 若有辣度选项，展开辣度单选题
         if (dish.isSpicy()) {
             try {
                 View v = spicyOption.inflate();
                 RadioGroup spicyRadioGroup = v.findViewById(R.id.spicy_RadioGroup);
+                // 默认选择不辣
+                spicy[0] = 1;
+                spicyStr[0] = getRString(R.string.spicy_1);
                 // 设置单选框监听器
                 spicyRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
                     @Override
@@ -233,10 +239,14 @@ public class FoodStickyAdapter extends BaseAdapter implements StickyListHeadersA
                 spicyOption.setVisibility(View.VISIBLE);
             }
         }
+        // 若有甜度选项，展开甜度单选题
         if (dish.isSweet()) {
             try {
                 View v = sweetOption.inflate();
                 RadioGroup sweetRadioGroup = v.findViewById(R.id.sweet_RadioGroup);
+                // 默认0分甜
+                sweet[0] = 1;
+                sweetStr[0] = getRString(R.string.sweet_1);
                 // 设置单选框监听器
                 sweetRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
                     @Override
@@ -270,7 +280,32 @@ public class FoodStickyAdapter extends BaseAdapter implements StickyListHeadersA
         // detail加号点击事件
         add.setOnClickListener(v -> {
             Log.d(TAG, "showDishDetail: add clicked");
-            addDishToShoppingCar(dish, spicy[0], sweet[0]);
+            // 将自定义口味拼接为一个字符串
+            ArrayList<String> customList=new ArrayList<>();
+            if(spicy[0]>0 ){
+                if(!Objects.equals(spicyStr[0], getRString(R.string.defaultValue))){
+                    customList.add(spicyStr[0]);
+                    Log.d(TAG, "add value: "+spicyStr[0]);
+
+                }else {
+                    customList.add(getRString(R.string.defaultValue));
+                    Log.d(TAG, "add default: ");
+                }
+            }
+            if(sweet[0]>0 ){
+                if(!Objects.equals(sweetStr[0], getRString(R.string.defaultValue))){
+                    customList.add(sweetStr[0]);
+                    Log.d(TAG, "add value: "+sweetStr[0]);
+
+                }else {
+                    customList.add(getRString(R.string.defaultValue));
+                    Log.d(TAG, "add default: ");
+
+                }
+            }
+            String customText= StringUtil.join(customList,",");
+            // 数据层上，将菜加入购物车
+            addDishToShoppingCar(dish, spicy[0], sweet[0], customText);
             dish.setCount(dish.getCount() + 1);
 //            TextView count_add = contentView.findViewById(R.id.dish_count);
             count.setText(String.valueOf(dish.getCount()));
@@ -322,7 +357,7 @@ public class FoodStickyAdapter extends BaseAdapter implements StickyListHeadersA
     }
 
 
-    public void addDishToShoppingCar(Dish dish, int spicy, int sweet) {
+    public void addDishToShoppingCar(Dish dish, int spicy, int sweet,String customText) {
         UserDish userDish = new UserDish(dish.getGID(),
                 dish.getName(),
                 dish.getDescription(),
@@ -331,7 +366,7 @@ public class FoodStickyAdapter extends BaseAdapter implements StickyListHeadersA
                 dish.getCID(),
                 spicy,
                 sweet,
-                "no comment",
+                customText,
                 1,
                 userName);
         // 如果购物车没有菜，直接添加

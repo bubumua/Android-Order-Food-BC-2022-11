@@ -48,8 +48,9 @@ import com.example.Android_bigWork.Utils.BaseDialog;
 import com.example.Android_bigWork.Utils.PayPasswordDialog;
 import com.example.Android_bigWork.Utils.RelativePopupWindow;
 import com.example.Android_bigWork.Utils.StringUtil;
-import com.example.Android_bigWork.ViewModels.DetailViewModel;
+import com.example.Android_bigWork.ViewModels.DishMenu;
 import com.hjq.xtoast.XToast;
+
 
 import java.util.ArrayList;
 
@@ -58,11 +59,15 @@ import se.emilsjolander.stickylistheaders.StickyListHeadersListView;
 public class DishMenuFragment extends Fragment {
 
     private final String TAG = "my";
-    private DetailViewModel mViewModel;
+    private DishMenu mViewModel;
     private StickyListHeadersListView stickyListView;
     private ListView listView;
     LinearLayout shoppingCar;
     Button payment;
+    private String userName;
+    public boolean showEmpty;
+    double total;
+
 
     //for test
     private ArrayList<Dish> dishList;
@@ -107,10 +112,11 @@ public class DishMenuFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        // init ViewModel
-        mViewModel = new ViewModelProvider(this).get(DetailViewModel.class);
-        userDishList = new ArrayList<>();
         // TODO: Use the ViewModel
+        // init ViewModel
+//        mViewModel = new ViewModelProvider(this).get(DishMenu.class);
+        userDishList = new ArrayList<>();
+        total = 0;
 
         // bind Views
         bindViews(view);
@@ -185,7 +191,7 @@ public class DishMenuFragment extends Fragment {
                     new PayPasswordDialog.Builder(requireActivity())
                             .setTitle(R.string.pay_title)
                             .setSubTitle(R.string.pay_sub_title)
-                            .setMoney(getRString(R.string.pay_money) + " " + String.valueOf(price))//TODO: 设置订单金额
+                            .setMoney(StringUtil.getSSMoney(total,72))//TODO: 设置订单金额
                             .setAutoDismiss(true)//支付满6位自动关闭
                             .setListener(new PayPasswordDialog.OnListener() {
                                 @Override
@@ -253,6 +259,8 @@ public class DishMenuFragment extends Fragment {
 
         // 初始化购物车已购金额
         setShoppingCarAccount(0);
+        // 初始化投喂文本为显示状态
+        showEmpty = true;
         // 购物车栏点击事件
         shoppingCar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -286,6 +294,7 @@ public class DishMenuFragment extends Fragment {
             total += ud.getPrice();
         }
         setShoppingCarAccount(total);
+        this.total = total;
     }
 
     /**
@@ -417,8 +426,17 @@ public class DishMenuFragment extends Fragment {
         Log.d(TAG, "showShoppingCar: X,Y=" + offsetX + "," + offsetY);
         // "清空"按钮点击事件
         button.setOnClickListener(v -> {
-            // TODO: 清空购物车
             Log.d(TAG, "onClick: 清空");
+            userDishList.clear();
+            for (Dish dish :
+                    dishList) {
+                if (dish.getCount() > 0) {
+                    dish.setCount(0);
+                }
+            }
+            ((FoodStickyAdapter) stickyListView.getAdapter()).notifyDataSetChanged();
+            shoppingList.getAdapter().notifyDataSetChanged();
+            updateShoppingCarAccount();
         });
     }
 
@@ -460,7 +478,7 @@ public class DishMenuFragment extends Fragment {
 //        // 设置按钮的点击事件
 //        Button button = contentView.findViewById(R.id.clear_shopping);
 //        button.setOnClickListener(v -> {
-//            // TODO: 清空购物车
+//            // 清空购物车
 //            Log.d(TAG, "onClick: 清空");
 //        });
 //        popupWindow = new PopupWindow(contentView,

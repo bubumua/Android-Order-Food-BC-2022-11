@@ -102,4 +102,5 @@
     <color name="grey_background_fill">#F6F6F6</color>
     <color name="Ensborough">#DCDCDC</color>
     <color name="category_header_background">#FAE47A</color>
+    <color name="light_golden">#FEF9E8</color>
 </resources>

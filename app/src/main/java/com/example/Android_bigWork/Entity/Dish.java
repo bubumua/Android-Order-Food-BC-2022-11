@@ -11,7 +11,7 @@ public class Dish {
     private int GID;    // 菜品在菜单上的唯一编号
     private String name;    // 菜品名
     private String description; // 菜品描述
-    private double price;   // 价格
+    private double price;   // 价格(单价)
     private String category;    // 分类类名
     private int CID;    // 分类编号
     private boolean customizable;   // 是否支持定制需求
