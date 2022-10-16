@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import com.example.Android_bigWork.Database.PersonDao;
 import com.example.Android_bigWork.Database.PersonDatabase;
+import com.example.Android_bigWork.Entity.Person;
 import com.example.Android_bigWork.R;
 import com.example.Android_bigWork.Utils.SubmitButton;
 import com.example.Android_bigWork.action.HandlerAction;
@@ -41,12 +42,18 @@ public class LoginActivity extends AppCompatActivity implements HandlerAction {
         Intent navigateToSignUp = new Intent(this, SignUpActivity.class);
         //跳转到Main时，清空Activity堆栈
         Intent navigateToHome = new Intent(this, MainActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-        //判断传入数据
-        String iUsername = initIntent.getStringExtra("username");
-        String iPassword = initIntent.getStringExtra("password");
-        if (iUsername != null && iPassword != null) {
-            mUsername.setText(iUsername);
-            mPassword.setText(iPassword);
+        //判断是否有传入的Bundle数据
+        if (initIntent.getExtras() != null) {
+            //获取Bundle数据
+            Bundle bundle = initIntent.getExtras();
+            //获取Bundle中的数据
+            Person user = (Person) bundle.getSerializable("user");
+            //判断是否有传入的用户数据
+            if (user != null) {
+                //将用户数据显示在界面上
+                mUsername.setText(user.username);
+                mPassword.setText(user.password);
+            }
         }
 
         //获取数据库
@@ -68,7 +75,13 @@ public class LoginActivity extends AppCompatActivity implements HandlerAction {
                 Toast.makeText(this, "登录成功", Toast.LENGTH_SHORT).show();
                 //跳转到主界面
                 postDelayed(() -> {
-                    navigateToHome.putExtra("username", username);
+                    //查询该用户
+                    Person user = personDao.queryPerson(username);
+                    //将用户数据传入Bundle
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable("user", user);
+                    //将Bundle数据传入Intent
+                    navigateToHome.putExtras(bundle);
                     startActivity(navigateToHome);
                 }, 1000);
             } else {
