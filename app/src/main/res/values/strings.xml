@@ -12,6 +12,7 @@
     <string name="buttonSub">从购物车去除</string>
     <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
     <string name="pay_title" translatable="false">请输入支付密码</string>
+    <string name="defaultValue">默认</string>
     <!--    商品信息    -->
     <string name="dish_1" translatable="false">巨无霸</string>
     <string name="dish_2" translatable="false">原味珍珠奶茶</string>
@@ -338,5 +339,6 @@
     <string name="sweet_2">3分甜</string>
     <string name="sweet_3">7分甜</string>
     <string name="sweet_4">10分甜</string>
+    <string name="shopping_car_wait_for_adding">购物车中还没有食物呢，欢迎客人来投喂呀~</string>
 
 </resources>

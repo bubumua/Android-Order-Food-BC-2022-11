@@ -1,5 +1,6 @@
 package com.example.Android_bigWork.Adapters;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.Resources;
 import android.util.Log;
@@ -26,6 +27,7 @@ import com.example.Android_bigWork.Utils.StringUtil;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import se.emilsjolander.stickylistheaders.StickyListHeadersAdapter;
 
@@ -198,6 +200,7 @@ public class FoodStickyAdapter extends BaseAdapter implements StickyListHeadersA
         final String[] spicyStr = {""};
         final String[] sweetStr = {""};
         // 判断是否显示口味选项
+        // 若有辣度选项，展开辣度单选题
         if (dish.isSpicy()) {
             try {
                 View v = spicyOption.inflate();
@@ -233,6 +236,7 @@ public class FoodStickyAdapter extends BaseAdapter implements StickyListHeadersA
                 spicyOption.setVisibility(View.VISIBLE);
             }
         }
+        // 若有甜度选项，展开甜度单选题
         if (dish.isSweet()) {
             try {
                 View v = sweetOption.inflate();
@@ -270,7 +274,25 @@ public class FoodStickyAdapter extends BaseAdapter implements StickyListHeadersA
         // detail加号点击事件
         add.setOnClickListener(v -> {
             Log.d(TAG, "showDishDetail: add clicked");
-            addDishToShoppingCar(dish, spicy[0], sweet[0]);
+            // 将自定义口味拼接为一个字符串
+            ArrayList<String> customList=new ArrayList<>();
+            if(spicy[0]>0 ){
+                if(!Objects.equals(spicyStr[0], "")){
+                    customList.add(spicyStr[0]);
+                }else {
+                    customList.add(getRString(R.string.defaultValue));
+                }
+            }
+            if(sweet[0]>0 ){
+                if(!Objects.equals(sweetStr[0], "")){
+                    customList.add(sweetStr[0]);
+                }else {
+                    customList.add(getRString(R.string.defaultValue));
+                }
+            }
+            String customText= StringUtil.join(customList,",");
+            // 数据层上，将菜加入购物车
+            addDishToShoppingCar(dish, spicy[0], sweet[0], customText);
             dish.setCount(dish.getCount() + 1);
 //            TextView count_add = contentView.findViewById(R.id.dish_count);
             count.setText(String.valueOf(dish.getCount()));
@@ -322,7 +344,7 @@ public class FoodStickyAdapter extends BaseAdapter implements StickyListHeadersA
     }
 
 
-    public void addDishToShoppingCar(Dish dish, int spicy, int sweet) {
+    public void addDishToShoppingCar(Dish dish, int spicy, int sweet,String customText) {
         UserDish userDish = new UserDish(dish.getGID(),
                 dish.getName(),
                 dish.getDescription(),
@@ -331,7 +353,7 @@ public class FoodStickyAdapter extends BaseAdapter implements StickyListHeadersA
                 dish.getCID(),
                 spicy,
                 sweet,
-                "no comment",
+                customText,
                 1,
                 userName);
         // 如果购物车没有菜，直接添加
