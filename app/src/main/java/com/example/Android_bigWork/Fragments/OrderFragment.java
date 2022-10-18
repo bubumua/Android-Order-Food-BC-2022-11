@@ -65,14 +65,11 @@ public class OrderFragment extends Fragment {
         stickyListView = view.findViewById(R.id.show_orders);
         OrderAdapter orderAdapter=new OrderAdapter(getContext(),orderViewModel);
         stickyListView.setAdapter(orderAdapter);
-        orderViewModel.getUserDishes().observe(getViewLifecycleOwner(), new Observer<List<UserDish>>() {
-            @SuppressLint("NotifyDataSetChanged")
-            @Override
-            public void onChanged(List<UserDish> userDishes) {
-                Log.d(TAG, "OrderViewModelObserver: "+userDishes.size());
-                orderAdapter.setUserDishList(orderViewModel.getUserDishes().getValue());
-                ((OrderAdapter)stickyListView.getAdapter()).notifyDataSetChanged();
-            }
+        orderViewModel.getUserDishes().observe(getViewLifecycleOwner(), userDishes -> {
+            Log.d(TAG, "OrderViewModelObserver: "+userDishes.size());
+            // TODO: 设置 RecyclerView 显示的内容
+            orderAdapter.setUserDishList(orderViewModel.getUserDishes().getValue());
+            ((OrderAdapter)stickyListView.getAdapter()).notifyDataSetChanged();
         });
 
     }

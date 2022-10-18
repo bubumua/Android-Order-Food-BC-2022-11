@@ -52,7 +52,6 @@ import com.example.Android_bigWork.Utils.StringUtil;
 import com.example.Android_bigWork.ViewModels.OrderViewModel;
 import com.hjq.xtoast.XToast;
 
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -61,11 +60,15 @@ import se.emilsjolander.stickylistheaders.StickyListHeadersListView;
 public class DishMenuFragment extends Fragment {
 
     private final String TAG = "my";
+
     // 布局控件
     private StickyListHeadersListView stickyListView;
     private ListView listView;
     LinearLayout shoppingCar;
     Button payment;
+    private String userName;
+    public boolean showEmpty;
+
 
     // 界面数据(列表)
     private ArrayList<Dish> dishList;
@@ -73,7 +76,6 @@ public class DishMenuFragment extends Fragment {
     private ArrayList<UserDish> userDishList;
     double total;
     private OrderViewModel orderViewModel;
-    private String userName;
 
     //数据库
     private DishDatabase dishDatabase;
