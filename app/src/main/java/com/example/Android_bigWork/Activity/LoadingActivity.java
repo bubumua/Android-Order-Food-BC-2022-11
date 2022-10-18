@@ -4,7 +4,9 @@ import androidx.annotation.StringRes;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.icu.util.Calendar;
 import android.os.Bundle;
+import android.util.Log;
 
 import com.airbnb.lottie.LottieAnimationView;
 import com.example.Android_bigWork.Database.DishDao;
@@ -13,6 +15,7 @@ import com.example.Android_bigWork.Database.PersonDao;
 import com.example.Android_bigWork.Database.PersonDatabase;
 import com.example.Android_bigWork.Entity.Dish;
 import com.example.Android_bigWork.R;
+import com.example.Android_bigWork.Utils.StringUtil;
 import com.example.Android_bigWork.action.HandlerAction;
 
 public class LoadingActivity extends AppCompatActivity
@@ -141,6 +144,10 @@ public class LoadingActivity extends AppCompatActivity
             Intent intent = new Intent(this, LoginActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
         }, 2400);
+
+        Log.d(TAG, "onCreate: "+ StringUtil.getCurrentDateAndTime());
+        Log.d(TAG, "onCreate: "+ StringUtil.getCurrentTime());
+
 
     }
 

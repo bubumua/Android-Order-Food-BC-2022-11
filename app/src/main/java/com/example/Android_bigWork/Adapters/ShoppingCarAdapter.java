@@ -54,6 +54,7 @@ public class ShoppingCarAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        Log.d(TAG, "onCreateViewHolder: ");
         // 在这里根据不同的viewType进行引入不同的布局
         if (viewType == VIEW_TYPE_EMPTY) {
             View emptyView = LayoutInflater.from(parent.getContext()).inflate(R.layout.shopping_car_empty, parent, false);
@@ -100,7 +101,7 @@ public class ShoppingCarAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
             // 更新购物车金额
             updateShoppingCarAccount();
         });
-        Log.d(TAG, "onCreateViewHolder: ");
+
         return holder;
     }
 
@@ -169,9 +170,9 @@ public class ShoppingCarAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         TextView price;
         TextView count;
         TextView customText;
+        ImageView img;
         ImageButton add;
         ImageButton sub;
-        ImageView img;
 
         public ShoppingItemViewHolder(@NonNull View view) {
             super(view);
