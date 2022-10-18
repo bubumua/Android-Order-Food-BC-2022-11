@@ -9,6 +9,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
@@ -18,6 +19,7 @@ import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -28,7 +30,6 @@ import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.core.widget.PopupWindowCompat;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -36,10 +37,13 @@ import com.example.Android_bigWork.Activity.MainActivity;
 import com.example.Android_bigWork.Adapters.FoodCategoryAdapter;
 import com.example.Android_bigWork.Adapters.FoodStickyAdapter;
 import com.example.Android_bigWork.Adapters.ShoppingCarAdapter;
+import com.example.Android_bigWork.Database.CouponDao;
+import com.example.Android_bigWork.Database.CouponDatabase;
 import com.example.Android_bigWork.Database.DishDao;
 import com.example.Android_bigWork.Database.DishDatabase;
 import com.example.Android_bigWork.Database.PersonDao;
 import com.example.Android_bigWork.Database.PersonDatabase;
+import com.example.Android_bigWork.Entity.Coupon;
 import com.example.Android_bigWork.Entity.Dish;
 import com.example.Android_bigWork.Entity.Person;
 import com.example.Android_bigWork.Entity.UserDish;
@@ -50,9 +54,11 @@ import com.example.Android_bigWork.Utils.RelativePopupWindow;
 import com.example.Android_bigWork.Utils.StringUtil;
 import com.example.Android_bigWork.ViewModels.DishMenu;
 import com.hjq.xtoast.XToast;
+import com.hjq.xtoast.draggable.SpringDraggable;
 
 
 import java.util.ArrayList;
+import java.util.Random;
 
 import se.emilsjolander.stickylistheaders.StickyListHeadersListView;
 
@@ -79,6 +85,9 @@ public class DishMenuFragment extends Fragment {
     private DishDao dishDao;
     private PersonDatabase personDatabase;
     private PersonDao personDao;
+
+    private CouponDatabase couponDatabase;
+    private CouponDao couponDao;
     private Person user;//MainActivity中的用户信息
 
     public static DishMenuFragment newInstance() {
@@ -93,6 +102,8 @@ public class DishMenuFragment extends Fragment {
         dishDao = dishDatabase.getDishDao();
         personDatabase = PersonDatabase.getDatabase(context);
         personDao = personDatabase.getPersonDao();
+        couponDatabase = CouponDatabase.getDatabase(context);
+        couponDao = couponDatabase.getCouponDao();
         //获取MainActivity的Bundle数据
         Intent intent = ((Activity) context).getIntent();
         Bundle bundle = intent.getExtras();
@@ -191,7 +202,7 @@ public class DishMenuFragment extends Fragment {
                     new PayPasswordDialog.Builder(requireActivity())
                             .setTitle(R.string.pay_title)
                             .setSubTitle(R.string.pay_sub_title)
-                            .setMoney(StringUtil.getSSMoney(total,72))//TODO: 设置订单金额
+                            .setMoney(StringUtil.getSSMoney(total, 72))//TODO: 设置订单金额
                             .setAutoDismiss(true)//支付满6位自动关闭
                             .setListener(new PayPasswordDialog.OnListener() {
                                 @Override
@@ -325,6 +336,93 @@ public class DishMenuFragment extends Fragment {
         listView = view.findViewById(R.id.category_list);
         payment = view.findViewById(R.id.shopping_commit);
         shoppingCar = view.findViewById(R.id.shopping_car);
+        redPackInit();
+    }
+
+    private void redPackInit() {
+        //计数器
+        final int[] count = {0};
+        new XToast<>(requireActivity())
+                .setContentView(R.layout.window_redpack)
+                .setAnimStyle(R.style.IOSAnimStyle)
+                .setImageDrawable(android.R.id.icon, R.drawable.redpack)
+                // 设置成可拖拽的
+                .setDraggable(new SpringDraggable())
+                .setOnClickListener(android.R.id.icon, new XToast.OnClickListener<ImageView>() {
+                    @Override
+                    public void onClick(final XToast<?> toast, ImageView view) {
+                        new XToast<>(requireActivity())
+                                .setContentView(R.layout.dialog_red_packet)
+                                .setAnimStyle(R.style.IOSAnimStyle)
+                                .setOnClickListener(R.id.iv_close, new XToast.OnClickListener<ImageView>() {
+                                    @Override
+                                    public void onClick(XToast<?> toast, ImageView view) {
+                                        toast.cancel();
+                                    }
+                                })
+                                .setOnClickListener(R.id.iv_open, new XToast.OnClickListener<ImageView>() {
+                                    @Override
+                                    public void onClick(XToast<?> toast, ImageView view) {
+                                        //获取id为R.id.iv_open的ImageView
+                                        AnimationDrawable animationDrawable = (AnimationDrawable) view.getBackground();
+                                        animationDrawable.start();
+                                        //生成优惠券
+                                        String couponText = geneCoupon();
+                                        toast.postDelayed(new Runnable() {
+                                            @Override
+                                            public void run() {
+                                                //new XToast 显示领取成功
+                                                new XToast<>(requireActivity())
+                                                        .setDuration(2000)
+                                                        .setContentView(R.layout.window_hint)
+                                                        .setAnimStyle(R.style.IOSAnimStyle)
+                                                        .setImageDrawable(android.R.id.icon, R.drawable.yanhua)
+                                                        .setText(android.R.id.message, "成功领取\n" + couponText + "优惠券")
+                                                        .show();
+                                                toast.cancel();
+                                            }
+                                        }, 900);
+                                        count[0] += 1;
+                                    }
+                                })
+                                .show();
+                        if (count[0] == 2) {
+                            toast.cancel();
+                        }
+                    }
+                })
+                .show();
+        //查询用户目前拥有的优惠券
+        Log.d(TAG, "redPackInit: " + couponDao.getAllCoupon(user.username));
+    }
+
+    /**
+     * 随机生成优惠券，并插入数据库
+     *
+     * @param
+     * @return
+     * @Author Anduin9527
+     * @date 2022/10/18 20:47
+     * @commit
+     */
+    private String geneCoupon() {
+        //随机生成优惠卷
+        //生成优惠券类型0~1
+        String couponText = "";
+        double condition = 0, reduction = 0, discount = 0;
+        int type = (int) (Math.random() * 2);
+        if (type == 0) {
+            condition = (int) (Math.random() * 100) + 1;
+            reduction = (int) (Math.random() * condition * 0.7) + 1;
+            couponText = "满" + condition + "减" + reduction;
+        } else {
+            discount = (int) (Math.random() * 4) + 2;
+            couponText = discount + "折";
+        }
+        //插入数据库
+
+        couponDao.addCoupon(user.username, type, discount, condition, reduction);
+        return couponText;
     }
 
     /**
