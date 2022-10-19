@@ -27,6 +27,10 @@ public class UserDishRepository {
         return userDishDao.getUserDishesForUser(userName);
     }
 
+    public LiveData<List<UserDish>> getUserDishesForUserByTime(String userName,long time){
+        return userDishDao.getUserDishesForUserByTime(userName,time);
+    }
+
     public void insert(UserDish userDish){
         UserDishDatabase.databaseExecutor.execute(()->{
             userDishDao.insert(userDish);

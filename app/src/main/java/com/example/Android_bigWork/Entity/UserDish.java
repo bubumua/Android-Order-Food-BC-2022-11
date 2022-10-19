@@ -55,7 +55,7 @@ public class UserDish {
     }
 
     public String display(){
-        return GID+"-"+name+"-"+price+"-"+count+"-"+userName;
+        return GID+"-"+name+"-"+price+"-"+count+"-"+userName+"--"+createdTime;
     }
 
     public long getCreatedTime() {

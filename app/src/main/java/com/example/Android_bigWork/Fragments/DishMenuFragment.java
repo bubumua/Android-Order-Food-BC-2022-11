@@ -233,6 +233,7 @@ public class DishMenuFragment extends Fragment {
                                             Log.d(TAG, "after payment: "+ud.display());
                                             orderViewModel.insert(ud);
                                         }
+
                                         clearShoppingCar();
                                     } else {
 //                                        Toast.makeText(requireActivity(), getRString(R.string.pay_fail), Toast.LENGTH_SHORT).show();

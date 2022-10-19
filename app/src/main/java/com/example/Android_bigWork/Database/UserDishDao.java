@@ -19,4 +19,7 @@ public interface UserDishDao {
 
     @Query("SELECT * FROM order_table ORDER BY createdTime DESC")
     LiveData<List<UserDish>> getUserDishesFromAllUsers();
+
+    @Query("SELECT * FROM order_table WHERE userName= :userName AND createdTime= :time")
+    LiveData<List<UserDish>> getUserDishesForUserByTime(String userName,long time);
 }

@@ -29,6 +29,7 @@ public class OrderAdapter extends BaseAdapter implements StickyListHeadersAdapte
     private static final String TAG = "my";
     public static final int VIEW_TYPE_ITEM = 1;
     public static final int VIEW_TYPE_EMPTY = 0;
+    public int viewType;
     private LayoutInflater inflater;
     Context context;
     OrderViewModel orderViewModel;
@@ -41,10 +42,16 @@ public class OrderAdapter extends BaseAdapter implements StickyListHeadersAdapte
         this.resources = context.getResources();
         this.inflater = LayoutInflater.from(context);
         this.userDishList = orderViewModel.getUserDishes().getValue();
+        this.viewType=0;
     }
 
     public void setUserDishList(List<UserDish> userDishList) {
         this.userDishList = userDishList;
+        if(userDishList.size()>0){
+            viewType=1;
+        }else {
+            viewType=0;
+        }
     }
 
     @Override
@@ -68,7 +75,7 @@ public class OrderAdapter extends BaseAdapter implements StickyListHeadersAdapte
 
     @Override
     public int getCount() {
-        if (userDishList == null) {
+        if (userDishList == null && userDishList.size()==0) {
             return 0;
         } else {
             return userDishList.size();
