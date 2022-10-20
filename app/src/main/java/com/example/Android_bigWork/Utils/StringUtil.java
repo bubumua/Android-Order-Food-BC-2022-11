@@ -1,12 +1,16 @@
 package com.example.Android_bigWork.Utils;
 
+import android.annotation.SuppressLint;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.icu.text.SimpleDateFormat;
+import android.icu.util.Calendar;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.style.AbsoluteSizeSpan;
 import android.text.style.ForegroundColorSpan;
 import android.text.style.StyleSpan;
+import android.util.Log;
 
 import java.util.List;
 import java.util.regex.Matcher;
@@ -49,6 +53,29 @@ public class StringUtil {
             }
             return s.toString();
         }
+    }
+
+    public static String getCurrentDateAndTime(){
+        Calendar c = Calendar.getInstance();
+        int year,month,day,hour,minute,second;
+        year = c.get(Calendar.YEAR);
+        month = c.get(Calendar.MONTH)+1;
+        day = c.get(Calendar.DATE);
+        hour = c.get(Calendar.HOUR);
+        minute = c.get(Calendar.MINUTE);
+        second=c.get(Calendar.SECOND);
+        return year+"/"+month+"/"+day+"-"+hour+":"+minute+":"+second;
+    }
+
+    public static String getCurrentTime(){
+        long currentTime = System.currentTimeMillis();
+        @SuppressLint("SimpleDateFormat") String timeNow = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(currentTime);
+        return timeNow;
+    }
+
+    @SuppressLint("SimpleDateFormat")
+    public static String getCurrentTimeByMills(long mills){
+        return new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(mills);
     }
 
 
