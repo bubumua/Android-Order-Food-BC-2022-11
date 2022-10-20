@@ -1,9 +1,12 @@
 package com.example.Android_bigWork.Entity;
 
+import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+@Entity(tableName = "order_table")
 public class UserDish {
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
+    public int OID;
     private int GID;
     private String name;    // 菜品名
     private String description; // 菜品描述
@@ -17,7 +20,8 @@ public class UserDish {
     private String customText;
     private int count;  // 选购份数
     private String userName;    // 订单所属用户
-//    private String date;    // 订单生成日期}
+    private long createdTime;   // 订单生成日期（时间戳）
+
 
     public UserDish(int GID, String name, String description, double price, String category, int CID, int spicy, int sweet, String customText, int count, String userName) {
         this.GID = GID;
@@ -48,6 +52,18 @@ public class UserDish {
         return (userDish.getGID()==this.GID &&
                 userDish.getSpicy()==this.spicy &&
                 userDish.getSweet()==this.getSweet());
+    }
+
+    public String display(){
+        return GID+"-"+name+"-"+price+"-"+count+"-"+userName+"--"+createdTime;
+    }
+
+    public long getCreatedTime() {
+        return createdTime;
+    }
+
+    public void setCreatedTime(long createdTime) {
+        this.createdTime = createdTime;
     }
 
     public int getGID() {
@@ -138,4 +154,5 @@ public class UserDish {
     public void setCount(int count) {
         this.count = count;
     }
+
 }

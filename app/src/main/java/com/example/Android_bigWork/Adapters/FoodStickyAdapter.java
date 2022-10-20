@@ -358,7 +358,8 @@ public class FoodStickyAdapter extends BaseAdapter implements StickyListHeadersA
 
 
     public void addDishToShoppingCar(Dish dish, int spicy, int sweet,String customText) {
-        UserDish userDish = new UserDish(dish.getGID(),
+        UserDish userDish = new UserDish(
+                dish.getGID(),
                 dish.getName(),
                 dish.getDescription(),
                 dish.getPrice(),
