@@ -1,0 +1,31 @@
+<animation-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:drawable="@drawable/icon_open_red_packet1"
+        android:duration="100" />
+    <item
+        android:drawable="@drawable/icon_open_red_packet2"
+        android:duration="100" />
+    <item
+        android:drawable="@drawable/icon_open_red_packet3"
+        android:duration="100" />
+    <item
+        android:drawable="@drawable/icon_open_red_packet4"
+        android:duration="100" />
+    <item
+        android:drawable="@drawable/icon_open_red_packet5"
+        android:duration="100" />
+    <item
+        android:drawable="@drawable/icon_open_red_packet6"
+        android:duration="100" />
+    <item
+        android:drawable="@drawable/icon_open_red_packet7"
+        android:duration="100" />
+    <item
+        android:drawable="@drawable/icon_open_red_packet8"
+        android:duration="100" />
+    <item
+        android:drawable="@drawable/icon_open_red_packet9"
+        android:duration="100" />
+
+
+</animation-list>

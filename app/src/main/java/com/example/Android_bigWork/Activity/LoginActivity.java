@@ -121,8 +121,7 @@ public class LoginActivity extends AppCompatActivity implements HandlerAction {
     }
 
     private boolean checkDataBase(String username, String password, PersonDao personDao) {
-        if (username.equals("admin") && password.equals("password")
-                || personDao.checkLogin(username, password) != null
+        if (personDao.checkLogin(username, password) != null
                 || isNumber(username) && personDao.checkLoginByPhoneNumber(Long.parseLong(username), password) != null) {
             return true;
         }
