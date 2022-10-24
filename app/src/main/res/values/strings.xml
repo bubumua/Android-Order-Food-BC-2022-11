@@ -314,12 +314,11 @@
     <string-array name="setting_country">
         <item>China</item>
         <item>England</item>
-        <item>Japan</item>
+        <item>America</item>
     </string-array>
     <string-array name="setting_language">
-        <item>Chinese</item>
         <item>English</item>
-        <item>Japanese</item>
+        <item>Chinese</item>
     </string-array>
     <string name="commit">付款</string>
     <string name="shopping_car_title">购物车</string>

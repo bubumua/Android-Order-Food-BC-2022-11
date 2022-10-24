@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -55,14 +56,20 @@ public class SettingFragment extends Fragment {
 
         Button button1 = (Button) getActivity().findViewById(R.id.button_user);
         Button button2 = (Button) getActivity().findViewById(R.id.button_update);
-
-        //监听button1单击事件
+        TextView  tv1 =(TextView) getActivity().findViewById(R.id.editTextTextPassword_old);
+        TextView  tv2 =(TextView) getActivity().findViewById(R.id.editTextTextPassword_new);
+        TextView  tv3 =(TextView) getActivity().findViewById(R.id.textView5);
+        tv3.setText(user.username);
         button1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                String str1 = tv1.getText().toString();
+                String str2 = tv2.getText().toString();
+
                 //获取Person数据库
                 PersonDatabase personDatabase = PersonDatabase.getDatabase(getActivity());
                 PersonDao personDao = personDatabase.getPersonDao();
+                personDao.changePassword(str1,str2, user.username);
 
                 //修改密码
                 Toast.makeText(getActivity(), "修改成功！", Toast.LENGTH_LONG).show();

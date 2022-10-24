@@ -9,8 +9,12 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+<<<<<<< HEAD
+import android.widget.TextView;
+=======
 import android.widget.CompoundButton;
 import android.widget.Switch;
+>>>>>>> origin/master
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -68,6 +72,14 @@ public class OrderFragment extends Fragment {
 
     @SuppressLint("ResourceType")
     @Override
+<<<<<<< HEAD
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        TextView tv4=(TextView) getActivity().findViewById(R.id.textView12) ;
+        tv4.setText(user.username);
+        mViewModel = new ViewModelProvider(this).get(OrderViewModel.class);
+        // TODO: Use the ViewModel
+=======
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
@@ -120,6 +132,7 @@ public class OrderFragment extends Fragment {
             orderAdapter.setUserDishList(filter);
         }
         orderAdapter.notifyDataSetChanged();
+>>>>>>> origin/master
     }
 
 }
