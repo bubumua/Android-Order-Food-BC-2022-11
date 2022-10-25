@@ -7,7 +7,6 @@
     android:background="@drawable/category_list_background"
     tools:context=".Fragments.OrderFragment">
 
-<<<<<<< HEAD
     <TextView
         android:id="@+id/textView8"
         android:layout_width="405dp"
@@ -82,11 +81,13 @@
         app:layout_constraintVertical_bias="0.548" />
 
     <se.emilsjolander.stickylistheaders.StickyListHeadersListView
-        android:id="@+id/stickyListHeadersListView"
-        android:layout_width="411dp"
-        android:layout_height="448dp"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="141dp" />
+        android:id="@+id/show_orders"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/guideline7"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/guideline6" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline6"
@@ -128,28 +129,3 @@
         app:layout_constraintGuide_percent="0.83036935" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
-
-=======
-    <se.emilsjolander.stickylistheaders.StickyListHeadersListView
-        android:id="@+id/show_orders"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/show_history"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-    </se.emilsjolander.stickylistheaders.StickyListHeadersListView>
-
-    <Switch
-        android:id="@+id/show_history"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:minHeight="32dp"
-        android:text="显示所有订单（记得加入strings）"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-</androidx.constraintlayout.widget.ConstraintLayout>
->>>>>>> origin/master
