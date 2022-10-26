@@ -25,10 +25,10 @@ public class Coupon {
     private double reduction;
     private String username;
 
-    public Coupon(int type, double discount, double full, double reduction, String username) {
+    public Coupon(int type, double discount, double condition, double reduction, String username) {
         this.type = type;
         this.discount = discount;
-        this.condition = full;
+        this.condition = condition;
         this.reduction = reduction;
         this.username = username;
     }
@@ -42,7 +42,7 @@ public class Coupon {
                 "CID=" + CID +
                 ", type=" + type +
                 ", discount=" + discount +
-                ", full=" + condition +
+                ", condition=" + condition +
                 ", reduction=" + reduction +
                 ", username='" + username +
                 '}';

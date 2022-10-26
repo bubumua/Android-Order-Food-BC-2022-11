@@ -43,9 +43,10 @@ public class OrderFragment extends Fragment {
     // View
     private StickyListHeadersListView stickyListView;
     public OrderAdapter orderAdapter;
-//    private Switch switchButton;
+    private Switch switchButton;
     private boolean showHistory;
     private long createdTime;
+    private TextView ordersHeader;
 
     public static OrderFragment newInstance() {
         return new OrderFragment();
@@ -72,10 +73,10 @@ public class OrderFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        TextView tv4 = (TextView) getActivity().findViewById(R.id.textView12);
+        TextView tv4 = getActivity().findViewById(R.id.textView12);
         tv4.setText(user.username);
 //        mViewModel = new ViewModelProvider(this).get(OrderViewModel.class);
-        // TODO: Use the ViewModel
+
     }
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -83,7 +84,8 @@ public class OrderFragment extends Fragment {
         orderViewModel = new ViewModelProvider(requireActivity()).get(OrderViewModel.class);
         stickyListView = view.findViewById(R.id.show_orders);
         orderAdapter = new OrderAdapter(getContext(), orderViewModel);
-//        switchButton = view.findViewById(R.id.show_history);
+        switchButton = view.findViewById(R.id.show_history);
+        ordersHeader=view.findViewById(R.id.textView8);
         showHistory = false;
         createdTime = 0;
 
@@ -94,13 +96,18 @@ public class OrderFragment extends Fragment {
             updateOrders();
         });
 
-//        switchButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-//            @Override
-//            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-//                showHistory = isChecked;
-//                updateOrders();
-//            }
-//        });
+        switchButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                showHistory = isChecked;
+                updateOrders();
+                if(isChecked){
+                    ordersHeader.setText(getResources().getString(R.string.history_orders));
+                }else {
+                    ordersHeader.setText(getResources().getString(R.string.recent_order));
+                }
+            }
+        });
     }
 
     /**

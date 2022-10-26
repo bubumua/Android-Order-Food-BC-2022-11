@@ -10,10 +10,12 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.drawable.AnimationDrawable;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
@@ -22,6 +24,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.PopupWindow;
+import android.widget.Spinner;
 import android.widget.Toast;
 import android.widget.TextView;
 
@@ -36,6 +40,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.Android_bigWork.Activity.MainActivity;
+import com.example.Android_bigWork.Adapters.CouponAdapter;
 import com.example.Android_bigWork.Adapters.FoodCategoryAdapter;
 import com.example.Android_bigWork.Adapters.FoodStickyAdapter;
 import com.example.Android_bigWork.Adapters.ShoppingCarAdapter;
@@ -83,6 +88,7 @@ public class DishMenuFragment extends Fragment {
     private ArrayList<UserDish> userDishList;
     double total;
     private OrderViewModel orderViewModel;
+    private Coupon selectedCoupon;
 
     //数据库
     private DishDatabase dishDatabase;
@@ -112,6 +118,7 @@ public class DishMenuFragment extends Fragment {
         Intent intent = ((Activity) context).getIntent();
         Bundle bundle = intent.getExtras();
         user = (Person) bundle.getSerializable("user");
+
     }
 
     @Override
@@ -122,6 +129,7 @@ public class DishMenuFragment extends Fragment {
         initCategoryItems();
         userDishList = new ArrayList<>();
         total = 0;
+        selectedCoupon = null;
         return inflater.inflate(R.layout.fragment_dish_menu, container, false);
     }
 
@@ -173,10 +181,7 @@ public class DishMenuFragment extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 int selectedCID = ((FoodCategoryAdapter.CategoryItem) foodCategoryAdapter.getItem(position)).getCID();
                 int selectedPosition = foodStickyAdapter.getPositionByCID(selectedCID);
-//                stickyListView.smoothScrollToPosition(selectedPosition);
                 stickyListView.setSelection(selectedPosition);
-//                stickyListView.smoothScrollToPositionFromTop(selectedPosition,0);
-//                stickyListView.smoothScrollByOffset(foodStickyAdapter.getPositionByCID(selectedCID));
                 Log.d(TAG, "onItemClick: click and set selection");
             }
         });
@@ -237,16 +242,20 @@ public class DishMenuFragment extends Fragment {
                                                 // 设置窗口背景阴影强度
                                                 .setBackgroundDimAmount(0.5f)
                                                 .show();
-                                        // TODO:设置支付成功后的操作
                                         // 为 userDishList 中所有菜品添加时间戳（订单生成时间），并插入数据库
                                         long currentTime = System.currentTimeMillis();
                                         for (UserDish ud : userDishList) {
                                             ud.setCreatedTime(currentTime);
-                                            Log.d(TAG, "after payment: "+ud.display());
+                                            Log.d(TAG, "after payment: " + ud.display());
                                             orderViewModel.insert(ud);
                                         }
-
+                                        // 支付后清空购物车
                                         clearShoppingCar();
+                                        // 消耗优惠券
+                                        if (selectedCoupon != null) {
+                                            couponDao.deleteCoupon(selectedCoupon.CID);
+                                            selectedCoupon = null;
+                                        }
                                     } else {
 //                                        Toast.makeText(requireActivity(), getRString(R.string.pay_fail), Toast.LENGTH_SHORT).show();
                                         Log.d(TAG, "onPay: " + payPassword + " " + personDao.queryPayPassword(user.username));
@@ -323,8 +332,8 @@ public class DishMenuFragment extends Fragment {
         for (UserDish ud : userDishList) {
             total += ud.getPrice();
         }
-        setShoppingCarAccount(total);
         this.total = total;
+        setShoppingCarAccount(total);
     }
 
     /**
@@ -338,7 +347,23 @@ public class DishMenuFragment extends Fragment {
      */
     public void setShoppingCarAccount(double money) {
         TextView totalAccount = shoppingCar.findViewById(R.id.account_in_car);
-        totalAccount.setText(StringUtil.getSSMoney(money, 72));
+        if (selectedCoupon == null || money < 0.01) {
+            totalAccount.setText(StringUtil.getSSMoney(money, 72));
+        } else {
+            totalAccount.setText(StringUtil.getSSMoneyAfterDiscount(money, 72, selectedCoupon));
+            switch (selectedCoupon.getType()) {
+                case 0:
+                    this.total = selectedCoupon.getDiscount() * this.total / 10;
+                    break;
+                case 1:
+                    if (this.total >= selectedCoupon.getCondition()) {
+                        this.total -= selectedCoupon.getReduction();
+                    }
+                    break;
+                default:
+                    break;
+            }
+        }
     }
 
     /**
@@ -402,6 +427,8 @@ public class DishMenuFragment extends Fragment {
                                             }
                                         }, 900);
                                         count[0] += 1;
+                                        Log.d(TAG, "redPack: " + couponDao.getAllCoupon(user.username));
+
                                     }
                                 })
                                 .show();
@@ -430,7 +457,7 @@ public class DishMenuFragment extends Fragment {
         String couponText = "";
         double condition = 0, reduction = 0, discount = 0;
         int type = (int) (Math.random() * 2);
-        if (type == 0) {
+        if (type == 1) {
             condition = (int) (Math.random() * 100) + 1;
             reduction = (int) (Math.random() * condition * 0.7) + 1;
             couponText = "满" + condition + "减" + reduction;
@@ -525,10 +552,38 @@ public class DishMenuFragment extends Fragment {
         View contentView = shoppingCar.getContentView();
         Button button = contentView.findViewById(R.id.clear_shopping);
         RecyclerView shoppingList = contentView.findViewById(R.id.shopping_list);
+        Spinner selectCoupon = contentView.findViewById(R.id.spinner_coupon);
         // 设置 RecyclerView
         shoppingList.setLayoutManager(new LinearLayoutManager(requireActivity()));
         ShoppingCarAdapter shoppingCarAdapter = new ShoppingCarAdapter(getContext(), this, userDishList, dishList);
         shoppingList.setAdapter(shoppingCarAdapter);
+        // 设置优惠券下拉框 Spinner
+        List<Coupon> coupons = couponDao.getAllCoupon(user.username);
+        CouponAdapter couponAdapter = new CouponAdapter(getContext(), coupons);
+        selectCoupon.setAdapter(couponAdapter);
+        int position = -1;
+        for (int i = 0; i < coupons.size(); i++) {
+            if (selectedCoupon != null && selectedCoupon.getCID() == coupons.get(i).getCID()) {
+                position = i;
+            }
+        }
+        if (position > -1) {
+            selectCoupon.setSelection(position);
+        }
+        selectCoupon.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                selectedCoupon = coupons.get(position);
+                String couponString = selectedCoupon.toString();
+                Log.d(TAG, "onCouponItemClick: select " + couponString);
+                updateShoppingCarAccount();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
         //需要先测量，PopupWindow还未弹出时，宽高为0
         contentView.measure(makeDropDownMeasureSpec(shoppingCar.getWidth()),
                 makeDropDownMeasureSpec(shoppingCar.getHeight()));
@@ -549,7 +604,16 @@ public class DishMenuFragment extends Fragment {
         });
     }
 
-    public void clearShoppingCar(){
+
+    /**
+     * 清空购物车
+     *
+     * @return void
+     * @Author Bubu
+     * @date 2022/10/26 13:47
+     * @commit
+     */
+    public void clearShoppingCar() {
         Log.d(TAG, "clear the shopping car!");
         userDishList.clear();
         for (Dish dish :
@@ -586,45 +650,4 @@ public class DishMenuFragment extends Fragment {
     public void setStickyListView(StickyListHeadersListView stickyListView) {
         this.stickyListView = stickyListView;
     }
-
-    /**
-     * show shopping car popupWindow
-     * 已经废弃了的购物车弹窗
-     *
-     * @return void
-     * @Author Bubu
-     * @date 2022/10/12 17:45
-     * @commit
-     */
-//    private void showPopupWindow() {
-//        //加载弹出框的布局
-//        contentView = LayoutInflater.from(getActivity()).inflate(R.layout.popupwindow, null);
-//        // 设置按钮的点击事件
-//        Button button = contentView.findViewById(R.id.clear_shopping);
-//        button.setOnClickListener(v -> {
-//            // 清空购物车
-//            Log.d(TAG, "onClick: 清空");
-//        });
-//        popupWindow = new PopupWindow(contentView,
-//                ViewGroup.LayoutParams.MATCH_PARENT,
-//                ViewGroup.LayoutParams.WRAP_CONTENT
-//        );
-//
-//        popupWindow.setFocusable(true);// 取得焦点
-//        //注意  要是点击外部空白处弹框消息  那么必须给弹框设置一个背景色  不然是不起作用的
-//        popupWindow.setBackgroundDrawable(getResources().getDrawable(R.drawable.ic_launcher_background));
-//        //点击外部消失
-//        popupWindow.setOutsideTouchable(true);
-//        //设置可以点击
-//        popupWindow.setTouchable(true);
-//        //设置进入退出的动画，指定刚才定义的style
-//        popupWindow.setAnimationStyle(R.style.ipopwindow_anim_style);
-//        // 获取高度
-//
-//        // 显示PopWindow
-//        int deltaY=bottomNavigationBarHeight+shoppingCarHeight;
-//        Log.d(TAG, "showPopupWindow: offSetY="+(-popupWindow.getHeight()+deltaY));
-//        popupWindow.showAtLocation(contentView, Gravity.BOTTOM, 0, deltaY);
-////        popupWindow.showAsDropDown(showPopup,0,);
-//    }
 }
