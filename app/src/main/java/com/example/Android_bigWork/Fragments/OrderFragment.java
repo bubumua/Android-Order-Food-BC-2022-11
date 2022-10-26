@@ -73,6 +73,7 @@ public class OrderFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+
         TextView tv4 = getActivity().findViewById(R.id.textView12);
         tv4.setText(user.username);
 //        mViewModel = new ViewModelProvider(this).get(OrderViewModel.class);
@@ -84,8 +85,10 @@ public class OrderFragment extends Fragment {
         orderViewModel = new ViewModelProvider(requireActivity()).get(OrderViewModel.class);
         stickyListView = view.findViewById(R.id.show_orders);
         orderAdapter = new OrderAdapter(getContext(), orderViewModel);
+
         switchButton = view.findViewById(R.id.show_history);
         ordersHeader=view.findViewById(R.id.textView8);
+
         showHistory = false;
         createdTime = 0;
 
@@ -95,6 +98,7 @@ public class OrderFragment extends Fragment {
             // 获取时间
             updateOrders();
         });
+
 
         switchButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -108,6 +112,7 @@ public class OrderFragment extends Fragment {
                 }
             }
         });
+
     }
 
     /**
