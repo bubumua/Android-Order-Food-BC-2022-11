@@ -324,7 +324,7 @@
     <string name="shopping_car_title">购物车</string>
     <string name="clear_shopping_car">清空</string>
     <string name="confirm_to_pay">确认付款</string>
-    <string name="confirm_message">您确定要付款并生成订单吗？啊？大声点？</string>
+    <string name="confirm_message">您确定要付款并生成订单吗？\n付款前记得先打开购物车看看有没有优惠券哟~</string>
     <string name="confirm">确认</string>
     <string name="cancel">取消</string>
 
@@ -363,7 +363,10 @@
     <string name="register_username_exist">用户名已存在</string>
     <string name="register_phone_exist">手机号已存在</string>
     <string name="register_phone_error">手机号格式错误</string>
-
+    <string name="chooseCoupon">选择优惠券</string>
+    <string name="coupon">优惠券</string>
+    <string name="history_orders">历史订单</string>
+    <string name="recent_order">最近订单</string>
 
 
 </resources>

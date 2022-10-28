@@ -12,7 +12,7 @@ import com.example.Android_bigWork.Entity.Dish;
 import java.util.List;
 
 public class DishMenu extends AndroidViewModel {
-    // TODO: Implement the ViewModel
+
     private LiveData<List<Dish>> allDishes;
 
     public DishMenu(@NonNull Application application) {

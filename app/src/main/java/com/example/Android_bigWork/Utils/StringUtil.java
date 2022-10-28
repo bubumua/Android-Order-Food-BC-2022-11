@@ -9,14 +9,27 @@ import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.style.AbsoluteSizeSpan;
 import android.text.style.ForegroundColorSpan;
+import android.text.style.StrikethroughSpan;
 import android.text.style.StyleSpan;
+import android.text.style.UnderlineSpan;
 import android.util.Log;
+
+import com.example.Android_bigWork.Entity.Coupon;
 
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class StringUtil {
+    /**
+     * 将字符串中的特殊符号删除
+     *
+     * @param str 待处理的字符串
+     * @return String
+     * @Author Bubu
+     * @date 2022/10/26 18:38
+     * @commit
+     */
     public static String replaceToBlank(String str) {
         String dest = "";
         if (str != null) {
@@ -27,6 +40,52 @@ public class StringUtil {
         return dest;
     }
 
+    public static SpannableString getSSMoneyAfterDiscount(double moneyBeforeDiscount, int symbolSize, Coupon coupon) {
+        String moneyBefore = String.valueOf(moneyBeforeDiscount);
+        int lengthBefore = moneyBefore.length();
+        double moneyAfterDiscount = moneyBeforeDiscount;
+        switch (coupon.getType()) {
+            case 0:
+                moneyAfterDiscount = coupon.getDiscount()  * moneyBeforeDiscount / 10;
+                break;
+            case 1:
+                if (moneyBeforeDiscount >= coupon.getCondition()) {
+                    moneyAfterDiscount -= coupon.getReduction();
+                }
+            default:
+                break;
+        }
+        String moneyAfter = String.valueOf(moneyAfterDiscount);
+        int lengthAfter = moneyAfter.length();
+        SpannableString ss = new SpannableString("￥" + moneyBefore + moneyAfter);
+        // 设置大小
+        AbsoluteSizeSpan sizeSpan = new AbsoluteSizeSpan(symbolSize);
+        // 加粗
+        StyleSpan styleSpan = new StyleSpan(Typeface.BOLD_ITALIC);
+        // 设置颜色
+        ForegroundColorSpan yellowSpan = new ForegroundColorSpan(Color.parseColor("#ffc107"));
+        // 下划线
+        UnderlineSpan underlineSpan = new UnderlineSpan();
+        // 删除线
+        StrikethroughSpan strikethroughSpan=new StrikethroughSpan();
+        // 将上述设置应用到SpannableString, 并设置应用范围
+        ss.setSpan(yellowSpan, 0, 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        ss.setSpan(sizeSpan, 0, 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        ss.setSpan(styleSpan, 0, 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        ss.setSpan(strikethroughSpan, 1, 1 + lengthBefore, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        return ss;
+    }
+
+    /**
+     * 获取显示在购物车中的总金额
+     *
+     * @param money      金额
+     * @param symbolSize 金钱符号大小
+     * @return SpannableString
+     * @Author Bubu
+     * @date 2022/10/26 18:38
+     * @commit
+     */
     public static SpannableString getSSMoney(double money, int symbolSize) {
         String moneyStr = String.valueOf(money);
         SpannableString ss = new SpannableString("￥" + moneyStr);
@@ -39,6 +98,16 @@ public class StringUtil {
         return ss;
     }
 
+    /**
+     * 将List转化为字符串
+     *
+     * @param list 待转换的List
+     * @param div  分隔符
+     * @return String
+     * @Author Bubu
+     * @date 2022/10/26 18:40
+     * @commit
+     */
     public static String join(List<String> list, String div) {
         StringBuilder s = new StringBuilder();
         if (list.size() == 0) {
@@ -55,26 +124,35 @@ public class StringUtil {
         }
     }
 
-    public static String getCurrentDateAndTime(){
+    public static String getCurrentDateAndTime() {
         Calendar c = Calendar.getInstance();
-        int year,month,day,hour,minute,second;
+        int year, month, day, hour, minute, second;
         year = c.get(Calendar.YEAR);
-        month = c.get(Calendar.MONTH)+1;
+        month = c.get(Calendar.MONTH) + 1;
         day = c.get(Calendar.DATE);
         hour = c.get(Calendar.HOUR);
         minute = c.get(Calendar.MINUTE);
-        second=c.get(Calendar.SECOND);
-        return year+"/"+month+"/"+day+"-"+hour+":"+minute+":"+second;
+        second = c.get(Calendar.SECOND);
+        return year + "/" + month + "/" + day + "-" + hour + ":" + minute + ":" + second;
     }
 
-    public static String getCurrentTime(){
+    public static String getCurrentTime() {
         long currentTime = System.currentTimeMillis();
         @SuppressLint("SimpleDateFormat") String timeNow = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(currentTime);
         return timeNow;
     }
 
+    /**
+     * 通过时间戳，转化为表示日期、时间的字符串
+     *
+     * @param mills 时间戳
+     * @return String
+     * @Author Bubu
+     * @date 2022/10/26 18:42
+     * @commit
+     */
     @SuppressLint("SimpleDateFormat")
-    public static String getCurrentTimeByMills(long mills){
+    public static String getCurrentTimeByMills(long mills) {
         return new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(mills);
     }
 
