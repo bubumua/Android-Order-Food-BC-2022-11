@@ -3,12 +3,14 @@ package com.example.Android_bigWork.Adapters;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.Resources;
+import android.os.Handler;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewStub;
+import android.view.animation.Animation;
 import android.widget.BaseAdapter;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -161,9 +163,10 @@ public class FoodStickyAdapter extends BaseAdapter implements StickyListHeadersA
         return convertView;
     }
 
-    private void showDishDetail(Dish dish) {
+    private PopupWindow showDishDetail(Dish dish) {
         Log.d(TAG, "showDishDetail: dish.count="+dish.getCount());
         View contentView = LayoutInflater.from(context).inflate(R.layout.popupwindow_dish_detail, null, false);
+        // 创建弹窗
         PopupWindow dishDetail = new PopupWindow(contentView,
                 ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT);
@@ -175,8 +178,8 @@ public class FoodStickyAdapter extends BaseAdapter implements StickyListHeadersA
         dishDetail.setOutsideTouchable(true);
         //设置可以点击
         dishDetail.setTouchable(true);
-        //设置进入退出的动画，指定刚才定义的style
-//        dishDetail.setAnimationStyle(R.style.ipopwindow_anim_style);
+        //设置进入退出的动画
+        dishDetail.setAnimationStyle(R.style.dishDetail_anim_style);
         // 绑定视图
         TextView desc = contentView.findViewById(R.id.dish_desctiption);
         TextView name = contentView.findViewById(R.id.dish_name);
@@ -311,6 +314,12 @@ public class FoodStickyAdapter extends BaseAdapter implements StickyListHeadersA
             count.setText(String.valueOf(dish.getCount()));
             dishMenuFragment.updateShoppingCarAccount();
             notifyDataSetChanged();
+            // 点击加号后，新建一个弹窗作为动画
+            PopupWindow temp= showDishDetail(dish);
+            new Handler().postDelayed(() -> {
+                Log.d(TAG, "run: delay dismiss");
+                temp.dismiss();
+            }, 300);
         });
         // detail减号点击事件
         sub.setOnClickListener(v -> {
@@ -333,7 +342,7 @@ public class FoodStickyAdapter extends BaseAdapter implements StickyListHeadersA
         });
         // 显示
         dishDetail.showAtLocation(contentView, Gravity.CENTER, 0, 0);
-
+return dishDetail;
     }
 
     private void removeSingleDishFromShoppingCar(Dish dish) {
