@@ -81,11 +81,18 @@
         <item name="android:windowExitAnimation">@anim/exit</item>
     </style>
 
+    <!-- 购物车显示与退出动画-->
     <style name="shoppingCar_anim_style">
-        <item name="android:windowEnterAnimation">@anim/shopping_car_enter</item>
         <!-- 指定显示的动画xml -->
-        <item name="android:windowExitAnimation">@anim/shopping_car_exit</item>
+        <item name="android:windowEnterAnimation">@anim/shopping_car_enter</item>
         <!-- 指定消失的动画xml -->
+        <item name="android:windowExitAnimation">@anim/shopping_car_exit</item>
+    </style>
+
+    <!-- 菜品详情显示与退出动画-->
+    <style name="dishDetail_anim_style">
+        <item name="android:windowEnterAnimation">@anim/dish_detail_enter</item>
+        <item name="android:windowExitAnimation">@anim/dish_detail_exit</item>
     </style>
     <!-- 缩放动画 -->
     <style name="ScaleAnimStyle" parent="android:Animation">

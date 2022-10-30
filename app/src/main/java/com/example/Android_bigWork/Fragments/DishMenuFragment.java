@@ -10,12 +10,10 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.drawable.AnimationDrawable;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
@@ -24,7 +22,6 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.PopupWindow;
 import android.widget.Spinner;
 import android.widget.Toast;
 import android.widget.TextView;
@@ -65,7 +62,6 @@ import com.hjq.xtoast.draggable.SpringDraggable;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 import se.emilsjolander.stickylistheaders.StickyListHeadersListView;
 
@@ -124,8 +120,8 @@ public class DishMenuFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        // for test
-        initDishListForTest();
+
+        initDishList();
         initCategoryItems();
         userDishList = new ArrayList<>();
         total = 0;
@@ -308,15 +304,6 @@ public class DishMenuFragment extends Fragment {
             }
         });
 
-
-        // 监听购物车栏的布局变化，获取高度
-//        shoppingCar.addOnLayoutChangeListener(new View.OnLayoutChangeListener() {
-//            @Override
-//            public void onLayoutChange(View v, int left, int top, int right, int bottom, int oldLeft, int oldTop, int oldRight, int oldBottom) {
-//                shoppingCarHeight=shoppingCar.getMeasuredHeight();
-//            }
-//        });
-
     }
 
     /**
@@ -383,6 +370,14 @@ public class DishMenuFragment extends Fragment {
         redPackInit();
     }
 
+    /**
+     * 初始化红包
+     *
+     * @return void
+     * @Author Bubu
+     * @date 2022/10/29 10:18
+     * @commit
+     */
     private void redPackInit() {
         //计数器
         final int[] count = {0};
@@ -445,8 +440,7 @@ public class DishMenuFragment extends Fragment {
     /**
      * 随机生成优惠券，并插入数据库
      *
-     * @param
-     * @return
+     * @return String
      * @Author Anduin9527
      * @date 2022/10/18 20:47
      * @commit
@@ -493,7 +487,7 @@ public class DishMenuFragment extends Fragment {
      * @date 2022/10/12 17:45
      * @commit
      */
-    private void initDishListForTest() {
+    private void initDishList() {
         Resources r = getResources();
         //连接数据库
         dishList = new ArrayList<>();
