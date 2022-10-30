@@ -40,8 +40,10 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.5.1'
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1'
     implementation 'com.ashokvarma.android:bottom-navigation-bar:2.2.0'
-    implementation 'se.emilsjolander:stickylistheaders:2.7.0'
     implementation 'com.android.support:multidex:1.0.3'
+    // 带头部的RecycleView
+    implementation 'se.emilsjolander:stickylistheaders:2.7.0'
+    implementation 'io.github.youth5201314:banner:2.2.2'
 
     // room
     def room_version = "2.4.3"
