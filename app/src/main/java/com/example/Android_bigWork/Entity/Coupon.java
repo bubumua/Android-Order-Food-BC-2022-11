@@ -33,8 +33,8 @@ public class Coupon {
         this.username = username;
     }
 
-    public Coupon() {
-    }
+//    public Coupon() {
+//    }
 
     @Override
     public String toString() {
