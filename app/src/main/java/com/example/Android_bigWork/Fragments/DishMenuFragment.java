@@ -35,11 +35,13 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager2.widget.MarginPageTransformer;
 
 import com.example.Android_bigWork.Activity.MainActivity;
 import com.example.Android_bigWork.Adapters.CouponAdapter;
 import com.example.Android_bigWork.Adapters.FoodCategoryAdapter;
 import com.example.Android_bigWork.Adapters.FoodStickyAdapter;
+import com.example.Android_bigWork.Adapters.ImageAdapter;
 import com.example.Android_bigWork.Adapters.ShoppingCarAdapter;
 import com.example.Android_bigWork.Database.CouponDao;
 import com.example.Android_bigWork.Database.CouponDatabase;
@@ -59,6 +61,11 @@ import com.example.Android_bigWork.Utils.StringUtil;
 import com.example.Android_bigWork.ViewModels.OrderViewModel;
 import com.hjq.xtoast.XToast;
 import com.hjq.xtoast.draggable.SpringDraggable;
+import com.youth.banner.Banner;
+import com.youth.banner.indicator.CircleIndicator;
+import com.youth.banner.transformer.ScaleInTransformer;
+import com.youth.banner.transformer.ZoomOutPageTransformer;
+import com.youth.banner.util.BannerUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -75,7 +82,7 @@ public class DishMenuFragment extends Fragment {
     LinearLayout shoppingCar;
     Button payment;
     private String userName;
-    public boolean showEmpty;
+    private Banner banner;
 
 
     // 界面数据(列表)
@@ -304,6 +311,13 @@ public class DishMenuFragment extends Fragment {
             }
         });
 
+        // 设置滚动栏
+        // 设置生命周期观察者
+        banner.addBannerLifecycleObserver(this);
+        // 设置适配器
+        banner.setAdapter(new ImageAdapter(dishList,getContext()));
+        // 设置展示方式
+        banner.setBannerGalleryMZ(100,0.6f);
     }
 
     /**
@@ -367,6 +381,7 @@ public class DishMenuFragment extends Fragment {
         listView = view.findViewById(R.id.category_list);
         payment = view.findViewById(R.id.shopping_commit);
         shoppingCar = view.findViewById(R.id.shopping_car);
+        banner=view.findViewById(R.id.banner_rec);
         redPackInit();
     }
 
