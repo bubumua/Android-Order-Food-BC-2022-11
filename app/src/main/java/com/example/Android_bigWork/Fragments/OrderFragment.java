@@ -115,16 +115,9 @@ public class OrderFragment extends Fragment {
 
     }
 
-    /**
-     * 当观察到用户付款引起的数据变化时，更新订单列表
-     *
-     * @return void
-     * @Author Bubu
-     * @date 2022/10/19 14:04
-     * @commit
-     */
-    public void updateOrders() {
-        // 设置 RecyclerView 显示的内容
+    public void updateOrders()
+    {
+
         createdTime = orderViewModel.lastOrderCreatedTime.getValue();
         List<UserDish> list = orderViewModel.getUserDishes().getValue();
         if (showHistory) {
@@ -141,7 +134,5 @@ public class OrderFragment extends Fragment {
             orderAdapter.setUserDishList(filter);
         }
         orderAdapter.notifyDataSetChanged();
-
     }
-
 }
