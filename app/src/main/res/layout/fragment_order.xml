@@ -49,7 +49,7 @@
         android:id="@+id/textView11"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hi"
+        android:text="@string/Hi"
         android:textColor="#0C0C0C"
         android:textSize="24sp"
         android:textStyle="bold"
@@ -70,16 +70,16 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/guideline6"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.891"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.238" />
+        app:layout_constraintVertical_bias="0.247" />
 
     <TextView
         android:id="@+id/textView13"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Online"
+        android:text="@string/ONLINE"
         android:textColor="#2ADD31"
         android:textSize="24sp"
         android:textStyle="bold"
