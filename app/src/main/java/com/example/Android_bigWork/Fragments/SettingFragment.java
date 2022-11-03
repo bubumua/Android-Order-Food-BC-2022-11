@@ -79,7 +79,7 @@ public class SettingFragment extends Fragment {
         button2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getActivity(), "更新成功！", Toast.LENGTH_LONG).show();
+                Toast.makeText(getActivity(), "已是最新版本！", Toast.LENGTH_LONG).show();
             }
         });
         mViewModel = new ViewModelProvider(this).get(SettingViewModel.class);
