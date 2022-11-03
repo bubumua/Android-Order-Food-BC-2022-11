@@ -40,7 +40,7 @@ public class OrderFragment extends Fragment {
     private OrderViewModel orderViewModel;
     private Person user;
 
-    // View
+    // 视图控件
     private StickyListHeadersListView stickyListView;
     public OrderAdapter orderAdapter;
     private Switch switchButton;
@@ -76,38 +76,41 @@ public class OrderFragment extends Fragment {
 
         TextView tv4 = getActivity().findViewById(R.id.textView12);
         tv4.setText(user.username);
-//        mViewModel = new ViewModelProvider(this).get(OrderViewModel.class);
-
     }
+
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-        orderViewModel = new ViewModelProvider(requireActivity()).get(OrderViewModel.class);
+        // 初始化视图
         stickyListView = view.findViewById(R.id.show_orders);
-        orderAdapter = new OrderAdapter(getContext(), orderViewModel);
-
         switchButton = view.findViewById(R.id.show_history);
-        ordersHeader=view.findViewById(R.id.textView8);
-
+        ordersHeader = view.findViewById(R.id.textView8);
+        // 设置数据
+        orderViewModel = new ViewModelProvider(requireActivity()).get(OrderViewModel.class);
+        orderAdapter = new OrderAdapter(getContext(), orderViewModel);
         showHistory = false;
         createdTime = 0;
-
+        // 设置订单列表展示内容
         stickyListView.setAdapter(orderAdapter);
+
+        // 数据监听器，当数据改变时，更新视图内容
         orderViewModel.getUserDishes().observe(getViewLifecycleOwner(), userDishes -> {
             Log.d(TAG, "OrderViewModelObserver: " + userDishes.size());
             // 获取时间
             updateOrders();
         });
 
-
+        // 历史订单开关监听
         switchButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                // 改变是否显示历史订单的成员变量
                 showHistory = isChecked;
+                // 更新订单
                 updateOrders();
-                if(isChecked){
+                // 改变订单的标题
+                if (isChecked) {
                     ordersHeader.setText(getResources().getString(R.string.history_orders));
-                }else {
+                } else {
                     ordersHeader.setText(getResources().getString(R.string.recent_order));
                 }
             }
@@ -115,24 +118,36 @@ public class OrderFragment extends Fragment {
 
     }
 
-    public void updateOrders()
-    {
-
+    /**
+     * 更新订单
+     *
+     * @return void
+     * @Author Bubu
+     * @date 2022/10/25 21:20
+     * @commit
+     */
+    public void updateOrders() {
+        // 获取事件戳（订单生成时间）
         createdTime = orderViewModel.lastOrderCreatedTime.getValue();
+        // 获取用户的所有订单列表
         List<UserDish> list = orderViewModel.getUserDishes().getValue();
+        // 根据是否显示历史订单，显示不一样的数据
         if (showHistory) {
+            // 设置显示所有历史订单
             orderAdapter.setUserDishList(list);
-            orderAdapter.setUserDishList(list);
-        } else {
+        }
+        // 若不显示历史订单，则从所有订单中挑选最近的订单
+        else {
             List<UserDish> filter = new ArrayList<>();
-            for (UserDish ud :
-                    list) {
+            for (UserDish ud : list) {
                 if (ud.getCreatedTime() == createdTime) {
                     filter.add(ud);
                 }
             }
+            // 设置要显示的订单列表
             orderAdapter.setUserDishList(filter);
         }
+        // 更新订单界面列表视图
         orderAdapter.notifyDataSetChanged();
     }
 }

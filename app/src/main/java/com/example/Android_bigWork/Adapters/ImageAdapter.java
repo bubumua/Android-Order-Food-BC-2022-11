@@ -18,6 +18,12 @@ import com.youth.banner.adapter.BannerAdapter;
 
 import java.util.List;
 
+/**
+ * @Type ImageAdapter
+ * @Desc 滚动推荐栏适配器
+ * @author Bubu
+ * @date 2022/10/29 14:42
+ */
 public class ImageAdapter extends BannerAdapter<Dish,ImageAdapter.BannerViewHolder> {
     private List<Dish> recommends;
     private Context context;
@@ -37,7 +43,7 @@ public class ImageAdapter extends BannerAdapter<Dish,ImageAdapter.BannerViewHold
         itemView.setLayoutParams(new ViewGroup.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.MATCH_PARENT));
-//itemView.findViewById(R.id.imageView8)
+        // itemView.findViewById(R.id.imageView8)
         BannerViewHolder holder=new BannerViewHolder(itemView);
         ImageView imageView=new ImageView(parent.getContext());
         // 根据viewpager2强制要求，设置为匹配父元素

@@ -14,7 +14,12 @@ import com.example.Android_bigWork.R;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-
+/**
+ * @Type FoodCategoryAdapter
+ * @Desc 菜品类别适配器
+ * @author Bubu
+ * @date 2022/10/16 14:42
+ */
 public class FoodCategoryAdapter extends BaseAdapter {
 
     private Context context;
@@ -56,7 +61,6 @@ public class FoodCategoryAdapter extends BaseAdapter {
         }
         // 设置视图
         viewHolder.categoryNameTextView.setText(categoryItems.get(position).getCategoryName());
-//        viewHolder.categoryNameTextView.setText("");
         viewHolder.categoryCountTextView.setText(String.valueOf(categoryItems.get(position).getCategoryCount()));
         viewHolder.categoryCountTextView.setVisibility(categoryItems.get(position).getCategoryCount() == 0 ? View.GONE : View.VISIBLE);
         viewHolder.categoryPointer.setVisibility(position==selectedPosition ? View.VISIBLE : View.INVISIBLE);

@@ -122,12 +122,6 @@ public class ShoppingCarAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         }
     }
 
-
-//    @Override
-//    public void onBindViewHolder(@NonNull ShoppingItemViewHolder holder, int position) {
-//
-//    }
-
     @Override
     public int getItemCount() {
 //        Log.d(TAG, "getItemCount: " + userDishList.size());
