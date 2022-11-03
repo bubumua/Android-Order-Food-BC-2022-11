@@ -3,9 +3,14 @@ package com.example.Android_bigWork.Entity;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+/**
+ * @Type Dish
+ * @Desc 菜单上的菜品
+ * @author Bubu
+ * @date 2022/10/13 20:11
+ */
 @Entity(tableName = "dish_table")//实体类的声明
 public class Dish {
-
 
     @PrimaryKey
     private int GID;    // 菜品在菜单上的唯一编号

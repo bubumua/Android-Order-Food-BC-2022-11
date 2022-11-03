@@ -23,8 +23,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Spinner;
-import android.widget.Toast;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -35,7 +35,6 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.viewpager2.widget.MarginPageTransformer;
 
 import com.example.Android_bigWork.Activity.MainActivity;
 import com.example.Android_bigWork.Adapters.CouponAdapter;
@@ -62,10 +61,6 @@ import com.example.Android_bigWork.ViewModels.OrderViewModel;
 import com.hjq.xtoast.XToast;
 import com.hjq.xtoast.draggable.SpringDraggable;
 import com.youth.banner.Banner;
-import com.youth.banner.indicator.CircleIndicator;
-import com.youth.banner.transformer.ScaleInTransformer;
-import com.youth.banner.transformer.ZoomOutPageTransformer;
-import com.youth.banner.util.BannerUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -168,9 +163,6 @@ public class DishMenuFragment extends Fragment {
 
             @Override
             public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
-//                Log.d(TAG, "onScroll: firstVisibleItem=" + firstVisibleItem +
-//                        ",visibleItemCount=" + visibleItemCount +
-//                        ",totalItemCount=" + totalItemCount);
                 // 提醒左栏变化
                 int firstVisibleCID = ((Dish) stickyListView.getAdapter().getItem(firstVisibleItem)).getCID();
                 foodCategoryAdapter.updateCategorySelectionByCID(firstVisibleCID);
@@ -182,8 +174,11 @@ public class DishMenuFragment extends Fragment {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                // 获得点击类别的CID
                 int selectedCID = ((FoodCategoryAdapter.CategoryItem) foodCategoryAdapter.getItem(position)).getCID();
+                // 根据CID，获取右侧菜单中该类别的第一个菜品的位置
                 int selectedPosition = foodStickyAdapter.getPositionByCID(selectedCID);
+                // 根据位置，进行跳转
                 stickyListView.setSelection(selectedPosition);
                 Log.d(TAG, "onItemClick: click and set selection");
             }
@@ -193,7 +188,6 @@ public class DishMenuFragment extends Fragment {
         payment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                showNewPopupWindow();
                 // 点击后生成确认对话框
                 AlertDialog.Builder builder = new AlertDialog.Builder(requireActivity());
                 builder.setTitle(getRString(R.string.confirm_to_pay));
@@ -205,10 +199,8 @@ public class DishMenuFragment extends Fragment {
                         Log.d(TAG, "dialogNo: payment cancel");
                     }
                 });
-                final boolean[] isPay = {false};
                 // 点击确认
                 builder.setPositiveButton(getRString(R.string.confirm), (dialogInterface, i) -> {
-                    //确认订单则弹出支付窗口
                     //获取当前购物车中的价格
                     double price = 0;
                     for (UserDish userDish : userDishList) {
@@ -218,6 +210,7 @@ public class DishMenuFragment extends Fragment {
                         Toast.makeText(getContext(), "买点,多少买点", Toast.LENGTH_SHORT).show();
                         return;
                     }
+                    //确认订单则弹出支付窗口
                     new PayPasswordDialog.Builder(requireActivity())
                             .setTitle(R.string.pay_title)
                             .setSubTitle(R.string.pay_sub_title)
@@ -303,7 +296,7 @@ public class DishMenuFragment extends Fragment {
         // 初始化购物车已购金额
         setShoppingCarAccount(0);
 
-        // 购物车栏点击事件
+        // 设置购物车栏点击事件
         shoppingCar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -315,9 +308,9 @@ public class DishMenuFragment extends Fragment {
         // 设置生命周期观察者
         banner.addBannerLifecycleObserver(this);
         // 设置适配器
-        banner.setAdapter(new ImageAdapter(dishList,getContext()));
+        banner.setAdapter(new ImageAdapter(dishList, getContext()));
         // 设置展示方式
-        banner.setBannerGalleryMZ(100,0.6f);
+        banner.setBannerGalleryMZ(100, 0.6f);
     }
 
     /**
@@ -381,7 +374,7 @@ public class DishMenuFragment extends Fragment {
         listView = view.findViewById(R.id.category_list);
         payment = view.findViewById(R.id.shopping_commit);
         shoppingCar = view.findViewById(R.id.shopping_car);
-        banner=view.findViewById(R.id.banner_rec);
+        banner = view.findViewById(R.id.banner_rec);
         redPackInit();
     }
 
@@ -389,7 +382,7 @@ public class DishMenuFragment extends Fragment {
      * 初始化红包
      *
      * @return void
-     * @Author Bubu
+     * @Author Anduin9527
      * @date 2022/10/29 10:18
      * @commit
      */
@@ -528,11 +521,15 @@ public class DishMenuFragment extends Fragment {
      */
     private void initCategoryItems() {
         categoryItems = null;
+        // 遍历菜单列表，如果该菜品所属类别尚未添加到类别列表中，则将此菜品的类别添加。
         dishList.forEach(dish -> {
+            // 若类别列表为空，则直接添加
             if (categoryItems == null) {
                 categoryItems = new ArrayList<>();
                 categoryItems.add(new FoodCategoryAdapter.CategoryItem(dish.getCategory(), dish.getCID()));
-            } else {
+            }
+            // 若不为空，则遍历类别列表，若无此类，则添加
+            else {
                 boolean addCategory = true;
                 for (int i = 0; i < categoryItems.size(); i++) {
                     if (dish.getCID() == categoryItems.get(i).getCID()) {
@@ -570,6 +567,7 @@ public class DishMenuFragment extends Fragment {
         List<Coupon> coupons = couponDao.getAllCoupon(user.username);
         CouponAdapter couponAdapter = new CouponAdapter(getContext(), coupons);
         selectCoupon.setAdapter(couponAdapter);
+        /*初始化用户选择的优惠券*/
         int position = -1;
         for (int i = 0; i < coupons.size(); i++) {
             if (selectedCoupon != null && selectedCoupon.getCID() == coupons.get(i).getCID()) {
@@ -579,6 +577,7 @@ public class DishMenuFragment extends Fragment {
         if (position > -1) {
             selectCoupon.setSelection(position);
         }
+        // 设置下拉框选项的点击事件
         selectCoupon.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -593,22 +592,24 @@ public class DishMenuFragment extends Fragment {
 
             }
         });
-        //需要先测量，PopupWindow还未弹出时，宽高为0
+        //需要先测量PopupWindow的宽高
         contentView.measure(makeDropDownMeasureSpec(shoppingCar.getWidth()),
                 makeDropDownMeasureSpec(shoppingCar.getHeight()));
         // 计算偏移量
         int offsetX = -contentView.getMeasuredWidth();
-//        int offsetY = (contentView.getMeasuredHeight() + payment.getHeight());
+        // int offsetY = (contentView.getMeasuredHeight() + payment.getHeight());
         int offsetY = 0;
         // 设置显隐动画
         shoppingCar.setAnimationStyle(R.style.shoppingCar_anim_style);
         // 显示购物车弹窗
         PopupWindowCompat.showAsDropDown(shoppingCar, payment, offsetX, offsetY, Gravity.END);
         Log.d(TAG, "showShoppingCar: X,Y=" + offsetX + "," + offsetY);
-        // "清空"按钮点击事件
+        // 设置"清空"按钮的点击事件
         button.setOnClickListener(v -> {
             Log.d(TAG, "onClick: 清空");
+            // 清空购物车
             clearShoppingCar();
+            // 更新购物车
             shoppingList.getAdapter().notifyDataSetChanged();
         });
     }
@@ -625,14 +626,15 @@ public class DishMenuFragment extends Fragment {
     public void clearShoppingCar() {
         Log.d(TAG, "clear the shopping car!");
         userDishList.clear();
-        for (Dish dish :
-                dishList) {
+        // 将选择的份数清零
+        for (Dish dish : dishList) {
             if (dish.getCount() > 0) {
                 dish.setCount(0);
             }
         }
+        // 更新菜单列表
         ((FoodStickyAdapter) stickyListView.getAdapter()).notifyDataSetChanged();
-//        shoppingList.getAdapter().notifyDataSetChanged();
+        // 更新购物车
         updateShoppingCarAccount();
     }
 

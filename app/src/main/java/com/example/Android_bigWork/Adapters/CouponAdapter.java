@@ -24,7 +24,6 @@ import java.util.List;
  * @Desc 优惠券下拉框适配器
  * @author Bubu
  * @date 2022/10/26 14:42
- * @version
  */
 public class CouponAdapter extends BaseAdapter {
     Context context;

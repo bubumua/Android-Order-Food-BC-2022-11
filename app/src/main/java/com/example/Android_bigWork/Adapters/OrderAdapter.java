@@ -25,6 +25,12 @@ import java.util.List;
 
 import se.emilsjolander.stickylistheaders.StickyListHeadersAdapter;
 
+/**
+ * @Type OrderAdapter
+ * @Desc 订单栏适配器
+ * @author Bubu
+ * @date 2022/10/26 14:42
+ */
 public class OrderAdapter extends BaseAdapter implements StickyListHeadersAdapter {
     private static final String TAG = "my";
     public static final int VIEW_TYPE_ITEM = 1;

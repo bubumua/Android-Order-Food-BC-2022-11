@@ -3,21 +3,25 @@ package com.example.Android_bigWork.Entity;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+/**
+ * @Type UserDish
+ * @Desc
+ * @author Bubu
+ * @date 2022/10/13 22:14
+ */
 @Entity(tableName = "order_table")
 public class UserDish {
     @PrimaryKey(autoGenerate = true)
-    public int OID;
-    private int GID;
+    public int OID; // 订单号
+    private int GID;    // 菜品号
     private String name;    // 菜品名
     private String description; // 菜品描述
     private double price;   // 价格
     private String category;    // 分类类名
     private int CID;    // 分类编号
-//    private boolean spicy;  // 辣味是否可选
-//    private boolean sweet;  // 甜味是否可选
-    private int spicy;
-    private int sweet;
-    private String customText;
+    private int spicy;  // 辣度
+    private int sweet;  // 甜度
+    private String customText;  // 客制化内容汇总
     private int count;  // 选购份数
     private String userName;    // 订单所属用户
     private long createdTime;   // 订单生成日期（时间戳）
@@ -48,6 +52,15 @@ public class UserDish {
 
     }
 
+    /**
+     * 比较两个UserDish是否相等
+     *
+     * @param userDish
+     * @return boolean
+     * @Author Bubu
+     * @date 2022/11/3 22:14
+     * @commit
+     */
     public boolean equals(UserDish userDish){
         return (userDish.getGID()==this.GID &&
                 userDish.getSpicy()==this.spicy &&
