@@ -154,7 +154,7 @@ public class DishMenuFragment extends Fragment {
         FoodCategoryAdapter foodCategoryAdapter = new FoodCategoryAdapter(getContext(), categoryItems);
         listView.setAdapter(foodCategoryAdapter);
 
-        // 菜品栏滑动监听
+// 菜品栏滑动监听
         stickyListView.setOnScrollListener(new AbsListView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(AbsListView view, int scrollState) {
@@ -170,7 +170,7 @@ public class DishMenuFragment extends Fragment {
             }
         });
 
-        // 类别栏按钮点击监听
+// 类别栏按钮点击监听
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -184,7 +184,7 @@ public class DishMenuFragment extends Fragment {
             }
         });
 
-        // 支付按钮点击事件
+// 支付按钮点击事件
         payment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
