@@ -44,8 +44,8 @@ dependencies {
     // 带头部的RecycleView
     implementation 'se.emilsjolander:stickylistheaders:2.7.0'
     implementation 'io.github.youth5201314:banner:2.2.2'
-    implementation 'androidx.navigation:navigation-fragment:2.5.3'
-    implementation 'androidx.navigation:navigation-ui:2.5.3'
+//    implementation 'androidx.navigation:navigation-fragment:2.5.3'
+//    implementation 'androidx.navigation:navigation-ui:2.5.3'
 
     // room
     def room_version = "2.4.3"

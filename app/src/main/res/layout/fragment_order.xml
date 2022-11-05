@@ -121,7 +121,7 @@
         android:layout_width="156dp"
         android:layout_height="40dp"
         android:layout_marginBottom="32dp"
-        android:text="本次用餐评价"
+        android:text="@string/evaluate"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

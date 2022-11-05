@@ -433,12 +433,12 @@ public class DishMenuFragment extends Fragment {
                                                 toast.cancel();
                                             }
                                         }, 900);
-                                        count[0] += 1;
                                         Log.d(TAG, "redPack: " + couponDao.getAllCoupon(user.username));
 
                                     }
                                 })
                                 .show();
+                                count[0] += 1;
                         if (count[0] == 2) {
                             toast.cancel();
                         }

@@ -386,5 +386,6 @@
     <string name="settings">Settings</string>
     <string name="successfullyReceived">successfully received</string>
     <string name="welcome">Welcome</string>
+    <string name="evaluate">Evaluation of This Meal</string>
 
 </resources>

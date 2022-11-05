@@ -387,4 +387,5 @@
 
     <string name="successfullyReceived">成功领取</string>
     <string name="welcome">欢迎</string>
+    <string name="evaluate">本次用餐评价</string>
 </resources>
