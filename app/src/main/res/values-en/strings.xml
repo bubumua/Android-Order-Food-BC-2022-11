@@ -6,7 +6,7 @@
     <string name="login_password_hint">Please enter your password</string>
     <string name="signup_username_hint">Please enter your username</string>
     <string name="signup_phoneNumber_hint" >Please input your mobile phone number (China)</string>
-    <string name="signup_text" >Register</string>
+    <string name="signup_text" >注册</string>
     <string name="login_signup" >Don\'t have an account?</string>
     <string name="buttomAdd">add one to cart</string>
     <string name="buttonSub" >sub one from cart</string>
@@ -335,10 +335,10 @@
     <string name="spicy_3">Medium Spicy</string>
     <string name="spicy_4">Spicy</string>
     <string name="sweetDegree">Sweetness</string>
-    <string name="sweet_1">0 points sweet</string>
-    <string name="sweet_2">3 points sweet</string>
-    <string name="sweet_3">7 points sweet</string>
-    <string name="sweet_4">10 points sweet</string>
+    <string name="sweet_1">0% sweet</string>
+    <string name="sweet_2">30% sweet</string>
+    <string name="sweet_3">70% sweet</string>
+    <string name="sweet_4">100% sweet</string>
     <string name="shopping_car_wait_for_adding">There is no food in the shopping cart. Welcome guests to feed~</string>
 
     <!--    支付页面提示字段-->
@@ -381,7 +381,8 @@
     <string name="ONLINE">on-line</string>
     <string name="Hi">Hello</string>
     <string name="languagesetting">The language will be switched automatically according to your phone language</string>
-    <string name="successfullyReceived">success fully received</string>
-    <string name="welcome">Welcome</string>
+    <string name="menu">Menu</string>
+    <string name="orders">Orders</string>
+    <string name="settings">Settings</string>
 
 </resources>

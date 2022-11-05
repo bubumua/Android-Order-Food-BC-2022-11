@@ -381,6 +381,9 @@
     <string name="APPSETTING">APP设置</string>
     <string name="ONLINE">在线</string>
     <string name="Hi">你好</string>
+    <string name="menu">点餐</string>
+    <string name="orders">订单</string>
+    <string name="settings">设置</string>
 
     <string name="successfullyReceived">成功领取</string>
     <string name="welcome">欢迎</string>

@@ -4,13 +4,13 @@
     <item
         android:id="@+id/detailFragment"
         android:icon="@android:drawable/ic_dialog_dialer"
-        android:title="Detail" />
+        android:title="@string/menu" />
     <item
         android:id="@+id/orderFragment"
         android:icon="@android:drawable/ic_dialog_dialer"
-        android:title="Order" />
+        android:title="@string/orders" />
     <item
         android:id="@+id/settingFragment"
         android:icon="@android:drawable/ic_dialog_dialer"
-        android:title="Setting" />
+        android:title="@string/settings" />
 </menu>
