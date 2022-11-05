@@ -50,6 +50,7 @@ public class OrderFragment extends Fragment {
     private boolean showHistory;
     private long createdTime;
     private TextView ordersHeader;
+    private TextView commentTip;
 
     public static OrderFragment newInstance() {
         return new OrderFragment();
@@ -76,18 +77,23 @@ public class OrderFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        ratingBar=getActivity().findViewById(R.id.ratingBar);
+        ratingBar = getActivity().findViewById(R.id.ratingBar);
         ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
             @Override
             public void onRatingChanged(RatingBar ratingBar, float v, boolean b) {
-                Toast.makeText(getActivity().getApplicationContext(), String.valueOf("本次服务评价为"+v+"星"),Toast.LENGTH_SHORT).show();
+                // 当评价大于0时显示提示消息，避免重置为0时触发消息弹出
+                if(v>0) {
+                    Toast.makeText(getActivity().getApplicationContext(), String.valueOf("本次服务评价为" + v + "星"), Toast.LENGTH_SHORT).show();
+                }
+                // 点击评价后使评价栏消失
+                ratingBar.setVisibility(View.GONE);
+                commentTip.setVisibility(View.GONE);
             }
         });
 
-
-
-
-
+        // 初始化评价栏以及提示为隐藏
+        commentTip.setVisibility(View.GONE);
+        ratingBar.setVisibility(View.GONE);
         TextView tv4 = getActivity().findViewById(R.id.textView55);
         tv4.setText(user.username);
     }
@@ -98,6 +104,7 @@ public class OrderFragment extends Fragment {
         stickyListView = view.findViewById(R.id.show_orders);
         switchButton = view.findViewById(R.id.show_history);
         ordersHeader = view.findViewById(R.id.textView8);
+        commentTip=view.findViewById(R.id.textView15);
         // 设置数据
         orderViewModel = new ViewModelProvider(requireActivity()).get(OrderViewModel.class);
         orderAdapter = new OrderAdapter(getContext(), orderViewModel);
@@ -109,8 +116,14 @@ public class OrderFragment extends Fragment {
         // 数据监听器，当数据改变时，更新视图内容
         orderViewModel.getUserDishes().observe(getViewLifecycleOwner(), userDishes -> {
             Log.d(TAG, "OrderViewModelObserver: " + userDishes.size());
-            // 获取时间
+            // 订单数据变化时，更新订单
             updateOrders();
+            // 显示评价栏
+            if (stickyListView.getAdapter().getCount() > 0) {
+                ratingBar.setRating(0);
+                ratingBar.setVisibility(View.VISIBLE);
+                commentTip.setVisibility(View.VISIBLE);
+            }
         });
 
         // 历史订单开关监听

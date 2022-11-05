@@ -80,7 +80,6 @@ public class DishMenuFragment extends Fragment {
     private String userName;
     private Banner banner;
 
-
     // 界面数据(列表)
     private ArrayList<Dish> dishList;
     private ArrayList<FoodCategoryAdapter.CategoryItem> categoryItems;
