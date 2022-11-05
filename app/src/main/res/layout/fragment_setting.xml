@@ -250,20 +250,19 @@
 
     <TextView
         android:id="@+id/textView14"
-        android:layout_width="446dp"
-        android:layout_height="32dp"
+        android:layout_width="0dp"
+        android:layout_height="36dp"
         android:background="@drawable/bgorder01"
         android:text="@string/APPSETTING"
-        android:textColor="#F4F1F1"
-        android:textSize="24sp"
+        android:textColor="#EADFDF"
+        android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/guideline5"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.903" />
-
+        app:layout_constraintVertical_bias="1.0" />
     <TextView
         android:id="@+id/textView17"
         android:layout_width="362dp"
