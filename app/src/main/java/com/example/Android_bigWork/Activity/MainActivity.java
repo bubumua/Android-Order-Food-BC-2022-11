@@ -70,6 +70,14 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * 初始化页面、
+     *
+     * @return void
+     * @Author Bubu
+     * @date 2022/11/4 20:29
+     * @commit
+     */
     private void initFragmentTransaction() {
         //开启事务
         fragmentTransaction = fragmentManager.beginTransaction();
@@ -111,12 +119,20 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * 初始化底部导航按钮
+     *
+     * @return void
+     * @Author Bubu
+     * @date 2022/10/4 23:10
+     * @commit
+     */
     private void initBottomNavigationBar() {
         bottomNavigationBar = (BottomNavigationBar) findViewById(R.id.bottomNavigationBar);
         bottomNavigationBar
-                .addItem(new BottomNavigationItem(R.drawable.icon_home, "Detail"))
-                .addItem(new BottomNavigationItem(R.drawable.icon_order, "Order"))
-                .addItem(new BottomNavigationItem(R.drawable.icon_setting, "Setting"))
+                .addItem(new BottomNavigationItem(R.drawable.icon_home, R.string.menu))
+                .addItem(new BottomNavigationItem(R.drawable.icon_order, R.string.orders))
+                .addItem(new BottomNavigationItem(R.drawable.icon_setting, R.string.settings))
                 .setFirstSelectedPosition(0)
                 .initialise();
 
@@ -156,7 +172,6 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-//        bottomNavigationBar.setVisibility(View.GONE);
     }
 
 }

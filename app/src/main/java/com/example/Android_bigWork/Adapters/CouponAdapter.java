@@ -18,11 +18,12 @@ import com.example.Android_bigWork.R;
 import com.example.Android_bigWork.Utils.StringUtil;
 
 import java.util.List;
+import java.util.Locale;
 
 /**
+ * @author Bubu
  * @Type CouponAdapter
  * @Desc 优惠券下拉框适配器
- * @author Bubu
  * @date 2022/10/26 14:42
  */
 public class CouponAdapter extends BaseAdapter {
@@ -31,17 +32,16 @@ public class CouponAdapter extends BaseAdapter {
     Resources resources;
 
     public CouponAdapter(Context context, List<Coupon> coupons) {
-        this.context=context;
-        this.coupons=coupons;
-        resources=context.getResources();
+        this.context = context;
+        this.coupons = coupons;
+        resources = context.getResources();
     }
 
     @Override
     public int getCount() {
-        if(coupons!=null){
+        if (coupons != null) {
             return coupons.size();
-        }
-        else{
+        } else {
             return 0;
         }
     }
@@ -60,40 +60,56 @@ public class CouponAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         CouponViewHolder holder;
-        if(convertView==null){
-            LayoutInflater inflater=LayoutInflater.from(context);
-            convertView=inflater.inflate(R.layout.item_coupon,parent,false);
-            holder=new CouponViewHolder(convertView);
+        if (convertView == null) {
+            LayoutInflater inflater = LayoutInflater.from(context);
+            convertView = inflater.inflate(R.layout.item_coupon, parent, false);
+            holder = new CouponViewHolder(convertView);
             convertView.setTag(holder);
-        }else{
-            holder=(CouponViewHolder) convertView.getTag();
+        } else {
+            holder = (CouponViewHolder) convertView.getTag();
         }
         // 获取Coupon对象
-        Coupon coupon=(Coupon) getItem(position);
+        Coupon coupon = (Coupon) getItem(position);
         // 根据Coupon对象，设置视图
-        double discount=coupon.getDiscount();
-        double condition=coupon.getCondition();
-        double reduction=coupon.getReduction();
-        switch (coupon.getType()) {
-            case 0:
-                holder.textView.setText(discount +"折");
-                break;
-            case 1:
-                holder.textView.setText("满"+condition+"减"+reduction);
-                break;
-            default:
-                break;
+        double discount = coupon.getDiscount();
+        double condition = coupon.getCondition();
+        double reduction = coupon.getReduction();
+        String language = Locale.getDefault().getLanguage();
+        Log.d("my", "getView: language=" + language);
+        if (language.equals("CN") || language.equals("zh")) {
+            switch (coupon.getType()) {
+                case 0:
+                    holder.textView.setText(discount + "折");
+                    break;
+                case 1:
+                    holder.textView.setText("满" + condition + "减" + reduction);
+                    break;
+                default:
+                    break;
+            }
+        } else {
+            switch (coupon.getType()) {
+                case 0:
+                    holder.textView.setText((10 - discount) * 10 + "% OFF");
+                    break;
+                case 1:
+                    holder.textView.setText("Over" + condition + "Minus" + reduction);
+                    break;
+                default:
+                    break;
+            }
         }
 
         return convertView;
     }
 
-    static class CouponViewHolder extends RecyclerView.ViewHolder{
+    static class CouponViewHolder extends RecyclerView.ViewHolder {
 
         TextView textView;
+
         public CouponViewHolder(@NonNull View itemView) {
             super(itemView);
-            textView=itemView.findViewById(R.id.tv_coupon_detail);
+            textView = itemView.findViewById(R.id.tv_coupon_detail);
         }
     }
 }
