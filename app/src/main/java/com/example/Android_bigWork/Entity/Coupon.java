@@ -16,14 +16,14 @@ public class Coupon {
 
 
     @PrimaryKey(autoGenerate = true)
-    public int CID;
-    private int type;
-    public static final int DISCOUNT = 0;
-    public static final int FULL_REDUCTION = 1;
-    private double discount;
-    private double condition;
-    private double reduction;
-    private String username;
+    public int CID;//优惠券ID
+    private int type;//优惠券类型
+    public static final int DISCOUNT = 0;//折扣券
+    public static final int FULL_REDUCTION = 1;//满减券
+    private double discount;//折扣
+    private double condition;//满减条件
+    private double reduction;//满减减免
+    private String username;//优惠券所属用户
 
     public Coupon(int type, double discount, double condition, double reduction, String username) {
         this.type = type;
@@ -33,8 +33,7 @@ public class Coupon {
         this.username = username;
     }
 
-//    public Coupon() {
-//    }
+
 
     @Override
     public String toString() {

@@ -64,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
             //获取Bundle中的数据
             user = (Person) bundle.getSerializable("user");
             //判断是否有传入的用户数据
-            Toast.makeText(this, "欢迎您，" + user.username, Toast.LENGTH_SHORT).show();
+//            Toast.makeText(this, R.string.welcome + user.username, Toast.LENGTH_SHORT).show();
         }
 
 

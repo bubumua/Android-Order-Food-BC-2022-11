@@ -79,4 +79,8 @@ public interface DishDao {
      */
     @Query("SELECT * FROM dish_table WHERE category = :category")
     List<Dish> getDishByCategory(String category);
+
+    @Query("SELECT COUNT(*) FROM dish_table")
+    int getDishCount();
+
 }

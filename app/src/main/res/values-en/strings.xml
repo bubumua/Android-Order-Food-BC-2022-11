@@ -6,7 +6,7 @@
     <string name="login_password_hint">Please enter your password</string>
     <string name="signup_username_hint">Please enter your username</string>
     <string name="signup_phoneNumber_hint" >Please input your mobile phone number (China)</string>
-    <string name="signup_text" >注册</string>
+    <string name="signup_text" >Register</string>
     <string name="login_signup" >Don\'t have an account?</string>
     <string name="buttomAdd">add one to cart</string>
     <string name="buttonSub" >sub one from cart</string>
@@ -381,5 +381,7 @@
     <string name="ONLINE">on-line</string>
     <string name="Hi">Hello</string>
     <string name="languagesetting">The language will be switched automatically according to your phone language</string>
+    <string name="successfullyReceived">success fully received</string>
+    <string name="welcome">Welcome</string>
 
 </resources>

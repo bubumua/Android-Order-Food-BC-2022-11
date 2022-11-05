@@ -55,7 +55,6 @@ public class SignUpActivity extends AppCompatActivity
 
         //设置电话号码输入框只能输入数字
         mPhoneNumber.setInputType(android.text.InputType.TYPE_CLASS_NUMBER);
-
         final int[] isFemale = {0};
         //获取数据库
         PersonDatabase personDatabase = PersonDatabase.getDatabase(this);
@@ -67,7 +66,6 @@ public class SignUpActivity extends AppCompatActivity
             else
                 isFemale[0] = 0;
         });
-
         //注册按钮监听器
         findViewById(R.id.btn_signup).setOnClickListener(v -> {
             mSignUpButton.showProgress();
@@ -91,7 +89,7 @@ public class SignUpActivity extends AppCompatActivity
                                     personDao.insert(person);
                                     mSignUpButton.showSucceed();
                                     Log.d(TAG, "onSignUp: " + person.toString());
-                                    Toast.makeText(SignUpActivity.this, getRString(R.string.register_success), Toast.LENGTH_SHORT).show();
+//                                    Toast.makeText(SignUpActivity.this, getRString(R.string.register_success), Toast.LENGTH_SHORT).show();
                                     //使用HandlerAction接口的PostDelayed方法实现延时跳转
                                     postDelayed(() -> {
                                         //构建Bundle对象传递person

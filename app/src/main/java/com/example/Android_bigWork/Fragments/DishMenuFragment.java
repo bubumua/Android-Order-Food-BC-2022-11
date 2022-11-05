@@ -64,6 +64,7 @@ import com.youth.banner.Banner;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import se.emilsjolander.stickylistheaders.StickyListHeadersListView;
 
@@ -424,7 +425,10 @@ public class DishMenuFragment extends Fragment {
                                                         .setContentView(R.layout.window_hint)
                                                         .setAnimStyle(R.style.IOSAnimStyle)
                                                         .setImageDrawable(android.R.id.icon, R.drawable.yanhua)
-                                                        .setText(android.R.id.message, "成功领取\n" + couponText + "优惠券")
+                                                        .setText(android.R.id.message, getRString(R.string.successfullyReceived)
+                                                                + "\n" +
+                                                                couponText
+                                                                + " " + getRString(R.string.coupon))
                                                         .show();
                                                 toast.cancel();
                                             }
@@ -459,17 +463,31 @@ public class DishMenuFragment extends Fragment {
         String couponText = "";
         double condition = 0, reduction = 0, discount = 0;
         int type = (int) (Math.random() * 2);
+        boolean isChinese = false;
+        String language = Locale.getDefault().getLanguage();
+        if (language.equals("CN") || language.equals("zh")) {
+            isChinese = true;
+        }
         if (type == 1) {
             condition = (int) (Math.random() * 100) + 1;
             reduction = (int) (Math.random() * condition * 0.7) + 1;
-            couponText = "满" + condition + "减" + reduction;
+            if (isChinese) {
+                couponText = "满" + condition + "减" + reduction;
+            } else {
+                couponText = "Over " + condition + " Minus " + reduction;
+            }
         } else {
             discount = (int) (Math.random() * 4) + 2;
-            couponText = discount + "折";
+            if (isChinese) {
+                couponText = discount + "折";
+            } else {
+                couponText = (10 - discount) * 10 + "% OFF";
+            }
         }
         //插入数据库
 
         couponDao.addCoupon(user.username, type, discount, condition, reduction);
+
         return couponText;
     }
 

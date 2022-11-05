@@ -73,7 +73,7 @@ public class LoginActivity extends AppCompatActivity implements HandlerAction {
             //查询数据库
             if (checkDataBase(username, password, personDao)) {
                 mLoginButton.showSucceed();
-                Toast.makeText(this, "登录成功", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(this, "登录成功", Toast.LENGTH_SHORT).show();
                 //跳转到主界面
                 postDelayed(() -> {
                     //查询该用户

@@ -23,15 +23,15 @@
 
     <TextView
         android:id="@+id/textView_signUp"
-        android:layout_width="146dp"
-        android:layout_height="76dp"
+        android:layout_width="200dp"
+        android:layout_height="77dp"
         android:layout_alignParentEnd="true"
+        android:layout_marginStart="24dp"
         android:text="@string/signup_text"
         android:textAlignment="center"
         android:textColor="#fc8c60"
         android:textSize="50sp"
         android:textStyle="bold"
-        app:autoSizeTextType="none"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/imageView_bg"
         app:layout_constraintHorizontal_bias="0.301"

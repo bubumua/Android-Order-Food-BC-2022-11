@@ -18,6 +18,12 @@ import com.example.Android_bigWork.R;
 import com.example.Android_bigWork.Utils.StringUtil;
 import com.example.Android_bigWork.action.HandlerAction;
 
+/**
+ * @author Anduin9527
+ * @Type LoadingActivity
+ * @Desc 欢迎界面
+ * @date 2022/10/10 20:09
+ */
 public class LoadingActivity extends AppCompatActivity
         implements HandlerAction {
     private static final String TAG = "LoadingActivity";
@@ -31,6 +37,7 @@ public class LoadingActivity extends AppCompatActivity
         if (getSupportActionBar() != null) {
             getSupportActionBar().hide();
         }
+
         loadingAnimationView = findViewById(R.id.animationView);
         loadingAnimationView.setAnimation(R.raw.animation_loading);//设置动画文件
         loadingAnimationView.playAnimation();//开始播放
@@ -41,8 +48,21 @@ public class LoadingActivity extends AppCompatActivity
         DishDao dishDao = dishDatabase.getDishDao();
         PersonDatabase personDatabase = PersonDatabase.getDatabase(this);
         PersonDao personDao = personDatabase.getPersonDao();
-        //TODO: 测试用，后续删除：清空数据库
-        dishDao.deleteAllDish();
+        //检测数据库是否为空
+        if (dishDao.getDishCount() == 0) {
+            //初始化数据库
+            initDishDatabase(dishDao);
+        }
+        //延迟2400ms跳转到登录界面
+        postDelayed(() -> {
+            Intent intent = new Intent(this, LoginActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+        }, 2400);
+        Log.d(TAG, "onCreate: " + StringUtil.getCurrentDateAndTime());
+        Log.d(TAG, "onCreate: " + StringUtil.getCurrentTime());
+    }
+
+    private void initDishDatabase(DishDao dishDao) {
         //插入数据
         dishDao.insert(new Dish(1, getRString(R.string.dish_1), getRString(R.string.desc_1), Double.parseDouble(getRString(R.string.price_1)), getRString(R.string.cate_1), 1, true, false));
         dishDao.insert(new Dish(5, getRString(R.string.dish_5), getRString(R.string.desc_5), Double.parseDouble(getRString(R.string.price_5)), getRString(R.string.cate_1), 1, true, false));
@@ -139,16 +159,6 @@ public class LoadingActivity extends AppCompatActivity
         dishDao.insert(new Dish(53, getRString(R.string.dish_53), getRString(R.string.desc_53), Double.parseDouble(getRString(R.string.price_53)), getRString(R.string.cate_7), 7, true, true));
         dishDao.insert(new Dish(72, getRString(R.string.dish_72), getRString(R.string.desc_72), Double.parseDouble(getRString(R.string.price_72)), getRString(R.string.cate_7), 7, true, true));
         dishDao.insert(new Dish(89, getRString(R.string.dish_89), getRString(R.string.desc_89), Double.parseDouble(getRString(R.string.price_89)), getRString(R.string.cate_7), 7, true, true));
-
-        postDelayed(() -> {
-            Intent intent = new Intent(this, LoginActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(intent);
-        }, 2400);
-
-        Log.d(TAG, "onCreate: "+ StringUtil.getCurrentDateAndTime());
-        Log.d(TAG, "onCreate: "+ StringUtil.getCurrentTime());
-
-
     }
 
     private String getRString(@StringRes int id) {

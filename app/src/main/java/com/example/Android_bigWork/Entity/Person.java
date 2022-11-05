@@ -18,7 +18,7 @@ public class Person implements Serializable {
 
     public static final int GENDER_MALE = 0;
     public static final int GENDER_FEMALE = 1;
-    public static final long serialVersionUID = 1L;
+    public static final long serialVersionUID = 1L;//这是序列化的版本号
 
     public Person(String username, String password, long phoneNumber, int gender, int payPassword) {
         this.username = username;

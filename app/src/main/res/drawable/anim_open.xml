@@ -26,6 +26,4 @@
     <item
         android:drawable="@drawable/icon_open_red_packet9"
         android:duration="100" />
-
-
 </animation-list>
