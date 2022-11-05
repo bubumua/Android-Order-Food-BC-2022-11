@@ -55,7 +55,8 @@ public class LoadingActivity extends AppCompatActivity
         }
         //延迟2400ms跳转到登录界面
         postDelayed(() -> {
-            Intent intent = new Intent(this, LoginActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+            Intent intent = new Intent(this, LoginActivity.class).
+                    setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
         }, 2400);
         Log.d(TAG, "onCreate: " + StringUtil.getCurrentDateAndTime());

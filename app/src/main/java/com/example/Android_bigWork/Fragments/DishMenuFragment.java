@@ -406,6 +406,7 @@ public class DishMenuFragment extends Fragment {
                                     @Override
                                     public void onClick(XToast<?> toast, ImageView view) {
                                         toast.cancel();
+                                        count[0] -= 1;
                                     }
                                 })
                                 .setOnClickListener(R.id.iv_open, new XToast.OnClickListener<ImageView>() {
@@ -434,12 +435,11 @@ public class DishMenuFragment extends Fragment {
                                             }
                                         }, 900);
                                         Log.d(TAG, "redPack: " + couponDao.getAllCoupon(user.username));
-
                                     }
                                 })
                                 .show();
-                                count[0] += 1;
-                        if (count[0] == 2) {
+                        count[0] += 1;
+                        if (count[0] == 3) {
                             toast.cancel();
                         }
                     }
@@ -603,7 +603,7 @@ public class DishMenuFragment extends Fragment {
                 String couponString = selectedCoupon.toString();
                 Log.d(TAG, "onCouponItemClick: select " + couponString);
                 updateShoppingCarAccount();
-            }
+        }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
