@@ -94,7 +94,7 @@ public class OrderFragment extends Fragment {
         // 初始化评价栏以及提示为隐藏
         commentTip.setVisibility(View.GONE);
         ratingBar.setVisibility(View.GONE);
-        TextView tv4 = getActivity().findViewById(R.id.textView12);
+        TextView tv4 = getActivity().findViewById(R.id.textView55);
         tv4.setText(user.username);
     }
 
@@ -112,7 +112,6 @@ public class OrderFragment extends Fragment {
         createdTime = 0;
         // 设置订单列表展示内容
         stickyListView.setAdapter(orderAdapter);
-
 
         // 数据监听器，当数据改变时，更新视图内容
         orderViewModel.getUserDishes().observe(getViewLifecycleOwner(), userDishes -> {
