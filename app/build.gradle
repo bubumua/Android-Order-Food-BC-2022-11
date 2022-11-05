@@ -39,13 +39,13 @@ dependencies {
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.5.1'
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1'
-    implementation 'com.ashokvarma.android:bottom-navigation-bar:2.2.0'
     implementation 'com.android.support:multidex:1.0.3'
+    // 底部导航按钮
+    implementation 'com.ashokvarma.android:bottom-navigation-bar:2.2.0'
     // 带头部的RecycleView
     implementation 'se.emilsjolander:stickylistheaders:2.7.0'
+    // 下拉框
     implementation 'io.github.youth5201314:banner:2.2.2'
-//    implementation 'androidx.navigation:navigation-fragment:2.5.3'
-//    implementation 'androidx.navigation:navigation-ui:2.5.3'
 
     // room
     def room_version = "2.4.3"
